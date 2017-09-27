@@ -1,0 +1,648 @@
+.full-width {
+  width: 100%;
+}
+.list-container {
+  background: #FFFFFF;
+  margin-bottom: 0.16rem;
+  width: 100%;
+}
+.list-container .list-item {
+  height: 1rem;
+  width: 6.9rem;
+  margin-left: 0.3rem;
+  margin-right: 0.4rem;
+  border-bottom: 1px solid #EBEBEB;
+}
+.list-container .list-item:nth-last-child(0) {
+  border-bottom-style: none;
+}
+.list-container .list-item:before,
+.list-container .list-item:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.list-container .list-item .label {
+  height: 100%;
+  line-height: 100%;
+}
+.list-container .list-item .label:before,
+.list-container .list-item .label:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.list-container .list-item .label .label-icon {
+  float: left;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.25rem;
+  margin-right: 0.24rem;
+}
+.list-container .list-item .label .label-text {
+  float: left;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.3rem;
+}
+.list-container .list-item .item {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.list-container .list-item .left {
+  float: left;
+}
+.list-container .list-item .right {
+  float: right;
+}
+.list-container .list-item .center {
+  text-align: center;
+}
+.list-container .list-item input,
+.list-container .list-item span {
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.3rem;
+  display: block;
+}
+.list-container .list-item input.full-width,
+.list-container .list-item span.full-width {
+  width: 6.9rem;
+}
+.btn-smscode {
+  display: block;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  margin-top: 0.25rem;
+  font-size: 0.26rem;
+  border: 1px solid #BFBFBF;
+  color: #666666;
+}
+.agreement {
+  padding-left: 0.3rem;
+  padding-right: 0.4rem;
+  font-size: 0.24rem;
+  color: #666666;
+  margin-top: 0.3rem;
+}
+.agreement:before,
+.agreement:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.agreement .checkbox {
+  float: left;
+  height: 0.3rem;
+  width: 0.3rem;
+  border-color: #BFBFBF;
+  border-radius: 0.04rem;
+  margin-right: 0.2rem;
+}
+.agreement .link {
+  color: #5b8aff;
+}
+.agreement .content {
+  float: left;
+  height: 0.3rem;
+  line-height: 0.3rem;
+}
+.btn-container {
+  margin-top: 0.64rem;
+  margin-left: 0.3rem;
+  width: 6.9rem;
+}
+.btn {
+  border-radius: 0.1rem;
+  background: #5b8aff;
+  color: #ffffff;
+  border: 0 none transparent;
+  font-size: 0.3rem;
+  height: 0.86rem;
+  line-height: 0.86rem;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+.btn.block {
+  display: block;
+  width: 100%;
+}
+.picker-modal-layer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+  background: #000000;
+}
+.picker-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.59rem;
+  background: #FFFFFF;
+}
+.picker-button-zone {
+  position: relative;
+  font-size: 0.17rem;
+  width: 100%;
+  text-align: center;
+  height: 0.435rem;
+  line-height: 0.435rem;
+  background: #F6F6F6;
+  color: #000000;
+}
+.picker-button-zone .picker-btn {
+  font-size: 0.15rem;
+  color: #007AFF;
+  border-style: none;
+  outline: none;
+  text-decoration: none;
+  margin-bottom: 0.11rem;
+}
+.picker-button-zone .picker-btn.btn-cancel {
+  float: left;
+  margin-left: 0.07rem;
+}
+.picker-button-zone .picker-btn.btn-confirm {
+  float: right;
+  margin-right: 0.07rem;
+}
+.picker-select-zone {
+  width: 100%;
+  position: relative;
+}
+.picker-select-zone:before,
+.picker-select-zone:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.picker-select-zone .picker-selected-zone {
+  position: relative;
+  left: 0;
+  top: 1.05rem;
+  height: 0.28rem;
+  width: 100%;
+  border-top: 0.02rem solid #DDDDDD;
+  border-bottom: 0.02rem solid #DDDDDD;
+}
+.picker-select-zone .select-container {
+  float: left;
+}
+.picker-select-zone .select-touch-layer {
+  position: relative;
+  background: red;
+  z-index: 9990;
+  height: 2.155rem;
+  top: -2.155rem;
+  opacity: 0;
+}
+.picker-select-zone .picker-item {
+  height: 2.155rem;
+  padding-top: 0.15rem;
+  padding-bottom: 0.15rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  text-wrap: none;
+  text-align: center;
+}
+.picker-select-zone .picker-item .option-item {
+  font-family: ".PingFangSC-Regular";
+}
+.picker-select-zone .picker-item .option-selected {
+  font-size: 0.235rem;
+  height: 0.33rem;
+  line-height: 0.33rem;
+  overflow: hidden;
+  text-wrap: none;
+  font-family: ".SFNSDisplay";
+  letter-spacing: 0.0038rem;
+  font-weight: bold;
+}
+.picker-select-zone .picker-item .option-selected-offset-1 {
+  font-size: 0.19rem;
+  height: 0.2rem;
+  line-height: 0.2rem;
+  letter-spacing: 0.004rem;
+  font-weight: 300;
+}
+.picker-select-zone .picker-item .option-selected-offset-1.before {
+  margin-bottom: 0.09rem;
+}
+.picker-select-zone .picker-item .option-selected-offset-1.after {
+  margin-top: 0.09rem;
+}
+.picker-select-zone .picker-item .option-selected-offset-2 {
+  font-size: 0.15rem;
+  height: 0.19rem;
+  line-height: 0.19rem;
+  letter-spacing: 0.004rem;
+  font-weight: 200;
+}
+.picker-select-zone .picker-item .option-selected-offset-2.before {
+  margin-bottom: 0.07rem;
+}
+.picker-select-zone .picker-item .option-selected-offset-2.after {
+  margin-top: 0.07rem;
+}
+.picker-select-zone .picker-item .option-selected-offset-3 {
+  font-size: 0.1rem;
+  height: 0.13rem;
+  line-height: 0.13rem;
+  letter-spacing: 0.008rem;
+  font-weight: 100;
+}
+.picker-select-zone .picker-item .option-selected-offset-3.before {
+  margin-bottom: 0.04rem;
+}
+.picker-select-zone .picker-item .option-selected-offset-3.after {
+  margin-top: 0.04rem;
+}
+.picker-select-zone .picker-item .option-selected-offset-4 {
+  font-size: 0.045rem;
+  height: 0.07rem;
+  line-height: 0.07rem;
+  letter-spacing: 0.008rem;
+  font-weight: 100;
+}
+.picker-select-zone .picker-item .option-selected-offset-4.before {
+  margin-bottom: 0.04rem;
+}
+.picker-select-zone .picker-item .option-selected-offset-4.after {
+  margin-top: 0.04rem;
+}
+.picker-select-zone .picker-item .option-padding {
+  height: 0.5rem;
+}
+.multi-select-1 .select-container {
+  width: 100%;
+}
+.multi-select-2 .select-container {
+  width: 50%;
+}
+.multi-select-3 .select-container {
+  width: 33.33333333%;
+}
+#amap {
+  width: 100%;
+  height: 7.5rem;
+}
+.carneed-product-container {
+  margin-bottom: 0.2rem;
+  background: #FFFFFF;
+}
+.carneed-product-container .product-img {
+  width: 7.5rem;
+  height: 3.6rem;
+  display: block;
+}
+.carneed-product-container .product-details {
+  font-family: "PingFang-SC-Bold";
+  padding-left: 0.3rem;
+  font-size: 0.3rem;
+  height: 1.4rem;
+}
+.carneed-product-container .product-details .detail-title {
+  color: #000000;
+  margin-top: 0.22rem;
+  margin-bottom: 0.25rem;
+}
+.carneed-product-container .product-details .detail-price {
+  color: #ea4040;
+}
+.product-detail .tips {
+  font-size: 0.24rem;
+  color: #e55d5d;
+  padding-left: 0.3rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+.product-detail .confirm-zone {
+  background: #ffffff;
+}
+.product-detail .confirm-zone:before,
+.product-detail .confirm-zone:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.product-detail .confirm-zone .price-zone {
+  float: left;
+  width: 4.3rem;
+  text-align: center;
+  font-size: 0.24rem;
+  height: 1.1rem;
+  line-height: 1.1rem;
+  color: #000000;
+  font-family: "PingFang-SC-Medium";
+}
+.product-detail .confirm-zone .price-zone .price-number {
+  font-size: 0.4rem;
+  font-family: "OpenSans-Bold";
+  color: #f6625f;
+}
+.product-detail .confirm-zone .price-zone .price-number:before,
+.product-detail .confirm-zone .price-zone .price-number:after {
+  content: "   ";
+}
+.product-detail .confirm-zone .price-zone .price-unit {
+  color: #f6625f;
+}
+.product-detail .confirm-zone .confirm-btn {
+  float: left;
+  width: 3.2rem;
+  height: 1.1rem;
+  line-height: 1.1rem;
+  font-size: 0.36rem;
+  background: #5b8aff;
+  color: #ffffff;
+  text-align: center;
+}
+.self-info .list-item.touxiang {
+  height: 1.7rem;
+}
+.self-info .list-item.touxiang .label .label-text {
+  height: 1.7rem;
+  line-height: 1.7rem;
+}
+.self-info .list-item.touxiang .touxiang-img {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  margin-top: 0.3rem;
+}
+.self-account {
+  padding-top: 0.2rem;
+}
+.self-account .income-zone {
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+  background: url("../images/bg@3x.png");
+  width: 7.1rem;
+  height: 2.8rem;
+  background-size: 7.1rem 2.8rem;
+  color: #ffffff;
+}
+.self-account .income-zone .income-number {
+  font-size: 0.6rem;
+  width: 100%;
+  text-align: center;
+  padding-top: 0.8rem;
+  padding-bottom: 0.1rem;
+}
+.self-account .income-zone .income-title {
+  font-size: 0.26rem;
+  width: 100%;
+  text-align: center;
+}
+.self-account .account-record-list-title {
+  font-size: 0.26rem;
+  margin-left: 0.3rem;
+  color: #666666;
+  font-family: "PingFang-SC-Medium";
+  height: 1rem;
+  line-height: 1rem;
+}
+.self-account .account-record-list-container {
+  width: 6.8rem;
+  padding-left: 0.3rem;
+  padding-right: 0.4rem;
+  background: #ffffff;
+}
+.self-account .account-record-list-container .account-record-item {
+  width: 6.8rem;
+  height: 1.5rem;
+  border-bottom: 1px solid #dddddd;
+}
+.self-account .account-record-list-container .account-record-item:nth-last-child(1) {
+  border-style: none;
+}
+.self-account .account-record-list-container .account-record-item:before,
+.self-account .account-record-list-container .account-record-item:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.self-account .account-record-list-container .account-record-item .left {
+  float: left;
+}
+.self-account .account-record-list-container .account-record-item .right {
+  float: right;
+}
+.self-account .account-record-list-container .account-record-item .business-type {
+  font-size: 0.3rem;
+  font-family: "PingFang-SC-Bold";
+  color: #000000;
+  margin-top: 0.3rem;
+  margin-bottom: 0.28rem;
+}
+.self-account .account-record-list-container .account-record-item .business-time {
+  font-size: 0.24rem;
+  font-family: "PingFang-SC-Medium";
+  color: #666666;
+}
+.self-account .account-record-list-container .account-record-item .business-number {
+  margin-top: 0.3rem;
+  font-size: 0.4rem;
+  font-family: "PingFang-SC-Bold";
+  color: #000000;
+}
+.self-order .status-zone {
+  background: #ffffff;
+}
+.self-order .status-zone:before,
+.self-order .status-zone:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.self-order .status-zone .status-item {
+  float: left;
+  width: 25%;
+  text-align: center;
+  height: 0.9rem;
+  line-height: 0.9rem;
+  color: #666666;
+  font-size: 0.3rem;
+  font-family: "PingFang-SC-Medium";
+}
+.self-order .status-zone .status-item.active {
+  color: #5b8aff;
+}
+.self-order .order-list .order-item {
+  margin-top: 0.2rem;
+  position: relative;
+  padding-left: 0.16rem;
+  margin-left: 0.3rem;
+  margin-right: 0.2rem;
+  background: #ffffff;
+  color: #333333;
+  height: 3rem;
+}
+.self-order .order-list .order-item .order-status {
+  background: url("../images/sign1@2x.png");
+  width: 1.09rem;
+  height: 0.49rem;
+  background-size: 1.09rem 0.49rem;
+  position: absolute;
+  left: -0.1rem;
+  top: 0.16rem;
+  font-size: 0.24rem;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+}
+.self-order .order-list .order-item .order-content {
+  padding-top: 0.8rem;
+}
+.self-order .order-list .order-item .order-content-item {
+  font-size: 0.26rem;
+}
+.self-order .order-list .order-item .order-content-item:before,
+.self-order .order-list .order-item .order-content-item:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.self-order .order-list .order-item .order-content-item.order-title {
+  font-size: 0.32rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+.self-order .order-list .order-item .order-content-item.order-address {
+  margin-bottom: 0.25rem;
+}
+.self-order .order-list .order-item .order-content-item .item-icon {
+  float: left;
+  height: 0.34rem;
+  width: 0.3rem;
+  margin-right: 0.08rem;
+}
+.self-order .order-list .order-item .order-content-item .item-text {
+  float: left;
+  height: 0.34rem;
+  line-height: 0.34rem;
+}
+.service-comment .user-info {
+  height: 1.8rem;
+  width: 100%;
+  background: #ffffff;
+}
+.service-comment .user-info .left {
+  float: left;
+}
+.service-comment .user-info .right {
+  float: right;
+}
+.service-comment .user-info .user-avator {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: 0.3rem;
+  margin-top: 0.3rem;
+}
+.service-comment .comment-title {
+  height: 0.62rem;
+  line-height: 0.62rem;
+  padding-left: 0.3rem;
+  font-size: 0.24rem;
+  color: #666666;
+}
+.service-comment .comment-zone {
+  padding-bottom: 0.32rem;
+  background: #ffffff;
+}
+.service-comment .comment-zone .star-operation:before,
+.service-comment .comment-zone .star-operation:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.service-comment .comment-zone .star-operation .operation-title {
+  float: left;
+  font-size: 0.3rem;
+  color: #000000;
+  margin-left: 0.3rem;
+  margin-right: 0.2rem;
+  height: 1.16rem;
+  line-height: 1.16rem;
+}
+.service-comment .comment-zone .star-operation .star-list {
+  float: left;
+  margin-bottom: 0.32rem;
+  margin-top: 0.32rem;
+}
+.service-comment .comment-zone .star-operation .star-list:before,
+.service-comment .comment-zone .star-operation .star-list:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.service-comment .comment-zone .star-operation .star-list .star-item {
+  float: left;
+  height: 0.52rem;
+  width: 0.52rem;
+  margin-right: 0.16rem;
+}
+.service-comment .comment-zone .star-operation .star-list .star-item:nth-last-child(1) {
+  margin-right: 0;
+}
+.service-comment .comment-zone .comment-text {
+  width: 6.9rem;
+  height: 2.48rem;
+  margin-left: 0.3rem;
+  font-size: 0.3rem;
+  color: #999999;
+}
+.service-comment .btn-zone {
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  padding-top: 0.56rem;
+}
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+* {
+  font-family: "PingFang SC";
+}
+input,
+input:focus {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.clear:before,
+.clear:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.page {
+  width: 100%;
+  min-height: 100%;
+  background: #F1F1F1;
+}
+.address {
+  display: block;
+  width: 0.34rem;
+  height: 0.41rem;
+  margin-top: 0.33rem;
+}
+.jiaohao {
+  display: block;
+  width: 0.16rem;
+  height: 0.27rem;
+  margin-top: 0.365rem;
+}

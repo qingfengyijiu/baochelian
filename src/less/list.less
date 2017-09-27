@@ -1,0 +1,78 @@
+.full-width {
+  width: 100%;
+}
+
+.list-container {
+  background: #FFFFFF;
+  margin-bottom: 0.16rem;
+  width: 100%;
+  .list-item {
+    height: 1rem;
+    width: 6.9rem;
+    margin-left: 0.3rem;
+    margin-right: 0.4rem;
+    border-bottom: 1px solid #EBEBEB;
+    &:nth-last-child(0) {
+      border-bottom-style: none;
+    }
+    &:before, &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+
+    .label {
+      &:before, &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+      height: 100%;
+      line-height: 100%;
+      .label-icon {
+        float: left;
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-top: 0.25rem;
+        margin-right: 0.24rem;
+      }
+      .label-text {
+        float: left;
+        height: 1rem;
+        line-height: 1rem;
+        font-size: 0.3rem;
+      }
+    }
+
+
+
+
+    .item {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .left {
+      float: left;
+    }
+
+    .right {
+      float: right;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    input, span {
+      height: 1rem;
+      line-height: 1rem;
+      font-size: 0.3rem;
+      display: block;
+      &.full-width {
+        width: 6.9rem;
+      }
+    }
+  }
+}

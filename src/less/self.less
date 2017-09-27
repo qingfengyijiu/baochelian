@@ -1,0 +1,173 @@
+.self-info {
+  .list-item.touxiang {
+    height: 1.7rem;
+    .label .label-text {
+      height: 1.7rem;
+      line-height: 1.7rem;
+    }
+    .touxiang-img {
+      width: 1.1rem;
+      height: 1.1rem;
+      border-radius: 50%;
+      margin-top: 0.3rem;
+    }
+  }
+}
+
+
+.self-account {
+  padding-top: 0.2rem;
+  .income-zone {
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    background: url("../images/bg@3x.png");
+    width: 7.1rem;
+    height: 2.8rem;
+    background-size: 7.1rem 2.8rem;
+    color: #ffffff;
+    .income-number {
+      font-size: 0.6rem;
+      width: 100%;
+      text-align: center;
+      padding-top: 0.8rem;
+      padding-bottom: 0.1rem;
+    }
+    .income-title {
+      font-size: 0.26rem;
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .account-record-list-title {
+    font-size: 0.26rem;
+    margin-left: 0.3rem;
+    color: #666666;
+    font-family: "PingFang-SC-Medium";
+    height: 1rem;
+    line-height: 1rem;
+  }
+  .account-record-list-container {
+    width: 6.8rem;
+    padding-left: 0.3rem;
+    padding-right: 0.4rem;
+    background: #ffffff;
+    .account-record-item {
+      width: 6.8rem;
+      height: 1.5rem;
+      border-bottom: 1px solid #dddddd;
+      &:nth-last-child(1) {
+        border-style: none;
+      }
+      &:before, &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+      .left {
+        float: left;
+      }
+      .right {
+        float: right;
+      }
+      .business-type {
+        font-size: 0.3rem;
+        font-family: "PingFang-SC-Bold";
+        color: #000000;
+        margin-top: 0.3rem;
+        margin-bottom: 0.28rem;
+      }
+      .business-time {
+        font-size: 0.24rem;
+        font-family: "PingFang-SC-Medium";
+        color: #666666;
+      }
+      .business-number {
+        margin-top: 0.3rem;
+        font-size: 0.4rem;
+        font-family: "PingFang-SC-Bold";
+        color: #000000;
+      }
+    }
+  }
+}
+
+.self-order {
+  .status-zone {
+    background: #ffffff;
+    &:before, &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+
+    .status-item {
+      float: left;
+      width: 100% / 4;
+      text-align: center;
+      height: 0.9rem;
+      line-height: 0.9rem;
+      color: #666666;
+      font-size: 0.3rem;
+      font-family: "PingFang-SC-Medium";
+      &.active {
+        color: #5b8aff;
+      }
+    }
+  }
+
+  .order-list {
+    .order-item {
+      margin-top: 0.2rem;
+      position: relative;
+      padding-left: 0.16rem;
+      margin-left: 0.3rem;
+      margin-right: 0.2rem;
+      background: #ffffff;
+      color: #333333;
+      height: 3rem;
+      .order-status {
+        background: url("../images/sign1@2x.png");
+        width: 1.09rem;
+        height: 0.49rem;
+        background-size: 1.09rem 0.49rem;
+        position: absolute;
+        left: -0.1rem;
+        top: 0.16rem;
+        font-size: 0.24rem;
+        color: #ffffff;
+        font-weight: bold;
+        text-align: center;
+      }
+      .order-content {
+        padding-top: 0.8rem;
+      }
+      .order-content-item {
+        font-size: 0.26rem;
+        &:before, &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+        &.order-title {
+          font-size: 0.32rem;
+          font-weight: bold;
+          margin-bottom: 0.3rem;
+        }
+        &.order-address {
+          margin-bottom: 0.25rem;
+        }
+        .item-icon {
+          float: left;
+          height: 0.34rem;
+          width: 0.3rem;
+          margin-right: 0.08rem;
+        }
+        .item-text {
+          float: left;
+          height: 0.34rem;
+          line-height: 0.34rem;
+        }
+      }
+    }
+  }
+}

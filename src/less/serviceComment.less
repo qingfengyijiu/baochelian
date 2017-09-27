@@ -1,0 +1,79 @@
+.service-comment {
+  .user-info {
+    height: 1.8rem;
+    width: 100%;
+    background: #ffffff;
+    .left {
+      float: left;
+    }
+    .right {
+      float: right;
+    }
+    .user-avator {
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-left: 0.3rem;
+      margin-top: 0.3rem;
+    }
+  }
+  .comment-title {
+    height: 0.62rem;
+    line-height: 0.62rem;
+    padding-left: 0.3rem;
+    font-size: 0.24rem;
+    color: #666666;
+  }
+  .comment-zone {
+    padding-bottom: 0.32rem;
+    background: #ffffff;
+    .star-operation {
+      &:before, &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+      .operation-title {
+        float: left;
+        font-size: 0.3rem;
+        color: #000000;
+        margin-left: 0.3rem;
+        margin-right: 0.2rem;
+        height: 1.16rem;
+        line-height: 1.16rem;
+      }
+      .star-list {
+        float: left;
+        margin-bottom: 0.32rem;
+        margin-top: 0.32rem;
+        &:before, &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+        .star-item {
+          float: left;
+          height: 0.52rem;
+          width: 0.52rem;
+          margin-right: 0.16rem;
+          &:nth-last-child(1) {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    .comment-text {
+      width: 6.9rem;
+      height: 2.48rem;
+      margin-left: 0.3rem;
+      font-size: 0.3rem;
+      color: #999999;
+    }
+  }
+
+  .btn-zone {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    padding-top: 0.56rem;
+  }
+}

@@ -1,0 +1,178 @@
+.picker-modal-layer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+  background: #000000;
+}
+
+.picker-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: @select-height + 0.435rem;
+  background: #FFFFFF;
+}
+.picker-button-zone {
+  position: relative;
+  font-size: 0.17rem;
+  width: 100%;
+  text-align: center;
+  height: 0.435rem;
+  line-height: 0.435rem;
+  background: #F6F6F6;
+  color: #000000;
+  .picker-btn {
+    font-size: 0.15rem;
+    color: #007AFF;
+    border-style: none;
+    outline: none;
+    text-decoration: none;
+    @margin: 0.07rem;
+    margin-bottom: 0.11rem;
+    &.btn-cancel {
+      float: left;
+      margin-left: @margin;
+    }
+    &.btn-confirm {
+      float: right;
+      margin-right: @margin;
+    }
+  }
+}
+@select-height: 2.155rem;
+.picker-select-zone {
+  width: 100%;
+  position:relative;
+  &:before, &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+
+  .picker-selected-zone {
+    position: relative;
+    left: 0;
+    top: 1.05rem;
+    height: 0.28rem;
+    width: 100%;
+    border-top: 0.02rem solid #DDDDDD;
+    border-bottom: 0.02rem solid #DDDDDD;
+  }
+
+  .select-container {
+    float: left;
+  }
+
+  .select-touch-layer {
+    position: relative;
+    background:red;
+    z-index: 9990;
+    height: @select-height;
+    top: -@select-height;
+    opacity: 0;
+  }
+
+  .picker-item {
+    height: @select-height;
+    padding-top: 0.15rem;
+    padding-bottom: 0.15rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    text-wrap: none;
+    text-align: center;
+    .option-item {
+      font-family: ".PingFangSC-Regular";
+    }
+    .option-selected {
+      font-size: 0.235rem;
+      height: 0.33rem;
+      line-height: 0.33rem;
+      overflow: hidden;
+      text-wrap: none;
+      font-family: ".SFNSDisplay";
+      letter-spacing: 0.0038rem;
+      font-weight: bold;
+    }
+    .option-selected-offset-1 {
+      font-size: 0.19rem;
+      height: 0.2rem;
+      line-height: 0.2rem;
+      @margin: 0.09rem;
+      letter-spacing: 0.004rem;
+      font-weight: 300;
+      &.before {
+        margin-bottom: @margin;
+      }
+      &.after {
+        margin-top: @margin;
+      }
+    }
+    .option-selected-offset-2 {
+      font-size: 0.15rem;
+      height: 0.19rem;
+      line-height: 0.19rem;
+      @margin: 0.07rem;
+      letter-spacing: 0.004rem;
+      font-weight: 200;
+      &.before {
+        margin-bottom: @margin;
+      }
+      &.after {
+        margin-top: @margin;
+      }
+    }
+    .option-selected-offset-3 {
+      font-size: 0.1rem;
+      height: 0.13rem;
+      line-height: 0.13rem;
+      letter-spacing: 0.008rem;
+      font-weight: 100;
+      @margin: 0.04rem;
+      &.before {
+        margin-bottom: @margin;
+      }
+      &.after {
+        margin-top: @margin;
+      }
+    }
+    .option-selected-offset-4 {
+      font-size: 0.045rem;
+      height: 0.07rem;
+      line-height: 0.07rem;
+      letter-spacing: 0.008rem;
+      font-weight: 100;
+      @margin: 0.04rem;
+      &.before {
+        margin-bottom: @margin;
+      }
+      &.after {
+        margin-top: @margin;
+      }
+    }
+    .option-padding {
+      height: 0.5rem;
+    }
+  }
+}
+
+.multi-select(@number) {
+  .select-container {
+    width: 100% / @number;
+  }
+}
+
+.multi-select-1 {
+  .multi-select(1);
+}
+
+.multi-select-2 {
+  .multi-select(2);
+}
+
+.multi-select-3 {
+  .multi-select(3);
+}

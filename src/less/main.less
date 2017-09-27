@@ -1,0 +1,54 @@
+@import './list';
+@import './rescue';
+@import './button';
+@import './picker';
+@import './myPosition';
+@import './product';
+@import './self';
+@import './serviceComment';
+
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  font-family: "PingFang SC";
+}
+
+input, input:focus {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.clear {
+  &:before, &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+
+.page {
+  width: 100%;
+  min-height: 100%;
+  background: #F1F1F1;
+}
+
+.address {
+  display: block;
+  width: 0.34rem;
+  height: 0.41rem;
+  margin-top: (1rem - 0.34rem) / 2;
+}
+
+.jiaohao {
+  display: block;
+  width: 0.16rem;
+  height: 0.27rem;
+  margin-top: (1rem - 0.27rem) / 2;
+}
