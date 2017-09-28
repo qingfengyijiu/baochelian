@@ -33,10 +33,10 @@ function sha1(str) {
 
 
 app.get('/', function(req, res) {
-  var signature = req.param("signature"),
-      timestamp = req.param("timestamp"),
-      nonce= req.param("nonce"),
-      echostr = req.param("echostr"),
+  var signature = req.params.signature,
+      timestamp = req.params.timestamp,
+      nonce= req.params.nonce,
+      echostr = req.params.echostr,
       token = "zhangjianxin";
   var arr = [token, timestamp, nonce].sort();
   var signStr = arr.concat(""),
