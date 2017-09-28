@@ -15,15 +15,16 @@ export default class extends Component {
 
 	constructor(props) {
 		super(props);
-		let value = [];
-		props.num = props.num != null ? props.num : 1;
+		let value = [],
+			num = props.num;
+		num = num != null ? num : 1;
 		if(props.defaultValue) {
 			value = props.defaultValue;
 			if(!(value instanceof Array)) {
 				value = [value];
 			}
 		} else {
-			for(let i = 0; i < props.num; i++) {
+			for(let i = 0; i < num; i++) {
 				value.push(0);
 			}
 		}
@@ -34,12 +35,13 @@ export default class extends Component {
 		}
 	}
 
-	onChange = function(index, value) {
+	onChange(index, value) {
 		let stateValue = this.state.value;
 		stateValue[index] = value;
 		this.setState({
 			value: stateValue
 		});
+		this.props.onChange && this.props.onChange(value, index);
 	}
 
 	show = () => {
@@ -68,11 +70,25 @@ export default class extends Component {
 		this.props.cancel && this.props.cancel();
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.defaultValue) {
+			this.setState({
+				value: nextProps.defaultValue
+			});
+		}
+		return true;
+	}
+
+	getValue = () => {
+		return this.state.value;
+	}
+
 	render() {
-		let {options, title, num} = this.props,
+		let {options, title, num, defaultValue, confirm, cancel, onChange, ...other} = this.props,
 			{value, show} = this.state,
 			pickers = [];
 		//如果是单列picker，统一转换成多列picker数组格式
+		num = num != null ? num : 1;
 		if(num == 1) {
 			options = [options];
 		}
@@ -83,7 +99,8 @@ export default class extends Component {
 			})
 		}
 		return (
-			<div className="picker-modal-layer" style={{display: show ? 'block' : 'none'}}>
+			<div className="picker-modal" style={{display: show ? 'block' : 'none'}} {...other}>
+				<div className="picker-shade-layer"/>
 				<div className="picker-container">
 					<div className="picker-button-zone">
 						<a className="picker-btn btn-cancel" onClick={this.hide}>取消</a>
@@ -95,7 +112,7 @@ export default class extends Component {
 						{
 							pickers.map((picker, index) => {
 								return (
-									<Picker picker={picker} selected={picker.value} onChange={this.onChange.bind(this, index)}/>
+									<Picker key={index} picker={picker} selected={picker.value} onChange={this.onChange.bind(this, index)}/>
 								)
 							})
 						}

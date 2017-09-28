@@ -7,14 +7,17 @@ export default class extends Component {
 	}
 
 	render() {
-		let {center, right, children, containerClass} = this.props;
+		let {left, center, right, children, className, ...other} = this.props;
 		return (
-			<div className={"list-item" + (containerClass ? " " + containerClass : "")}>
-				{children ? children : ''}
-				{center ? <div className="item center">{center}</div> : ''}
-				{right ? <div className="item right">{right}</div> : ''}
-			</div>
+			<table className={"list-item" + (className ? ' ' + className : '')} {...other}>
+				<tbody>
+				<tr>
+					<td className="item-part left">{left ? left : (children ? children : <div/>)}</td>
+					<td className="item-part center">{center ? center : ''}</td>
+					<td className="item-part right">{right ? right : ''}</td>
+				</tr>
+				</tbody>
+			</table>
 		)
 	}
-
 }

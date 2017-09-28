@@ -6,13 +6,16 @@
   background: #FFFFFF;
   margin-bottom: 0.16rem;
   width: 100%;
+  &:nth-last-child(1) {
+    margin-bottom: 0;
+  }
   .list-item {
     height: 1rem;
     width: 6.9rem;
     margin-left: 0.3rem;
     margin-right: 0.4rem;
     border-bottom: 1px solid #EBEBEB;
-    &:nth-last-child(0) {
+    &:nth-last-child(1) {
       border-bottom-style: none;
     }
     &:before, &:after {
@@ -44,9 +47,6 @@
       }
     }
 
-
-
-
     .item {
       height: 100%;
       margin: 0;
@@ -54,6 +54,11 @@
     }
 
     .left {
+      float: left;
+      width: 2rem;
+    }
+
+    .center {
       float: left;
     }
 
@@ -66,12 +71,60 @@
     }
 
     input, span {
+      float: left;
       height: 1rem;
       line-height: 1rem;
       font-size: 0.3rem;
       display: block;
       &.full-width {
         width: 6.9rem;
+      }
+    }
+  }
+}
+
+.list2 {
+  background: #ffffff;
+  margin-bottom: 0.16rem;
+  .list-item {
+    width: 100%;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    border-bottom: 1px solid #EBEBEB;
+    font-size: 0.3rem;
+    color: #999999;
+    &:nth-last-child(1) {
+      border-bottom-style: none;
+    }
+  }
+  .item-part {
+    vertical-align: middle;
+    min-height: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    &:before, &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+    &.left {
+      text-align: left;
+      > * {
+        float: left;
+        min-height: 0.4rem;
+        line-height: 0.4rem;
+      }
+    }
+    &.center {
+      text-align: left;
+      > * {
+        float: left;
+      }
+    }
+    &.right {
+      text-align: right;
+      > * {
+        float: right;
       }
     }
   }

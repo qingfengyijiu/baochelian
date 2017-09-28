@@ -46,6 +46,13 @@ export default class  extends Component {
 		});
 	}
 
+	onSelectTouchEnd = e => {
+		e.preventDefault();
+		e.stopPropagation();
+		e.nativeEvent.stopImmediatePropagation();
+		this.refs.picker.style.transform = "translateY(" + 0 + ")";
+	}
+
 	getOptionValue(picker, offset) {
 		let position = picker.value + offset;
 		return position >= 0 && position < picker.options.length ? picker.options[position] : '';
@@ -66,7 +73,7 @@ export default class  extends Component {
 					<div className="option-item option-selected-offset-3">{this.getOptionValue(picker, 3)}</div>
 					<div className="option-item option-selected-offset-4">{this.getOptionValue(picker, 4)}</div>
 				</div>
-				<div className="select-touch-layer" onTouchMove={this.onSelectTouchMove} onTouchStart={this.onSelectTouchStart}/>
+				<div className="select-touch-layer" onTouchMove={this.onSelectTouchMove} onTouchStart={this.onSelectTouchStart} onTouchEnd={this.onSelectTouchEnd}/>
 			</div>
 		)
 	}

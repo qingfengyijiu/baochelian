@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import List, {Item} from '../../components/List/index.jsx';
+import List, {Item} from '../../components/List';
 
 
 export default class extends Component {

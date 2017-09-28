@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import _Item from './Item.jsx';
 
 export default class extends Component {
 
@@ -8,13 +7,11 @@ export default class extends Component {
 	}
 
 	render() {
+		let {className, children, ...other} = this.props;
 		return (
-			<div className="list-container">
-				{this.props.children}
+			<div className={"list2" + (className ? ' ' + className : '')} {...other}>
+				{children}
 			</div>
 		)
 	}
-
 }
-
-export const Item = _Item;

@@ -39,6 +39,7 @@
     "immutable": "^3.8.1",
     "less-middleware": "~2.2.0",
     "lodash": "^4.17.2",
+    "moment": "^2.18.1",
     "morgan": "~1.7.0",
     "normalize-range": "^0.1.2",
     "num2fraction": "^1.2.2",
