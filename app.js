@@ -33,13 +33,13 @@ function sha1(str) {
 
 
 app.get('/', function(req, res) {
-  var signature = req.params.signature,
-      timestamp = req.params.timestamp,
-      nonce= req.params.nonce,
-      echostr = req.params.echostr,
+  var signature = req.query.signature,
+      timestamp = req.query.timestamp,
+      nonce= req.query.nonce,
+      echostr = req.query.echostr,
       token = "zhangjianxin";
   var arr = [token, timestamp, nonce].sort();
-  var signStr = arr.concat(""),
+  var signStr = arr.join(""),
       signedStr = sha1(signStr);
   if(signedStr == signature) {
     res.send(echostr);
