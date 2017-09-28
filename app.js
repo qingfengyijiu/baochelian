@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var crypto = require("crypto");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -23,9 +24,35 @@ app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+function sha1(str) {
+	var md5sum = crypto.createHash('sha1');
+	md5sum.update(str, "utf8");
+	str = md5sum.digest('hex');
+	return str;
+}
+
+
+app.get('/', function(req, res) {
+  var signature = req.param("signature"),
+      timestamp = req.param("timestamp"),
+      nonce= req.param("nonce"),
+      echostr = req.param("echostr"),
+      token = "zhangjianxin";
+  var arr = [token, timestamp, nonce].sort();
+  var signStr = arr.concat(""),
+      signedStr = sha1(signStr);
+  if(signedStr == signature) {
+    res.send(echostr);
+    res.end();
+  } else {
+    res.status(404);
+    res.end();
+  }
+});
+
 app.get('*', function(req, res) {
   res.render('index', { title: 'Express' });
-})
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
