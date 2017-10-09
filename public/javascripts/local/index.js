@@ -61332,6 +61332,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -61347,8 +61349,7 @@
 			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
 			_this.onTimerClick = function (e) {
-				console.log(1);
-				_this.refs.timer.run();
+				_this.refs.timer.start();
 			};
 
 			_this.state = {
@@ -61365,7 +61366,7 @@
 					var stateObject = {},
 					    value = e.target.value;
 					stateObject[field] = value;
-					this.setState(stateObject);
+					this.setState(_defineProperty({}, field, value));
 				};
 			}
 		}, {
@@ -61379,17 +61380,31 @@
 					'div',
 					{ className: 'phone-validate' },
 					_react2.default.createElement(
+						'div',
+						{ className: 'tip' },
+						'\u8BF7\u7ED1\u5B9A\u60A8\u7684\u624B\u673A\u53F7'
+					),
+					_react2.default.createElement(
 						_List2.default,
 						null,
 						_react2.default.createElement(
 							_List.Item,
-							{ right: _react2.default.createElement(_Timer2.default, { ref: 'timer', endText: '\u53D1\u9001\u9A8C\u8BC1\u7801', auto: true, onClick: this.onTimerClick }) },
+							{ right: _react2.default.createElement(_Timer2.default, { ref: 'timer', startText: '\u53D1\u9001\u9A8C\u8BC1\u7801', endText: '\u91CD\u65B0\u53D1\u9001', onClick: this.onTimerClick }) },
 							_react2.default.createElement('input', { value: phone, type: 'text', placeholder: '\u624B\u673A\u53F7', className: 'input-phone', onChange: this.onChange("phone").bind(this) })
 						),
 						_react2.default.createElement(
 							_List.Item,
 							null,
 							_react2.default.createElement('input', { value: captcha, type: 'text', placeholder: '\u9A8C\u8BC1\u7801', className: 'full-width', onChange: this.onChange("captcha").bind(this) })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'btn-container' },
+						_react2.default.createElement(
+							'button',
+							{ className: 'btn block' },
+							'\u7ED1\u5B9A'
 						)
 					)
 				);
@@ -61457,7 +61472,7 @@
 			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
 			_this.start = function () {
-				var isRunning = _this.props.isRunning;
+				var isRunning = _this.state.isRunning;
 
 				if (isRunning) return;
 				_this.props.onStart && _this.props.onStart();

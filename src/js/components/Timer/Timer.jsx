@@ -20,7 +20,7 @@ export default class extends Component {
 	}
 
 	start = () => {
-		let {isRunning} = this.props;
+		let {isRunning} = this.state;
 		if(isRunning) return;
 		this.props.onStart && this.props.onStart();
 		this.run();
