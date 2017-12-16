@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as ThisAction from './action.js';
+import history from '../history.jsx';
 
 class Map extends Component {
 
@@ -54,8 +58,8 @@ class Map extends Component {
 				pageSize: 30,
 				pageIndex: 1,
 				city: _this.citycode, //城市
-				map: _this.map,
-				panel: "nearbyList"
+				map: _this.map
+				//panel: "nearbyList"
 			});
 			_this.search();
 		})
@@ -77,42 +81,14 @@ class Map extends Component {
 	}
 }
 
-export default class extends Component {
+class Position extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			searchText: '',
 			selectedAddress: null,
-			nearbyList: [{
-				name: "科技大厦"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "富金佳源误区"
-			}, {
-				name: "科技大厦"
-			}]
+			nearbyList: []
 		}
 	}
 
@@ -130,9 +106,16 @@ export default class extends Component {
 	}
 
 	changeSelectedAddress = function(address) {
+		this.props.actions.thisAction.changeData({
+			location: address.name,
+			locationLng: address.location.lng,
+			locationLat: address.location.lat,
+			locationDetail: address.address
+		});
 		this.setState({
 			selectedAddress: address
 		});
+		history.goBack();
 	}
 
 	getNearbyViews = (nearbyList, selectedNearby) => {
@@ -183,4 +166,24 @@ export default class extends Component {
 	}
 
 }
+
+function mapStateToProps(state) {
+	let position = state.reducers.position.toJS();
+	return {
+		...position
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		actions: {
+			thisAction: bindActionCreators(ThisAction, dispatch)
+		}
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Position)
 

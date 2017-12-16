@@ -1,7 +1,21 @@
+.self-center {
+  .label-icon {
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+  .label-icon, .label-text {
+    float: left;
+    font-size: 0.3rem;
+  }
+  .label-text {
+    margin-left: 0.24rem;
+  }
+}
+
 .self-info {
   .list-item.touxiang {
     height: 1.7rem;
-    .label .label-text {
+    .label-text {
       height: 1.7rem;
       line-height: 1.7rem;
     }
@@ -47,7 +61,7 @@
     line-height: 1rem;
   }
   .account-record-list-container {
-    width: 6.8rem;
+    width: 7.5rem;
     padding-left: 0.3rem;
     padding-right: 0.4rem;
     background: #ffffff;
@@ -126,10 +140,8 @@
       color: #333333;
       height: 3rem;
       .order-status {
-        background: url("../images/sign1@2x.png");
         width: 1.09rem;
         height: 0.49rem;
-        background-size: 1.09rem 0.49rem;
         position: absolute;
         left: -0.1rem;
         top: 0.16rem;
@@ -137,6 +149,22 @@
         color: #ffffff;
         font-weight: bold;
         text-align: center;
+        &.not-accepted {
+          background: url("../images/sign1@2x.png");
+          background-size: 1.09rem 0.49rem;
+        }
+        &.not-paid {
+          background: url("../images/sign2@2x.png");
+          background-size: 1.09rem 0.49rem;
+        }
+        &.not-comment {
+          background: url("../images/sign3@2x.png");
+          background-size: 1.09rem 0.49rem;
+        }
+        &.complete {
+          background: url("../images/sign4@2x.png");
+          background-size: 1.09rem 0.49rem;
+        }
       }
       .order-content {
         padding-top: 0.8rem;
@@ -166,6 +194,104 @@
           float: left;
           height: 0.34rem;
           line-height: 0.34rem;
+        }
+      }
+    }
+  }
+}
+
+.self-coupon {
+  .tab-container {
+    background: #ffffff;
+    height: 0.9rem;
+    width: 100%;
+    padding-top: 0.32rem;
+    .tab-item {
+      height: 0.58rem;
+      font-size: 0.26rem;
+      line-height: 0.26rem;
+      padding-bottom: 0.23rem;
+      width: 2.18rem;
+      border-bottom: 0.03rem solid transparent;
+      margin-left: 0.8rem;
+      text-align: center;
+      &.active {
+        color: #5b8aff;
+        border-bottom-color: #5b8aff;
+      }
+    }
+    .tab-content-container {
+      min-height: 100%;
+      width: 100%;
+      background: red;
+    }
+  }
+  .tab-content-container {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    .coupon-item {
+      margin-top: 0.2rem;
+      width: 6.9rem;
+      height: 1.8rem;
+      &.fullcut-amount {
+        background: url("../images/youhui_redBg@2x.png");
+        background-size: 6.9rem 1.8rem;
+      }
+      &.fullcut-discount {
+        background: url("../images/youhui_blueBg@2x.png");
+        background-size: 6.9rem 1.8rem;
+      }
+      &.instantcut {
+        background: url("../images/youhui_yellowBg@2x.png");
+        background-size: 6.9rem 1.8rem;
+        .item-left .item-value-container .cut-value {
+          &.integer-part {
+            font-size: 0.5rem;
+          }
+          &.float-part {
+            font-size: 0.3rem;
+          }
+        }
+      }
+      .item-left {
+        width: 2.65rem;
+        height: 1.8rem;
+        color: #ffffff;
+        .item-value-container {
+          width: 100%;
+          text-align: center;
+          height: 1rem;
+          .icon-metric {
+            font-size: 0.4rem;
+            height: 1rem;
+            line-height: 1rem;
+          }
+          .cut-value {
+            display: inline-block;
+            margin-left: 0.05rem;
+            font-size: 0.72rem;
+            height: 1rem;
+            line-height: 1rem;
+          }
+        }
+        .cut-info {
+          margin-top: 0.2rem;
+          width: 100%;
+          text-align: center;
+          font-size: 0.24rem;
+        }
+      }
+      .item-right {
+        padding-left: 0.5rem;
+        .coupon-name {
+          font-size: 0.34rem;
+          color: #000000;
+          margin-top: 0.44rem;
+        }
+        .coupon-expiredate {
+          margin-top: 0.3rem;
+          font-size: 0.24rem;
+          color: #666666;
         }
       }
     }

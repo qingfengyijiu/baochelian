@@ -22,3 +22,17 @@ export function hideToast() {
         type: "TOAST_HIDE"
     }
 }
+
+export function changeSelfInfo(data) {
+    return {
+        type: "CHANGE_SELF_INFO",
+        data
+    }
+}
+
+export function changeTruckBrandList(data) {
+    return {
+        type: "CHANGE_TRUCK_BRAND_LIST",
+        data
+    }
+}

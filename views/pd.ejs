@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>订单详情</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="HandheldFriendly" content="true">
+	<style type="text/css">
+		html, body{
+			width: 100%;
+			height: 100%;
+			min-height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		* {
+			font-family: "PingFang SC";
+			outline: none;
+			box-sizing: border-box;
+		}
+
+		input, input:focus {
+			border: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.ft {
+			float: left;
+		}
+		.fr {
+			float: right;
+		}
+		.page {
+			background: #f1f1f1;
+			min-height: 100%;
+		}
+		.list.step-container {
+			padding-top: 0.46rem;
+			padding-bottom: 0.46rem;
+			padding-left: 0.65rem;
+			padding-right: 0.65rem;
+		}
+		.step-container:before, .step-container:after {
+			content: " ";
+			display: table;
+			clear: both;
+		}
+		.step-item {
+			font-size: 0.26rem;
+			width: 0.8rem;
+			float: left;
+		}
+		.step-icon {
+			width: 0.52rem;
+			height: 0.52rem;
+			margin-left: 0.14rem;
+			background: url(../images/duihao@2x.png);
+			background-size: 0.52rem 0.52rem;
+		}
+		.step-item.active .step-icon {
+			background: url(../images/duihao_active@2x.png);
+			background-size: 0.52rem 0.52rem;
+		}
+		.step-item .step-name {
+			margin-top: 0.24rem;
+			width: 100%;
+			text-align: center;
+			color: #666666;
+		}
+		.step-item.active .step-name {
+			color: #5b8aff;
+		}
+		.step-item-separator {
+			width: 1rem;
+			height: 0rem;
+			border-bottom: 0.02rem dashed #666666;
+			margin-top: 0.26rem;
+			float: left;
+		}
+		.step-item.active + .step-item-separator {
+			border-bottom-color: #5b8aff;
+			border-bottom-style: solid;
+		}
+		.list {
+			background: #ffffff;
+			margin-top: 0.16rem;
+			padding-left: 0.3rem;
+			padding-right: 0.3rem;
+		}
+		.list:nth-child(1) {
+			margin-top: 0;
+		}
+		.list-item {
+			border-bottom: 1px solid #cccccc;
+			padding-top: 0.25rem;
+			padding-bottom: 0.25rem;
+		}
+		.list-item:nth-last-child(1) {
+			border-bottom: 0 none;
+		}
+		.list-item:before, .list-item:after {
+			content: " ";
+			display: table;
+			clear:both;
+		}
+		.list-item .text{
+			height: 0.38rem;
+			line-height: 0.38rem;
+			font-size: 0.3rem;
+			color: #000000;
+		}
+		.list-item label.text {
+			width: 1.6rem;
+			color: #666666;
+		}
+		.technician-info-container .info-avatar {
+			width: 1.32rem;
+			height: 1.32rem;
+			margin-right: 0.3rem;
+		}
+		.technician-info-container .info-name {
+			font-size: 0.3rem;
+			color: #000000;
+			margin-top: 0.3rem;
+		}
+		.technician-info-container .info-comment {
+			font-size: 0.26rem;
+			color: #666666;
+			margin-top: 0.05rem;
+		}
+		.technician-info-container .info-comment:before, .technician-info-container .info-comment:after {
+			content: " ";
+			display: table;
+			clear: both;
+		}
+		.technician-info-container .info-comment .comment-value-number {
+			color: #5b8aff;
+		}
+		.comment-value-icon {
+			list-style: none;
+			list-style-position: inside;
+			margin: 0;
+			padding: 0;
+			margin-top: 0.03rem;
+		}
+		.comment-value-icon-item {
+			float: left;
+			background: url("../images/star2@2x.png");
+			width: 0.26rem;
+			height: 0.26rem;
+			background-size: 0.26rem 0.26rem;
+			margin-right: 0.06rem;
+		}
+		.comment-value-icon-item.active {
+			background: url("../images/star_d@2x.png");
+			background-size: 0.26rem 0.26rem;
+		}
+		.comment-value-number {
+			margin-left: 0.06rem;
+		}
+		.list-item .text.text-coupon {
+			font-size: 0.3rem;
+			color: #f34b4b;
+		}
+		.list-item .text.text-total {
+			font-size: 0.36rem;
+			color: #f34b4b;
+		}
+		.order-tip {
+			font-size: 0.24rem;
+			color: #f94f4f;
+			padding-left: 0.3rem;
+			padding-top: 0.3rem;
+			padding-bottom: 0.14rem;
+		}
+		.submit-btn {
+			display: block;
+			width: 100%;
+			height: 0.85rem;
+			line-height: 0.85rem;
+			text-align: center;
+			border-radius: 0.1rem;
+			background: #5b8aff;
+		}
+		.price-material {
+			width: 100%;
+		}
+		.price-material th, .price-material td {
+			font-size: 0.24rem;
+			color: #666666;
+			text-align: center;
+		}
+		.price-material td {
+
+		}
+		.price-material th:nth-child(1), .price-material td:nth-child(1) {
+			text-align: left;
+		}
+		.price-material th:nth-last-child(1), .price-material td:nth-last-child(1) {
+			text-align: right;
+		}
+	</style>
+	<script src='/javascripts/thirdparty/lodash.min.js'></script>
+	<script src='/javascripts/thirdparty/zepto.min.js'></script>
+</head>
+<body>
+<div class="page">
+	<div class="step-container list">
+		<div class="step-item active">
+			<div class="step-icon"></div>
+			<div class="step-name">抢单</div>
+		</div>
+		<div class="step-item-separator"></div>
+		<div class="step-item">
+			<div class="step-icon"></div>
+			<div class="step-name">付款</div>
+		</div>
+		<div class="step-item-separator"></div>
+		<div class="step-item">
+			<div class="step-icon"></div>
+			<div class="step-name">服务</div>
+		</div>
+		<div class="step-item-separator"></div>
+		<div class="step-item">
+			<div class="step-icon"></div>
+			<div class="step-name">评价</div>
+		</div>
+	</div>
+	<div class="order-info-container list">
+		<div class="list-item">
+			<label class="text ft">订单号</label>
+			<div class="text ft">123456</div>
+		</div>
+		<div class="list-item">
+			<label class="text ft">下单时间</label>
+			<div class="text ft">2017-08-09 12:00</div>
+		</div>
+		<div class="list-item">
+			<label class="text ft">付款时间</label>
+			<div class="text ft">2017-08-09 12:00</div>
+		</div>
+	</div>
+	<div class="service-info-container list">
+		<div class="list-item">
+			<label class="text ft">服务项目</label>
+			<div class="text ft">补胎救援</div>
+		</div>
+		<div class="list-item">
+			<label class="text ft">服务详情</label>
+			<div class="text ft"></div>
+		</div>
+		<div class="list-item">
+			<label class="text ft">服务耗材</label>
+			<div class="ft">
+				<div class="text">
+					<span>蘑菇钉</span>
+					<span> x </span>
+					<span>1</span>
+				</div>
+				<div class="text">
+					<span>蘑菇钉</span>
+					<span> x </span>
+					<span>1</span>
+				</div><div class="text">
+					<span>蘑菇钉</span>
+					<span> x </span>
+					<span>1</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="technician-info-container list">
+		<div class="list-item">
+			<img src="/images/default_avatar.png" class="info-avatar ft"/>
+			<div class="info-right ft">
+				<div class="info-name">范辉</div>
+				<div class="info-comment">
+					<label class="comment-label ft">综合评价：</label>
+					<ul class="comment-value-icon ft">
+						<li class="comment-value-icon-item active"></li>
+						<li class="comment-value-icon-item active"></li>
+						<li class="comment-value-icon-item active"></li>
+						<li class="comment-value-icon-item active"></li>
+						<li class="comment-value-icon-item"></li>
+					</ul>
+					<div class="comment-value-number ft">4.0</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="price-info-container list">
+		<div class="list-item">
+			<label class="text ft">工时费</label>
+			<div class="text fr">
+				<span>¥ </span>
+				<span>100</span>
+			</div>
+		</div>
+		<div class="list-item">
+			<table class="price-material">
+				<thead>
+					<tr>
+						<th>耗材</th>
+						<th>数量</th>
+						<th>费用</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>蘑菇钉</td>
+						<td>2</td>
+						<td>¥ 20</td>
+					</tr>
+					<tr>
+						<td>蘑菇钉</td>
+						<td>2</td>
+						<td>¥ 2</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="list-item">
+			<label class="text ft">距离费</label>
+			<div class="text fr">
+				<span>¥ </span>
+				<span>100</span>
+			</div>
+		</div>
+		<div class="list-item">
+			<label class="text ft">优惠</label>
+			<div class="text fr text-coupon">
+				<span>- ¥ </span>
+				<span>100</span>
+			</div>
+		</div>
+		<div class="list-item">
+			<label class="text ft">合计</label>
+			<div class="text fr text-total">
+				<span>¥ </span>
+				<span>100</span>
+			</div>
+		</div>
+	</div>
+	<div class="order-tip">服务不满意，7天内可申请退款。</div>
+	<div class="submit-btn-container list">
+		<div class="list-item">
+			<button class="submit-btn">确认</button>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	(function (doc, win) {
+		var docEl = doc.documentElement,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+			recalc = function () {
+				var clientWidth = docEl.clientWidth;
+				if (!clientWidth) return;
+				if(clientWidth>=750){
+					docEl.style.fontSize = '100px';
+				}else{
+					docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+				}
+			};
+
+		if (!doc.addEventListener) return;
+		win.addEventListener(resizeEvt, recalc, false);
+		doc.addEventListener('DOMContentLoaded', recalc, false);
+	})(document, window);
+</script>
+<script type="text/javascript">
+	function getQueryParams(searchString) {
+		searchString = searchString.substring(1, searchString.length);
+		var params = searchString.split("&");
+		var result = {};
+		for(var i = 0; i < params.length; i++) {
+			var parts = params[i].split("=");
+			result[parts[0]] = decodeURIComponent(parts[1]);
+		}
+		return result;
+	}
+
+	function setupWebViewJavascriptBridge(callback) {
+		if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+		if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+		window.WVJBCallbacks = [callback];
+		var WVJBIframe = document.createElement('iframe');
+		WVJBIframe.style.display = 'none';
+		WVJBIframe.src = 'https://__bridge_loaded__';
+		document.documentElement.appendChild(WVJBIframe);
+		setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+	}
+	$(function() {
+		var params = getQueryParams(location.search),
+			orderId = params.orderId;
+		setupWebViewJavascriptBridge(function(bridge) {
+
+			bridge.callHandler('getOrderDetail', {'orderId': orderId}, function responseCallback(responseData) {
+				if(responseData.code === 0) {
+
+				} else {
+					alert(responseData.message);
+				}
+			})
+		})
+	});
+</script>
+</body>
+</html>

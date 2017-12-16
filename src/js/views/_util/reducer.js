@@ -23,8 +23,28 @@ function toast(state = initialState.get("toast"), action = {}) {
     }
 }
 
+function selfInfo(state = initialState.get("selfInfo"), action = {}) {
+    switch (action.type) {
+        case "CHANGE_SELF_INFO":
+            return _p(action.data);
+        default:
+            return state;
+    }
+}
+
+function truckBrandList(state = initialState.get("truckBrandList"), action={}) {
+    switch (action.type) {
+        case "CHANGE_TRUCK_BRAND_LIST":
+            return _p(action.data);
+        default:
+            return state;
+    }
+}
+
 export default function (state = initialState, action = {}) {
     return state
         .set("loading", loading(state.get("loading"), action))
-        .set("toast", toast(state.get("toast"), action));
+        .set("toast", toast(state.get("toast"), action))
+        .set("selfInfo", selfInfo(state.get("selfInfo"), action))
+        .set("truckBrandList", truckBrandList(state.get("truckBrandList"), action));
 }

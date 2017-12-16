@@ -249,3 +249,21 @@ export function getRealParams(data) {
     }
     return params;
 }
+
+export function getWxNonceStr() {
+    var result = "";
+    var strLib = ['0','1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    for(var i = 0; i < 32; i++) {
+        var random = Math.random() * 35;
+        var randomStr = strLib[random];
+        result += randomStr;
+    }
+    return result;
+}
+
+export function signWxPay(params, key) {
+    var stringA = "appId=" + params.appId + "&nonceStr=" + params.nonceStr + "&package=" + encodeURIComponent(params.package)
+        + "&signType=" + params.signType + "&timeStamp=" + params.timeStamp;
+    var stringSignTemp = StringA + "&key=" + key;
+
+}

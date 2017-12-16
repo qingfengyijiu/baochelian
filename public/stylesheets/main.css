@@ -93,6 +93,11 @@
 .list2 .list-item:nth-last-child(1) {
   border-bottom-style: none;
 }
+.list2 .list-item input,
+.list2 .list-item select {
+  font-size: 0.3rem;
+  color: #999999;
+}
 .list2 .item-part {
   vertical-align: middle;
   min-height: 1rem;
@@ -125,6 +130,116 @@
 .list2 .item-part.right > * {
   float: right;
 }
+.list {
+  background: #ffffff;
+  margin-bottom: 0.16rem;
+}
+.list .list-item {
+  width: 100%;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  border-bottom: 1px solid #EBEBEB;
+  font-size: 0.3rem;
+  color: #999999;
+}
+.list .list-item:nth-last-child(1) {
+  border-bottom-style: none;
+}
+.list .list-item input,
+.list .list-item select,
+.list .list-item textarea {
+  width: 5rem;
+  font-size: 0.3rem;
+  color: #999999;
+}
+.list .list-item input.full-width,
+.list .list-item select.full-width,
+.list .list-item textarea.full-width {
+  width: 100%;
+}
+.list .list-item:before,
+.list .list-item:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.list .label-icon {
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.25rem;
+  margin-right: 0.24rem;
+}
+.list .text,
+.list input,
+.list select {
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.3rem;
+}
+.list .text.ft,
+.list input.ft,
+.list select.ft {
+  text-align: left;
+}
+.list .text.fr,
+.list input.fr,
+.list select.fr {
+  text-align: right;
+}
+.list .label-text {
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.3rem;
+  width: 1.6rem;
+  float: left;
+}
+.list .label-text.ft {
+  text-align: left;
+}
+.list .label-text.fr {
+  text-align: right;
+}
+.list .tail-text {
+  float: right;
+}
+.list .tail-icon.jiaohao {
+  margin-top: 0.36rem;
+}
+.list .tail-icon.address {
+  margin-top: 0.29rem;
+}
+.list .item-part {
+  vertical-align: middle;
+  min-height: 1rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+.list .item-part:before,
+.list .item-part:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.list .item-part.left {
+  text-align: left;
+}
+.list .item-part.left > * {
+  float: left;
+  min-height: 0.4rem;
+  line-height: 0.4rem;
+}
+.list .item-part.center {
+  text-align: left;
+}
+.list .item-part.center > * {
+  float: left;
+}
+.list .item-part.right {
+  text-align: right;
+}
+.list .item-part.right > * {
+  float: right;
+}
 .rescue {
   padding-top: 0.3rem;
 }
@@ -133,6 +248,8 @@
   width: 4rem;
 }
 .rescue .btn-smscode {
+  display: block;
+  margin-top: 0.3rem;
   padding-left: 0.2rem;
   padding-right: 0.2rem;
   font-size: 0.26rem;
@@ -197,6 +314,11 @@
 .btn.block {
   display: block;
   width: 100%;
+}
+.btn[disabled=disabled],
+.btn:disabled {
+  cursor: not-allowed;
+  background: #dddddd;
 }
 .picker-modal {
   width: 100%;
@@ -550,10 +672,22 @@
   color: #ffffff;
   text-align: center;
 }
+.self-center .label-icon {
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.self-center .label-icon,
+.self-center .label-text {
+  float: left;
+  font-size: 0.3rem;
+}
+.self-center .label-text {
+  margin-left: 0.24rem;
+}
 .self-info .list-item.touxiang {
   height: 1.7rem;
 }
-.self-info .list-item.touxiang .label .label-text {
+.self-info .list-item.touxiang .label-text {
   height: 1.7rem;
   line-height: 1.7rem;
 }
@@ -596,7 +730,7 @@
   line-height: 1rem;
 }
 .self-account .account-record-list-container {
-  width: 6.8rem;
+  width: 7.5rem;
   padding-left: 0.3rem;
   padding-right: 0.4rem;
   background: #ffffff;
@@ -672,10 +806,8 @@
   height: 3rem;
 }
 .self-order .order-list .order-item .order-status {
-  background: url("../images/sign1@2x.png");
   width: 1.09rem;
   height: 0.49rem;
-  background-size: 1.09rem 0.49rem;
   position: absolute;
   left: -0.1rem;
   top: 0.16rem;
@@ -683,6 +815,22 @@
   color: #ffffff;
   font-weight: bold;
   text-align: center;
+}
+.self-order .order-list .order-item .order-status.not-accepted {
+  background: url("../images/sign1@2x.png");
+  background-size: 1.09rem 0.49rem;
+}
+.self-order .order-list .order-item .order-status.not-paid {
+  background: url("../images/sign2@2x.png");
+  background-size: 1.09rem 0.49rem;
+}
+.self-order .order-list .order-item .order-status.not-comment {
+  background: url("../images/sign3@2x.png");
+  background-size: 1.09rem 0.49rem;
+}
+.self-order .order-list .order-item .order-status.complete {
+  background: url("../images/sign4@2x.png");
+  background-size: 1.09rem 0.49rem;
 }
 .self-order .order-list .order-item .order-content {
   padding-top: 0.8rem;
@@ -714,6 +862,99 @@
   float: left;
   height: 0.34rem;
   line-height: 0.34rem;
+}
+.self-coupon .tab-container {
+  background: #ffffff;
+  height: 0.9rem;
+  width: 100%;
+  padding-top: 0.32rem;
+}
+.self-coupon .tab-container .tab-item {
+  height: 0.58rem;
+  font-size: 0.26rem;
+  line-height: 0.26rem;
+  padding-bottom: 0.23rem;
+  width: 2.18rem;
+  border-bottom: 0.03rem solid transparent;
+  margin-left: 0.8rem;
+  text-align: center;
+}
+.self-coupon .tab-container .tab-item.active {
+  color: #5b8aff;
+  border-bottom-color: #5b8aff;
+}
+.self-coupon .tab-container .tab-content-container {
+  min-height: 100%;
+  width: 100%;
+  background: red;
+}
+.self-coupon .tab-content-container {
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+}
+.self-coupon .tab-content-container .coupon-item {
+  margin-top: 0.2rem;
+  width: 6.9rem;
+  height: 1.8rem;
+}
+.self-coupon .tab-content-container .coupon-item.fullcut-amount {
+  background: url("../images/youhui_redBg@2x.png");
+  background-size: 6.9rem 1.8rem;
+}
+.self-coupon .tab-content-container .coupon-item.fullcut-discount {
+  background: url("../images/youhui_blueBg@2x.png");
+  background-size: 6.9rem 1.8rem;
+}
+.self-coupon .tab-content-container .coupon-item.instantcut {
+  background: url("../images/youhui_yellowBg@2x.png");
+  background-size: 6.9rem 1.8rem;
+}
+.self-coupon .tab-content-container .coupon-item.instantcut .item-left .item-value-container .cut-value.integer-part {
+  font-size: 0.5rem;
+}
+.self-coupon .tab-content-container .coupon-item.instantcut .item-left .item-value-container .cut-value.float-part {
+  font-size: 0.3rem;
+}
+.self-coupon .tab-content-container .coupon-item .item-left {
+  width: 2.65rem;
+  height: 1.8rem;
+  color: #ffffff;
+}
+.self-coupon .tab-content-container .coupon-item .item-left .item-value-container {
+  width: 100%;
+  text-align: center;
+  height: 1rem;
+}
+.self-coupon .tab-content-container .coupon-item .item-left .item-value-container .icon-metric {
+  font-size: 0.4rem;
+  height: 1rem;
+  line-height: 1rem;
+}
+.self-coupon .tab-content-container .coupon-item .item-left .item-value-container .cut-value {
+  display: inline-block;
+  margin-left: 0.05rem;
+  font-size: 0.72rem;
+  height: 1rem;
+  line-height: 1rem;
+}
+.self-coupon .tab-content-container .coupon-item .item-left .cut-info {
+  margin-top: 0.2rem;
+  width: 100%;
+  text-align: center;
+  font-size: 0.24rem;
+}
+.self-coupon .tab-content-container .coupon-item .item-right {
+  padding-left: 0.5rem;
+}
+.self-coupon .tab-content-container .coupon-item .item-right .coupon-name {
+  font-size: 0.34rem;
+  color: #000000;
+  margin-top: 0.44rem;
+}
+.self-coupon .tab-content-container .coupon-item .item-right .coupon-expiredate {
+  margin-top: 0.3rem;
+  font-size: 0.24rem;
+  color: #666666;
 }
 .service-comment .comment-title {
   height: 0.62rem;
@@ -882,6 +1123,198 @@
   padding-left: 0.3rem;
   padding-right: 0.3rem;
 }
+.search-zone {
+  position: relative;
+  height: 1.02rem;
+  width: 100%;
+}
+.search-zone .search-input {
+  position: absolute;
+  left: 0.3rem;
+  top: 0.21rem;
+  width: 6.9rem;
+  height: 0.6rem;
+  text-align: center;
+  border-radius: 0.2rem;
+  background: #e5e5e5;
+  color: #666666;
+  z-index: 6200;
+  opacity: 0.5;
+}
+.search-zone .search-placeholder {
+  position: absolute;
+  left: 3.1rem;
+  top: 0.35rem;
+  z-index: 6100;
+}
+.search-zone .search-placeholder:before,
+.search-zone .search-placeholder:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.search-zone .search-placeholder .search-icon {
+  float: left;
+  width: 0.27rem;
+  height: 0.29rem;
+}
+.search-zone .search-placeholder .search-label {
+  float: left;
+  font-size: 0.24rem;
+  color: #666666;
+  margin-left: 0.11rem;
+}
+#truckBrandSearchInput {
+  background: #ffffff;
+}
+#truckBrandPage .brand-zone {
+  background: #ffffff;
+  font-size: 0.3rem;
+  color: #333333;
+}
+#truckBrandPage .brand-zone .brand-detail-zone {
+  float: left;
+  width: 6.95rem;
+}
+#truckBrandPage .brand-zone .brand-detail-zone .hot-brand-zone {
+  padding-left: 0.3rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+#truckBrandPage .brand-zone .brand-detail-zone .hot-brand-zone .hot-brand-title {
+  font-size: 0.24rem;
+  color: #666666;
+}
+#truckBrandPage .brand-zone .brand-detail-zone .hot-brand-zone .hot-brand-item {
+  margin-top: 0.2rem;
+  border: 0.02rem solid #eeeeee;
+  border-radius: 0.08rem;
+  float: left;
+  margin-right: 0.22rem;
+  padding: 0.08rem 0.2rem;
+}
+#truckBrandPage .brand-zone .brand-detail-zone .hot-brand-zone .hot-brand-item.active {
+  color: #5b8aff;
+  border-color: #5b8aff;
+}
+#truckBrandPage .brand-zone .brand-detail-zone .brand-list-zone .brand-sub-list .brand-sub-list-title {
+  display: block;
+  text-decoration: none;
+  outline: none;
+  color: #333333;
+  padding-left: 0.4rem;
+  background: #f1f1f1;
+  width: 100%;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+#truckBrandPage .brand-zone .brand-detail-zone .brand-list-zone .brand-sub-list .brand-sub-list-container {
+  padding-left: 0.4rem;
+}
+#truckBrandPage .brand-zone .brand-detail-zone .brand-list-zone .brand-sub-list .brand-sub-list-container .brand-sub-list-item {
+  height: 0.9rem;
+  line-height: 0.9rem;
+  border-bottom: 0.01rem solid #e1e2e5;
+}
+#truckBrandPage .brand-zone .brand-detail-zone .brand-list-zone .brand-sub-list .brand-sub-list-container .brand-sub-list-item:nth-last-child(1) {
+  border-bottom: 0 none;
+}
+#truckBrandPage .brand-zone .brand-initialing-list {
+  float: left;
+  width: 0.55rem;
+}
+#truckBrandPage .overlay {
+  z-index: 9000;
+  background: #333333;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+#truckBrandPage .popup-brand-series {
+  z-index: 9100;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 5rem;
+  background: #ffffff;
+  height: 100%;
+  font-size: 0.3rem;
+  overflow-y: auto;
+}
+#truckBrandPage .popup-brand-series .brand {
+  padding-left: 0.4rem;
+  padding-top: 0.33rem;
+  padding-bottom: 0.33rem;
+  color: #333333;
+  border-bottom: 0.02rem solid #dddddd;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item:nth-last-child(1) .item-model-list .model-item:nth-last-child(1) {
+  border-bottom: 1px solid #dddddd;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item.active .item-model-list {
+  display: block;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item.active .item-container .item-arrow {
+  background: url("../images/arrow-down@2x.png");
+  background-size: 0.14rem 0.22rem;
+  width: 0.14rem;
+  height: 0.22rem;
+  margin-left: 0.26rem;
+  margin-top: 0.08rem;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item .item-container {
+  padding-top: 0.18rem;
+  padding-bottom: 0.18rem;
+  border-bottom: 1px solid #dddddd;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item .item-container .item-name {
+  float: left;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  width: 4rem;
+  padding-left: 0.4rem;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item .item-container .item-arrow {
+  float: right;
+  margin-right: 0.5rem;
+  width: 0.22rem;
+  height: 0.14rem;
+  margin-top: 0.16rem;
+  margin-left: 0.18rem;
+  background: url("../images/arrow-right@2x.png");
+  background-size: 0.22rem 0.14rem;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item .item-model-list {
+  display: none;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item .item-model-list .model-item {
+  padding-top: 0.18rem;
+  padding-bottom: 0.18rem;
+  border-bottom: 1px solid #dddddd;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item .item-model-list .model-item:nth-last-child(2) {
+  border-bottom: 0 none;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item .item-model-list .model-item.active .btn-checkbox {
+  background: url("../images/duihao1@2x.png");
+  background-size: 0.4rem 0.4rem;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item .item-model-list .model-item .item-name {
+  float: left;
+  width: 4rem;
+  padding-left: 0.8rem;
+}
+#truckBrandPage .popup-brand-series .brand-series .brand-series-item .item-model-list .model-item .btn-checkbox {
+  float: right;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-right: 0.5rem;
+  background: url("../images/duihao2@2x.png");
+  background-size: 0.4rem 0.4rem;
+}
 html,
 body,
 #app {
@@ -903,7 +1336,9 @@ input:focus {
   margin: 0;
 }
 .clear:before,
-.clear:after {
+.clearfix:before,
+.clear:after,
+.clearfix:after {
   content: " ";
   display: table;
   clear: both;
@@ -922,4 +1357,13 @@ input:focus {
   display: block;
   width: 0.16rem;
   height: 0.27rem;
+}
+.text-align-right {
+  text-align: right;
+}
+.ft {
+  float: left;
+}
+.fr {
+  float: right;
 }

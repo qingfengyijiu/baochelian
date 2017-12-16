@@ -1,16 +1,35 @@
 import React from "react";
-import Footer from './Footer.jsx';
+import * as UtilAction from './_util/action';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import ws from '../lib/ws';
 
-export default class App extends React.Component{
-
-    handleHomeClick() {
-        window.location.href = "/home";
-    }
+class App extends React.Component{
 
     componentDidMount() {
-        let actions = this.props.actions;
+        let {actions} = this.props;
+	    ws.get({
+		    url: '/api/self/info'
+	    }).then(response => {
+		    if(response.code === 0) {
+			    if(response.data.phone != null) {
+			        actions.utilAction.changeSelfInfo(response.data);
+			    }
+		    } else {
+			    alert(response.message);
+		    }
+	    })
+	    // 获取品牌列表
+	    ws.get({
+		    url: '/api/truck/brands'
+	    }).then(response => {
+		    if(response.code === 0) {
+		    	actions.utilAction.changeTruckBrandList(response.data);
+		    } else {
+			    alert(response.message);
+		    }
+	    });
     }
-
 
     render() {
         return (
@@ -20,3 +39,24 @@ export default class App extends React.Component{
         )
     }
 }
+
+function mapStateToProps(state) {
+    let utilState = state.reducers.util.toJS();
+    return {
+        util: utilState
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: {
+            utilAction: bindActionCreators(UtilAction, dispatch)
+        }
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App)
+

@@ -5,9 +5,11 @@ import App from "./App.jsx";
 import PhoneValidate from "./PhoneValidate.jsx";
 
 import rescueRoute from "./rescue/route";
-import myPositionRoute from "./myPosition/route";
+import positionRoute from "./position/route";
 import carneedRoute from "./cardNeed/route";
 import selfCenterRoute from "./selfCenter/route";
+import useButterRoute from "./useButter/route";
+import truckBrandRoute from './truckBrand/route';
 
 export default class extends React.Component {
 
@@ -17,9 +19,11 @@ export default class extends React.Component {
             <Router history={history}>
                 <Route path="/" component={App}>
                     {rescueRoute}
-                    {myPositionRoute}
+                    {positionRoute}
                     {carneedRoute}
                     {selfCenterRoute}
+                    {useButterRoute}
+                    {truckBrandRoute}
                     <Route path="phoneValidate" component={PhoneValidate}/>
                 </Route>
             </Router>

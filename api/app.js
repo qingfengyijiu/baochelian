@@ -4,6 +4,9 @@ var tokenFilter = require('./filter/tokenFilter');
 var app = express();
 app.use(tokenFilter);
 app.use('/util', require('./router/util'));
+app.use('/self', require('./router/self'));
+app.use('/order', require('./router/order'));
+app.use('/truck', require('./router/truck'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,169 @@
+#truckBrandSearchInput {
+  background: #ffffff;
+}
+
+#truckBrandPage {
+  .brand-zone {
+    background: #ffffff;
+    font-size: 0.3rem;
+    color: #333333;
+    .brand-detail-zone {
+      float: left;
+      width: 6.95rem;
+      .hot-brand-zone {
+        padding-left: 0.3rem;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+        .hot-brand-title {
+          font-size: 0.24rem;
+          color: #666666;
+        }
+        .hot-brand-item {
+          margin-top: 0.2rem;
+          border: 0.02rem solid #eeeeee;
+          border-radius: 0.08rem;
+          float: left;
+          margin-right: 0.22rem;
+          padding: 0.08rem 0.2rem;
+          &.active {
+            color: #5b8aff;
+            border-color: #5b8aff;
+          }
+        }
+      }
+      .brand-list-zone {
+        .brand-sub-list {
+          .brand-sub-list-title {
+            display: block;
+            text-decoration: none;
+            outline: none;
+            color: #333333;
+            padding-left: 0.4rem;
+            background: #f1f1f1;
+            width: 100%;
+            height: 0.6rem;
+            line-height: 0.6rem;
+          }
+          .brand-sub-list-container {
+            padding-left: 0.4rem;
+            .brand-sub-list-item {
+              height: 0.9rem;
+              line-height: 0.9rem;
+              border-bottom: 0.01rem solid #e1e2e5;
+              &:nth-last-child(1) {
+                border-bottom: 0 none;
+              }
+            }
+          }
+        }
+      }
+    }
+    .brand-initialing-list {
+      float: left;
+      width: 0.55rem;
+    }
+  }
+
+  .overlay {
+    z-index: 9000;
+    background: #333333;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+  .popup-brand-series {
+    z-index: 9100;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 5rem;
+    background: #ffffff;
+    height: 100%;
+    font-size: 0.3rem;
+    overflow-y: auto;
+    .brand {
+      padding-left: 0.4rem;
+      padding-top: 0.33rem;
+      padding-bottom: 0.33rem;
+      color: #333333;
+      border-bottom: 0.02rem solid #dddddd;
+    }
+    .brand-series {
+      .brand-series-item {
+        &:nth-last-child(1) .item-model-list .model-item:nth-last-child(1) {
+          border-bottom: 1px solid #dddddd;
+        }
+        &.active {
+          .item-model-list {
+            display: block;
+          }
+          .item-container {
+            .item-arrow {
+              background: url("../images/arrow-down@2x.png");
+              background-size: 0.14rem 0.22rem;
+              width: 0.14rem;
+              height: 0.22rem;
+              margin-left: 0.26rem;
+              margin-top: 0.08rem;
+            }
+          }
+        }
+        .item-container {
+          padding-top: 0.18rem;
+          padding-bottom: 0.18rem;
+          border-bottom: 1px solid #dddddd;
+          .item-name {
+            float: left;
+            height: 0.4rem;
+            line-height: 0.4rem;
+            width: 4rem;
+            padding-left: 0.4rem;
+          }
+          .item-arrow {
+            float: right;
+            margin-right: 0.5rem;
+            width: 0.22rem;
+            height: 0.14rem;
+            margin-top: 0.16rem;
+            margin-left: 0.18rem;
+            background: url("../images/arrow-right@2x.png");
+            background-size: 0.22rem 0.14rem;
+          }
+        }
+        .item-model-list {
+          display: none;
+          .model-item {
+            padding-top: 0.18rem;
+            padding-bottom: 0.18rem;
+            border-bottom: 1px solid #dddddd;
+            &:nth-last-child(2) {
+              border-bottom: 0 none;
+            }
+            &.active {
+              .btn-checkbox {
+                background: url("../images/duihao1@2x.png");
+                background-size: 0.4rem 0.4rem;
+              }
+            }
+            .item-name {
+              float: left;
+              width: 4rem;
+              padding-left: 0.8rem;
+            }
+            .btn-checkbox {
+              float: right;
+              width: 0.4rem;
+              height: 0.4rem;
+              margin-right: 0.5rem;
+              background: url("../images/duihao2@2x.png");
+              background-size: 0.4rem 0.4rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

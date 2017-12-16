@@ -9,6 +9,8 @@
 @import './orderDetail';
 @import './userinfo';
 @import './phoneValidate';
+@import "./search-input";
+@import "./TruckBrand";
 
 html, body, #app {
   width: 100%;
@@ -30,7 +32,7 @@ input, input:focus {
   margin: 0;
 }
 
-.clear {
+.clear, .clearfix {
   &:before, &:after {
     content: " ";
     display: table;
@@ -54,4 +56,15 @@ input, input:focus {
   display: block;
   width: 0.16rem;
   height: 0.27rem;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.ft {
+  float: left;
+}
+.fr {
+  float: right;
 }

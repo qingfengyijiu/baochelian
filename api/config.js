@@ -1,11 +1,9 @@
 var config = {
     base: {
         protocol: 'http',
-        domain: 'acegame.org'
+        domain: '47.94.1.230:8080'
     },
     dev: {
-        domain: '172.16.100.209:9000'
-        //domain: '192.168.1.25:9000'   //xue rui
     },
     test: {
 

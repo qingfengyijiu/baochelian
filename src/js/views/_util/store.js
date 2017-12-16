@@ -5,5 +5,12 @@ export default Immutable.fromJS({
     toast: {
         text: "",
         show: false
+    },
+    selfInfo: {
+
+    },
+    truckBrandList: {
+        hotBrands: [],
+        truckModels: []
     }
 })

@@ -9,7 +9,6 @@ export default class extends Component {
 	getStarScoreViews = (score) => {
 		let arr = [1,1,1,1,1];
 		return arr.map((value, index) => {
-			console.log(value);
 			let active = index + 1 <= value,
 				imgUrl = active ? '/images/star1@2x.png' : '/images/star_h@2x.png';
 			return (

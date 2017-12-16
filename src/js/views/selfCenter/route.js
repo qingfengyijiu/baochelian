@@ -7,17 +7,20 @@ import SelfAccount from "./SelfAccount.jsx";
 import SelfOrder from "./SelfOrder.jsx";
 import OrderDetail from "./OrderDetail.jsx";
 import ServiceComment from "./ServiceComment.jsx";
+import SelfCoupon from "./SelfCoupon.jsx";
 
 export default (
     <Route path="self">
-	    <Route path="center" component={SelfCenter}/>
+	    <IndexRoute component={SelfCenter}/>
 	    <Route path="info" component={SelfInfo}/>
 	    <Route path="car" component={SelfCar}/>
 	    <Route path="account" component={SelfAccount}/>
 	    <Route path="order">
 		    <IndexRoute component={SelfOrder}/>
 		    <Route path=":id" component={OrderDetail}/>
+		    <Route path=":id/comment" component={ServiceComment}/>
 	    </Route>
-	    <Route path="servicecomment" component={ServiceComment}/>
+	    <Route path="coupon" component={SelfCoupon}/>
+
     </Route>
 )

@@ -1,0 +1,40 @@
+.search-zone {
+  position: relative;
+  height: 1.02rem;
+  width: 100%;
+  .search-input {
+    position: absolute;
+    left: 0.3rem;
+    top: 0.21rem;
+    width: 6.9rem;
+    height: 0.6rem;
+    text-align: center;
+    border-radius: 0.2rem;
+    background: #e5e5e5;
+    color: #666666;
+    z-index: 6200;
+    opacity: 0.5;
+  }
+  .search-placeholder {
+    position: absolute;
+    left: 3.1rem;
+    top: 0.35rem;
+    z-index: 6100;
+    &:before, &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+    .search-icon {
+      float: left;
+      width: 0.27rem;
+      height: 0.29rem;
+    }
+    .search-label {
+      float: left;
+      font-size: 0.24rem;
+      color: #666666;
+      margin-left: 0.11rem;
+    }
+  }
+}

@@ -33,7 +33,9 @@ function sha1(str) {
 	return str;
 }
 
-
+app.get('/pd.html', function(req, res) {
+  res.render('pd');
+})
 app.get('/', function(req, res) {
   var signature = req.query.signature,
       timestamp = req.query.timestamp,

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import List, {Item} from "../../components/List/index.js";
+import {browserHistory} from 'react-router';
 
 export default class extends Component {
 
@@ -7,39 +8,58 @@ export default class extends Component {
 		super(props);
 	}
 
+	gotoSelfInfo = e => {
+		browserHistory.push("/self/info");
+	}
+
+	gotoSelfCar = e => {
+		browserHistory.push("/self/car");
+	}
+
+	gotoSelfOrder = e => {
+		browserHistory.push("/self/order");
+	}
+
+	gotoSelfCoupon = e => {
+		browserHistory.push("/self/coupon");
+	}
+
+	gotoSelfAccount = e => {
+		browserHistory.push("/self/account");
+	}
+
 	render() {
 		return (
 			<div className="self-center">
 				<List>
-					<Item right={<img className="jiaohao" src="/images/jiaohao@2x.png"/>}>
-						<div className="label">
-							<img className="label-icon" src="/images/icon_geren@2x.png"/>
-							<div className="label-text">个人信息</div>
-						</div>
-
+					<Item onClick={this.gotoSelfInfo}>
+						<img className="label-icon ft" src="/images/icon_geren@2x.png"/>
+						<div className="label-text ft">个人信息</div>
+						<img className="jiaohao tail-icon fr" src="/images/jiaohao@2x.png"/>
 					</Item>
-					<Item right={<img className="jiaohao" src="/images/jiaohao@2x.png"/>}>
-						<div className="label">
-							<img className="label-icon" src="/images/icon_che@2x.png"/>
-							<div className="label-text">我的车辆</div>
-						</div>
+					<Item onClick={this.gotoSelfCar}>
+						<img className="label-icon ft" src="/images/icon_che@2x.png"/>
+						<div className="label-text ft">我的车辆</div>
+						<img className="jiaohao tail-icon fr" src="/images/jiaohao@2x.png"/>
 					</Item>
 				</List>
 				<List>
-					<Item right={<img className="jiaohao" src="/images/jiaohao@2x.png"/>}>
-						<div className="label">
-							<img className="label-icon" src="/images/icon_dingdan@2x.png"/>
-							<div className="label-text">我的订单</div>
-						</div>
+					<Item onClick={this.gotoSelfOrder}>
+						<img className="label-icon ft" src="/images/icon_dingdan@2x.png"/>
+						<div className="label-text ft">我的订单</div>
+						<img className="jiaohao tail-icon fr" src="/images/jiaohao@2x.png"/>
+					</Item>
+					<Item onClick={this.gotoSelfCoupon}>
+						<img className="label-icon ft" src="/images/icon_youhuiquan@2x.png"/>
+						<div className="label-text ft">我的优惠券</div>
+						<img className="jiaohao tail-icon fr" src="/images/jiaohao@2x.png"/>
 					</Item>
 				</List>
 				<List>
-					<Item right={<img className="jiaohao" src="/images/jiaohao@2x.png"/>}>
-						<div className="label">
-							<img className="label-icon" src="/images/icon_zhanghu@2x.png"/>
-							<div className="label-text">我的账号</div>
-						</div>
-
+					<Item onClick={this.gotoSelfAccount}>
+						<img className="label-icon ft" src="/images/icon_zhanghu@2x.png"/>
+						<div className="label-text ft">我的账号</div>
+						<img className="jiaohao tail-icon fr" src="/images/jiaohao@2x.png"/>
 					</Item>
 				</List>
 			</div>

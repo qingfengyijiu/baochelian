@@ -96,6 +96,103 @@
     &:nth-last-child(1) {
       border-bottom-style: none;
     }
+    input, select {
+      font-size: 0.3rem;
+      color: #999999;
+    }
+  }
+  .item-part {
+    vertical-align: middle;
+    min-height: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    &:before, &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+    &.left {
+      text-align: left;
+      > * {
+        float: left;
+        min-height: 0.4rem;
+        line-height: 0.4rem;
+      }
+    }
+    &.center {
+      text-align: left;
+      > * {
+        float: left;
+      }
+    }
+    &.right {
+      text-align: right;
+      > * {
+        float: right;
+      }
+    }
+  }
+}
+
+.list {
+  background: #ffffff;
+  margin-bottom: 0.16rem;
+  .list-item {
+    width: 100%;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    border-bottom: 1px solid #EBEBEB;
+    font-size: 0.3rem;
+    color: #999999;
+    &:nth-last-child(1) {
+      border-bottom-style: none;
+    }
+    input, select, textarea {
+      width: 5rem;
+      font-size: 0.3rem;
+      color: #999999;
+      &.full-width {
+        width: 100%;
+      }
+    }
+    &:before, &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+  }
+  .label-icon {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-top: 0.25rem;
+    margin-right: 0.24rem;
+  }
+  .text, input, select {
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 0.3rem;
+    &.ft {
+      text-align: left;
+    }
+    &.fr {
+      text-align: right;
+    }
+  }
+  .label-text {
+    .text;
+    width: 1.6rem;
+    float: left;
+  }
+  .tail-text {
+    float: right;
+  }
+  .tail-icon {
+    &.jiaohao {
+      margin-top: 0.36rem;
+    }
+    &.address {
+      margin-top: 0.29rem;
+    }
   }
   .item-part {
     vertical-align: middle;
