@@ -1,0 +1,326 @@
+html, body{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: "PingFang SC",Helvetica,Tahoma,Arial,STXihei,"华文细黑","Microsoft YaHei","微软雅黑",sans-serif;
+    outline: none;
+    box-sizing: border-box;
+}
+
+input, input:focus {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ft {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+.panel {
+    width: 10rem;
+    margin: 0 auto;
+}
+.full-width {
+    width: 100% !important;
+}
+.btn {
+    text-decoration: none;
+    outline: none;
+}
+.header {
+    background: #ffffff;
+    height: 0.8rem;
+    font-size: 0.2rem;
+    padding-top: 0.2rem;
+}
+.header-company .company-icon {
+    width: 0.4rem;
+    height: 0.4rem;
+}
+.header-company .company-name {
+    font-size: 0.3rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    margin-left: 0.1rem;
+}
+.header-contact {
+    height: 0.4rem;
+    line-height: 0.4rem;
+    margin-left: 0.6rem;
+    color: #000000;
+    text-decoration: none;
+    outline: none;
+}
+.introduction {
+    width: 100%;
+    height: 6.4rem;
+    background: url("introduction_bg.jpg") no-repeat;
+    background-size: 100% 6.4rem;
+    position: relative;
+}
+.introduction-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #000000;
+    opacity: 0.4;
+    width: 100%;
+    height: 6.4rem;
+}
+.introduction-content {
+    width: 100%;
+    height: 6.4rem;
+    position: absolute;
+    top: 2rem;
+    left: 0;
+}
+.introduction-title {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 0.5rem;
+    text-align: center;
+    color: #ffffff;
+}
+.introduction-detail {
+    font-size: 0.28rem;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0.5rem auto 0.3rem;
+    letter-spacing: -0.003rem;
+    font-weight: 300;
+    color: #ffffff;
+}
+.introduction-btn {
+    font-size: 0.25rem;
+    display: block;
+    width: 1.5rem;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 0.1rem;
+    padding: 0.15rem 0.2rem;
+    background: #ffffff;
+    border-color: transparent;
+    opacity: 0.9;
+    color: #333333;
+    text-align: center;
+
+}
+.introduction-btn:hover {
+    border-color: #d3d3d3;
+    opacity: 1;
+    color: #000000;
+}
+.advantage-container {
+    padding-top: 0.3rem;
+    padding-bottom: 0.15rem;
+}
+.advantage-header {
+    width: 100%;
+    text-align: center;
+    font-size: 0.3rem;
+}
+.advantage-item {
+    width: 3.33rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    margin-top: 0.15rem;
+}
+.advantage-img {
+    display: block;
+    width: 100%;
+    height: 1.5rem;
+}
+.advantage-title {
+    font-size: 0.18rem;
+    width: 100%;
+    text-align: center;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    overflow: hidden;
+}
+.feature-list {
+    margin-top: 0.3rem;
+}
+.feature-item {
+    margin-bottom: 0.4rem;
+}
+.feature-img {
+    display: block;
+    width: 4rem;
+    height: 1.5rem;
+}
+.feature-detail {
+    font-size: 0.16rem;
+    width: 5.5rem;
+    padding-top: 0.5rem;
+}
+.contact-container {
+    background: #3f444a;
+    padding-bottom: 0.3rem;
+    padding-top: 0.3rem;
+}
+.contact-title {
+    font-size: 0.3rem;
+    color: #ffffff;
+    width: 100%;
+    text-align: center;
+}
+.contact-form {
+    margin-top: 0.3rem;
+    width: 4rem;
+    font-size: 0.2rem;
+}
+.form-item {
+    width: 100%;
+    margin-bottom: 0.15rem;
+}
+.contact-form .form-item input {
+    width: 100%;
+    background: transparent;
+    color: #c4c6c8;
+    border: 1px solid #c4c6c8;
+    height: 0.35rem;
+    line-height: 0.35rem;
+    padding-left: 0.15rem;
+}
+.contact-form .form-item .btn {
+    width: 100%;
+    text-align: center;
+    height: 0.35rem;
+    line-height: 0.35rem;
+    background: #f1f1f1;
+    color: #333333;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-radius: 0.1rem;
+}
+.contact-form .form-item .btn:hover {
+    background: #ffffff;
+    color: #000000;
+}
+.form-item .form-tip {
+    text-align: center;
+    width: 100%;
+}
+.form-tip.success {
+    color: green;
+}
+.form-tip.error {
+    color: indianred;
+}
+.contact-info {
+    padding-top: 0.4rem;
+    padding-bottom: 0.25rem;
+}
+.contact-info .info-title {
+    font-size: 0.24rem;
+}
+.contact-info .info-list {
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.contact-info .info-list li {
+    margin-top: 0.2rem;
+    margin-left: 0.5rem;
+    float: left;
+}
+.contact-info .info-list li:nth-child(1) {
+    margin-left: 0;
+}
+.contact-info .info-phone, .contact-info .info-email {
+    font-size: 0.16rem;
+    display: block;
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+}
+.footer {
+    background: #3f444a;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    font-size: 0.14rem;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+}
+.contact-introduction {
+    color: #ffffff;
+    width: 5.7rem;
+    margin-left: 0.3rem;
+    height: 2.35rem;
+    text-align: center;
+    margin-top: 0.3rem;
+}
+.contact-introduction .contact-introduction-company {
+    font-size: 0.5rem;
+}
+.contact-introduction .contact-introduction-title {
+    margin-top: 0.2rem;
+    font-size: 0.2rem;
+}
+.contact-introduction .contact-introduction-advantage-list {
+    font-size: 0.18rem;
+    list-style: none;
+    padding: 0;
+}
+.contact-introduction .contact-introduction-advantage-list li {
+    margin-top: 0.18rem;
+}
+@media only screen and (max-width: 1000px) {
+    .panel {
+        width: 100%;
+    }
+    .introduction-title {
+        font-size: 0.3rem;
+    }
+    .introduction-detail {
+        font-size: 0.14rem;
+    }
+    .advantage-item {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .feature-img {
+        width: 100%;
+    }
+    .feature-detail {
+        margin-left: 0;
+        width: 100%;
+        padding-top: 0.15rem;
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+    }
+    .contact-introduction {
+        width: 100%;
+        margin-left: 0;
+    }
+    .contact-form {
+        width: 100%;
+    }
+
+    .contact-form .form-item input, .contact-form .form-item .btn {
+        height: 0.5rem;
+        line-height: 0.5rem;
+        margin-bottom: 0.3rem;
+    }
+
+}
