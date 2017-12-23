@@ -210,22 +210,22 @@
 <body>
 <div class="page">
 	<div class="step-container list">
-		<div class="step-item active">
+		<div class="step-item" name="order">
 			<div class="step-icon"></div>
 			<div class="step-name">抢单</div>
 		</div>
 		<div class="step-item-separator"></div>
-		<div class="step-item">
+		<div class="step-item" name="payment">
 			<div class="step-icon"></div>
 			<div class="step-name">付款</div>
 		</div>
 		<div class="step-item-separator"></div>
-		<div class="step-item">
+		<div class="step-item" name="service">
 			<div class="step-icon"></div>
 			<div class="step-name">服务</div>
 		</div>
 		<div class="step-item-separator"></div>
-		<div class="step-item">
+		<div class="step-item" name="comment">
 			<div class="step-icon"></div>
 			<div class="step-name">评价</div>
 		</div>
@@ -233,43 +233,29 @@
 	<div class="order-info-container list">
 		<div class="list-item">
 			<label class="text ft">订单号</label>
-			<div class="text ft">123456</div>
+			<div class="text ft" id="orderId"></div>
 		</div>
 		<div class="list-item">
 			<label class="text ft">下单时间</label>
-			<div class="text ft">2017-08-09 12:00</div>
+			<div class="text ft" id="appointmentTime"></div>
 		</div>
-		<div class="list-item">
+		<div class="list-item" id="payTimeField">
 			<label class="text ft">付款时间</label>
-			<div class="text ft">2017-08-09 12:00</div>
+			<div class="text ft" id="payTime"></div>
 		</div>
 	</div>
 	<div class="service-info-container list">
 		<div class="list-item">
 			<label class="text ft">服务项目</label>
-			<div class="text ft">补胎救援</div>
+			<div class="text ft" id="serviceCategoryName">补胎救援</div>
 		</div>
 		<div class="list-item">
 			<label class="text ft">服务详情</label>
-			<div class="text ft"></div>
+			<div class="text ft" id="serviceName"></div>
 		</div>
 		<div class="list-item">
 			<label class="text ft">服务耗材</label>
-			<div class="ft">
-				<div class="text">
-					<span>蘑菇钉</span>
-					<span> x </span>
-					<span>1</span>
-				</div>
-				<div class="text">
-					<span>蘑菇钉</span>
-					<span> x </span>
-					<span>1</span>
-				</div><div class="text">
-					<span>蘑菇钉</span>
-					<span> x </span>
-					<span>1</span>
-				</div>
+			<div class="ft" id="serviceMaterials">
 			</div>
 		</div>
 	</div>
@@ -309,17 +295,7 @@
 					<th>费用</th>
 				</tr>
 				</thead>
-				<tbody>
-				<tr>
-					<td>蘑菇钉</td>
-					<td>2</td>
-					<td>¥ 20</td>
-				</tr>
-				<tr>
-					<td>蘑菇钉</td>
-					<td>2</td>
-					<td>¥ 2</td>
-				</tr>
+				<tbody id="materials">
 				</tbody>
 			</table>
 		</div>
@@ -346,11 +322,6 @@
 		</div>
 	</div>
 	<div class="order-tip">服务不满意，7天内可申请退款。</div>
-	<div class="submit-btn-container list">
-		<div class="list-item">
-			<button class="submit-btn">确认</button>
-		</div>
-	</div>
 </div>
 <script type="text/javascript">
 	(function (doc, win) {
@@ -383,7 +354,56 @@
 		return result;
 	}
 
-	function setupWebViewJavascriptBridge(callback) {
+	function changeOrderStatus(status) {
+		console.log(status);
+		if(status >= 200) {
+			$(".step-item[name=order]").addClass("active");
+		}
+		if(status >= 400) {
+			$(".step-item[name=payment]").addClass("active");
+		}
+		if(status >= 500) {
+			$(".step-item[name=service]").addClass("active");
+		}
+		if(status >= 700) {
+			$(".step-item[name=comment]").addClass("active");
+		}
+	}
+
+	function renderServiceMaterials(skus) {
+		var result = "";
+		_.forEach(skus, function(item) {
+			result += '<div class="text"><span>' + item.skuName + '</span><span> x </span><span>' + item.count + '</span></div>';
+		});
+		$("#serviceMaterials").html(result);
+	}
+
+	function renderMaterials(skus) {
+		var result = "";
+		_.forEach(skus, function(item) {
+			result += '<tr><td>' + item.skuName + '</td><td>' + item.count + '</td><td>¥ ' + item.skuPrice + '</td></tr>';
+		});
+		$("#materials").html(result);
+	}
+
+	function renderData(data) {
+		changeOrderStatus(data.orderStatus ? data.orderStatus.key : null);
+		$("#orderId").text(data.orderId);
+		$("#appointmentTime").text(data.appointmentTime ? data.appointmentTime.substring(0, data.appointmentTime.length - 3) : "");
+		if(data.payTime) {
+			$("#payTime").text(data.payTime);
+			$("#payTimeField").show();
+		} else {
+			$("#payTimeField").hide();
+		}
+		$("#serviceCategoryName").text(data.serviceCategoryName);
+		$("#serviceName").text(data.serviceName);
+		renderServiceMaterials(data.skuCollection);
+		$("#driverName").text(data.driverName);
+		renderMaterials(data.skuCollection);
+	}
+
+	/*function setupWebViewJavascriptBridge(callback) {
 		if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
 		if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
 		window.WVJBCallbacks = [callback];
@@ -392,20 +412,33 @@
 		WVJBIframe.src = 'https://__bridge_loaded__';
 		document.documentElement.appendChild(WVJBIframe);
 		setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
-	}
+	}*/
 	$(function() {
 		var params = getQueryParams(location.search),
-			orderId = params.orderId;
-		setupWebViewJavascriptBridge(function(bridge) {
-
-			bridge.callHandler('getOrderDetail', {'orderId': orderId}, function responseCallback(responseData) {
-				if(responseData.code === 0) {
-
+			orderId = params.orderId,
+			userId = params.userId,
+			token = params.token;
+		$.ajax({
+			type: 'POST',
+			url: '/api/native/order',
+			contentType: "application/json",
+			dataType: "json",
+			data: JSON.stringify({
+				orderId: orderId,
+				userId: userId,
+				token: token
+			}),
+			success: function(response) {
+				if(response.code === 0) {
+					renderData(response.data);
 				} else {
-					alert(responseData.message);
+					alert(response.message);
 				}
-			})
-		})
+			},
+			error: function(error) {
+				alert("网络超时，请稍后重试");
+			}
+		});
 	});
 </script>
 </body>

@@ -52,7 +52,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: '保车连' });
 });
 
 // catch 404 and forward to error handler
