@@ -57780,6 +57780,16 @@
 				_history2.default.push('/self/order/' + orderId + '/comment');
 			};
 
+			_this2.pay = function (requestData) {
+				if (WeixinJSBridge) {
+					WeixinJSBridge.invoke('getBrandWCPayRequest', requestData, function (res) {
+						if (res.err_msg == "get_brand_wcpay_request:ok") {} // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+					});
+				} else {
+					alert("微信支付不可用，请稍后重试");
+				}
+			};
+
 			_this2.state = {};
 			return _this2;
 		}
