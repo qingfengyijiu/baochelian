@@ -106,6 +106,17 @@ export default class extends Component {
 		history.push('/self/order/' + orderId + '/comment')
 	}
 
+	pay = (requestData) => {
+		if(WeixinJSBridge) {
+			WeixinJSBridge.invoke('getBrandWCPayRequest', requestData, function(res){
+				if(res.err_msg == "get_brand_wcpay_request:ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+			});
+		} else {
+			alert("微信支付不可用，请稍后重试");
+		}
+
+	}
+
 	render() {
 		let {id, appointmentTime, payTime, serviceCategoryName, serviceName, status, serviceFee, reduce, totalAmount} = this.state;
 		status = status ? status : {};
