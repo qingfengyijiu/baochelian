@@ -40,7 +40,6 @@ class Map extends Component {
 			_this.map.addControl(_this.geolocation);
 			_this.geolocation.getCurrentPosition();
 			AMap.event.addListener(_this.geolocation, 'complete', function(data) {
-				console.log(data);
 				_this.currentPosition = data.position;
 				_this.city = data.addressComponent.city;
 				_this.citycode = data.addressComponent.citycode;
@@ -62,14 +61,30 @@ class Map extends Component {
 				//panel: "nearbyList"
 			});
 			_this.search();
+		});
+
+		this.map.on('click', function(e) {
+			_this.map.setCenter(e.lnglat);
+			_this.searchNearBy(e.lnglat);
 		})
+	}
+
+	searchNearBy = center => {
+		let _this = this;
+		this.placeSearch.searchNearBy(null, center, 50000, function(status, result) {
+			if(result && result.poiList && result.poiList.pois) {
+				_this.props.onChangeNearbyList && _this.props.onChangeNearbyList(result.poiList.pois);
+			}
+
+		});
 	}
 
 	search = text => {
 		let _this = this;
 		this.placeSearch.search(text, function(status, result) {
-			console.log(result);
-			_this.props.onChangeNearbyList && _this.props.onChangeNearbyList(result.poiList.pois);
+			if(result && result.poiList && result.poiList.pois) {
+				_this.props.onChangeNearbyList && _this.props.onChangeNearbyList(result.poiList.pois);
+			}
 		});
 	}
 
