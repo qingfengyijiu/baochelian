@@ -5,7 +5,7 @@ import * as ThisAction from './action.js';
 import * as UtilAction from '../_util/action.js';
 import AddOrder from '../../components/AddOrder';
 
-class UseButter extends Component {
+class DaoLun extends Component {
 
 	onChangeField = (field, value) => {
 		let {model, actions} = this.props;
@@ -14,8 +14,8 @@ class UseButter extends Component {
 	}
 
 	serviceCategory = {
-		serviceCategoryId: '5a3f8722ac4c1e5154e77977',
-		serviceCategoryName: '打黄油'
+		serviceCategoryId: '5a3f8754ac4c1e5154e7797b',
+		serviceCategoryName: '倒轮'
 	}
 
 	render() {
@@ -27,11 +27,11 @@ class UseButter extends Component {
 
 function mapStateToProps(state) {
 	let position = state.reducers.position.toJS(),
-		useButter = state.reducers.useButter.toJS(),
+		daoLun = state.reducers.daoLun.toJS(),
 		selfInfo = state.reducers.util.toJS().selfInfo;
 	return {
 		position: position,
-		model: useButter,
+		model: daoLun,
 		selfInfo: selfInfo
 	}
 }
@@ -48,4 +48,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(UseButter)
+)(DaoLun)

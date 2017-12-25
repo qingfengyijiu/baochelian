@@ -5,6 +5,8 @@ import position from './position/reducer.js';
 import rescue from './rescue/reducer.js';
 import useButter from './useButter/reducer.js';
 import truckBrand from './truckBrand/reducer.js';
+import baoLun from './baoLun/reducer.js';
+import daoLun from './daoLun/reducer.js';
 
 export default combineReducers({
     enums,
@@ -12,5 +14,7 @@ export default combineReducers({
     position,
     rescue,
     useButter,
-    truckBrand
+    truckBrand,
+    baoLun,
+    daoLun
 })
