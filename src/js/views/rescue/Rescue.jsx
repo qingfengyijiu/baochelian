@@ -16,7 +16,7 @@ class Rescue extends Component {
 	}
 
 	serviceCategory = {
-		serviceCategoryId: '',
+		serviceCategoryId: '5a3f86f9ac4c1e5154e77975',
 		serviceCategoryName: '补胎救援'
 	}
 

@@ -10,6 +10,8 @@ import carneedRoute from "./cardNeed/route";
 import selfCenterRoute from "./selfCenter/route";
 import useButterRoute from "./useButter/route";
 import truckBrandRoute from './truckBrand/route';
+import baoLunRoute from "./baoLun/route";
+import daoLunRoute from './daoLun/route';
 
 export default class extends React.Component {
 
@@ -24,6 +26,8 @@ export default class extends React.Component {
                     {selfCenterRoute}
                     {useButterRoute}
                     {truckBrandRoute}
+                    {baoLunRoute}
+                    {daoLunRoute}
                     <Route path="phoneValidate" component={PhoneValidate}/>
                 </Route>
             </Router>
