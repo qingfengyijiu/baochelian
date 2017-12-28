@@ -8,6 +8,7 @@ app.use('/self', require('./router/self'));
 app.use('/order', require('./router/order'));
 app.use('/truck', require('./router/truck'));
 app.use('/native', require('./router/native'));
+app.use('/spu', require('./router/spu'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
