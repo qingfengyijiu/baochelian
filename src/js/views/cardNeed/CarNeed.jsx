@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
+import ws from '../../lib/ws';
 
 export default class extends Component {
 
 	constructor(props) {
 		super(props);
+	}
+
+	componentDidMount() {
+		ws.get({
+			url: '/api/spu'
+		}).then(response => {
+			console.log(response);
+		})
 	}
 
 	getListViews = (list) => {

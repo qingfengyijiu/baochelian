@@ -55265,7 +55265,7 @@
 /* 708 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -55276,6 +55276,10 @@
 	var _react = __webpack_require__(300);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _ws = __webpack_require__(570);
+
+	var _ws2 = _interopRequireDefault(_ws);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55296,20 +55300,20 @@
 			_this.getListViews = function (list) {
 				return list.map(function (item, index) {
 					return _react2.default.createElement(
-						"div",
-						{ className: "carneed-product-container", key: index },
-						_react2.default.createElement("img", { src: item.img, className: "product-img" }),
+						'div',
+						{ className: 'carneed-product-container', key: index },
+						_react2.default.createElement('img', { src: item.img, className: 'product-img' }),
 						_react2.default.createElement(
-							"div",
-							{ className: "product-details" },
+							'div',
+							{ className: 'product-details' },
 							_react2.default.createElement(
-								"div",
-								{ className: "detail-title" },
+								'div',
+								{ className: 'detail-title' },
 								item.title
 							),
 							_react2.default.createElement(
-								"div",
-								{ className: "detail-price" },
+								'div',
+								{ className: 'detail-price' },
 								"¥" + item.price
 							)
 						)
@@ -55321,7 +55325,16 @@
 		}
 
 		_createClass(_class, [{
-			key: "render",
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				_ws2.default.get({
+					url: '/api/spu'
+				}).then(function (response) {
+					console.log(response);
+				});
+			}
+		}, {
+			key: 'render',
 			value: function render() {
 				var list = [{
 					img: "",
@@ -55337,8 +55350,8 @@
 					price: 100
 				}];
 				return _react2.default.createElement(
-					"div",
-					{ className: "page" },
+					'div',
+					{ className: 'page' },
 					this.getListViews(list)
 				);
 			}

@@ -7,10 +7,11 @@ var bodyParser = require('body-parser');
 var crypto = require("crypto");
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 var api = require("./api/app");
+var ws = require("./api/util/ws");
+var cookieUtil = require('./api/util/cookieUtil');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,7 +53,28 @@ app.get('/', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-  res.render('index', { title: '保车连' });
+  var tokenInfo = cookieUtil.getTokenInfo(req),
+      code,
+      appid = "wx3e98278c327dfef2",
+      redirect_uri = encodeURIComponent("https://wechat.91bcl.com" + req.originalUrl),
+      scope = "snsapi_userinfo";
+  if(tokenInfo) {
+	  res.render('index', { title: '保车连' });
+  } else {
+      code = req.query.code;
+      if(code != null) {
+          ws.get({
+              url: "/wechat/auth?code=" + code
+          }).then(function(response) {
+	          if(response.code == 0) {
+		          cookieUtil.setToken(res, response.data);
+	          }
+              res.render('index', { title: '保车连' });
+          })
+      } else {
+          res.redirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=" + scope + "#wechat_redirect");
+      }
+  }
 });
 
 // catch 404 and forward to error handler
