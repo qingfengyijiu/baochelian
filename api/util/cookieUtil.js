@@ -1,5 +1,6 @@
 var tokenName = '91BCL_WECHAT_TOKEN';
 var jwtUtil = require('./jwtUtil');
+
 function getLocalToken(req) {
     return req.cookies[tokenName];
 }
@@ -29,10 +30,10 @@ function clearToken(res) {
 }
 
 module.exports = {
-    getTokenInfo: getTokenInfo(),
+    getTokenInfo: getTokenInfo,
     getToken: getToken,
     setToken: setToken,
     clearToken: clearToken,
     verifyToken: verifyToken,
-    getLocalToken: getLocalToken(req)
+    getLocalToken: getLocalToken
 };
