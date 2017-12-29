@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var crypto = require("crypto");
+var logger = require('./api/../../logger')();
 
 var index = require('./routes/index');
 
@@ -27,14 +28,14 @@ app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', api);
 
-function sha1(str) {
+/*function sha1(str) {
 	var md5sum = crypto.createHash('sha1');
 	md5sum.update(str, "utf8");
 	str = md5sum.digest('hex');
 	return str;
-}
+}*/
 
-app.get('/', function(req, res) {
+/*app.get('/', function(req, res) {
   var signature = req.query.signature,
       timestamp = req.query.timestamp,
       nonce= req.query.nonce,
@@ -50,7 +51,7 @@ app.get('/', function(req, res) {
     res.status(404);
     res.end();
   }
-});
+});*/
 
 app.get('*', function(req, res) {
   var tokenInfo = cookieUtil.getTokenInfo(req),
@@ -62,6 +63,7 @@ app.get('*', function(req, res) {
 	  res.render('index', { title: '保车连' });
   } else {
       code = req.query.code;
+      logger.info("获取到请求中的code");
       if(code != null) {
           ws.get({
               url: "/wechat/auth?code=" + code
@@ -72,6 +74,9 @@ app.get('*', function(req, res) {
               res.render('index', { title: '保车连' });
           })
       } else {
+          logger.info("开始请求微信鉴权");
+          logger.info("appid：" + appid);
+          logger.info("redirect_uri：" + redirect_uri);
           res.redirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=" + scope + "#wechat_redirect");
       }
   }
