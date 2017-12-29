@@ -54,7 +54,7 @@ app.use('/api', api);
 });*/
 
 app.get('*', function(req, res) {
-  var tokenInfo = cookieUtil.getTokenInfo(req),
+  var tokenInfo = cookieUtil.getLocalToken(req),
       code,
       appid = "wx3e98278c327dfef2",
       redirect_uri = encodeURIComponent("https://wechat.91bcl.com" + req.originalUrl),
@@ -63,7 +63,7 @@ app.get('*', function(req, res) {
 	  res.render('index', { title: '保车连' });
   } else {
       code = req.query.code;
-      logger.info("获取到请求中的code");
+      logger.info("获取到请求中的code:" + code);
       if(code != null) {
           ws.get({
               url: "/wechat/auth?code=" + code
