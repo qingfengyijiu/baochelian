@@ -13,25 +13,6 @@
   <body>
     <div id='app'></div>
     <script type="text/javascript">
-      function getQueryParams(searchString) {
-          searchString = searchString.substring(1, searchString.length);
-          var params = searchString.split("&");
-          var result = {};
-          for(var i = 0; i < params.length; i++) {
-              var parts = params[i].split("=");
-              result[parts[0]] = decodeURIComponent(parts[1]);
-          }
-          return result;
-      }
-      window.code = getQueryParams(location.search)["code"];
-      if(window.code == null) {
-      	window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect"
-      }
-      window.onload = function() {
-
-      }
-    </script>
-    <script type="text/javascript">
 	    (function (doc, win) {
 		    var docEl = doc.documentElement,
 			    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
