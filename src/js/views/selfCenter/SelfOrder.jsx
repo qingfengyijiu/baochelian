@@ -110,7 +110,6 @@ export default class extends Component {
 					                  hasMore={this.state.hasMore}>
 						{this.getOrderItemViews(orderList)}
 					</InfiniteScroller>
-
 				</div>
 			</div>
 		)

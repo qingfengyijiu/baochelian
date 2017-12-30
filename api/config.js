@@ -1,6 +1,6 @@
 var config = {
     base: {
-        protocol: 'http',
+        protocol: 'https',
         //domain: '47.94.1.230:8080'
         domain: 'core.91bcl.com'
     },

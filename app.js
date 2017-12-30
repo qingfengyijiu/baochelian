@@ -53,33 +53,38 @@ app.use('/api', api);
   }
 });*/
 
+function test(req, res) {
+	res.render('index', {title: '保车连'});
+}
+
 app.get('*', function(req, res) {
-  var tokenInfo = cookieUtil.getLocalToken(req),
-      code,
-      appid = "wx3e98278c327dfef2",
-      redirect_uri = encodeURIComponent("https://wechat.91bcl.com" + req.originalUrl),
-      scope = "snsapi_userinfo";
-  if(tokenInfo) {
+    return test(req, res);
+	var tokenInfo = cookieUtil.getLocalToken(req),
+		code,
+		appid = "wx3e98278c327dfef2",
+		redirect_uri = encodeURIComponent("https://wechat.91bcl.com" + req.originalUrl),
+		scope = "snsapi_userinfo";
+	if(tokenInfo) {
 	  res.render('index', { title: '保车连' });
-  } else {
-      code = req.query.code;
-      logger.info("获取到请求中的code:" + code);
-      if(code != null) {
-          ws.get({
-              url: "/wechat/auth?code=" + code
-          }).then(function(response) {
+	} else {
+	  code = req.query.code;
+	  logger.info("获取到请求中的code:" + code);
+	  if(code != null) {
+	      ws.get({
+	          url: "/wechat/auth?code=" + code
+	      }).then(function(response) {
 	          if(response.code == 0) {
 		          cookieUtil.setToken(res, response.data);
 	          }
-              res.render('index', { title: '保车连' });
-          })
-      } else {
-          logger.info("开始请求微信鉴权");
-          logger.info("appid：" + appid);
-          logger.info("redirect_uri：" + redirect_uri);
-          res.redirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=" + scope + "#wechat_redirect");
-      }
-  }
+	          res.render('index', { title: '保车连' });
+	      })
+	  } else {
+	      logger.info("开始请求微信鉴权");
+	      logger.info("appid：" + appid);
+	      logger.info("redirect_uri：" + redirect_uri);
+	      res.redirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=" + scope + "#wechat_redirect");
+	  }
+	}
 });
 
 // catch 404 and forward to error handler

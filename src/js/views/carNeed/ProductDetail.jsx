@@ -8,6 +8,10 @@ export default class extends Component {
 		super(props);
 	}
 
+	componentDidMount() {
+		document.title = "车需";
+	}
+
 	render() {
 		let item = {
 			img: "",

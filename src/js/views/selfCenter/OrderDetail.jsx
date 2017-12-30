@@ -19,7 +19,8 @@ export default class extends Component {
 			url: '/api/order/' + id
 		}).then(response => {
 			this.setState({
-				...response
+				...response.data,
+				status: response.data.orderStatus.key
 			});
 		})
 	}
@@ -66,39 +67,11 @@ export default class extends Component {
 			url: '/api/order/' + orderId + '/pay'
 		}).then(response => {
 			if(response.code === 0) {
-				_this.startPay(response.data.prepayId, response.data.appId);
+				_this.pay(response.data.prepayId, response.data.appId);
 			} else {
 				alert(response.message);
 			}
 		})
-	}
-
-	startPay = (prepayId, appId) => {
-		function onBridgeReady(){
-			WeixinJSBridge.invoke(
-				'getBrandWCPayRequest', {
-					"appId": appId,     //公众号名称，由商户传入
-					"timeStamp":"1395712654",         //时间戳，自1970年以来的秒数
-					"nonceStr":"e61463f8efa94090b1f366cccfbbb444", //随机串
-					"package":"prepay_id=" + prepayId,
-					"signType":"MD5",         //微信签名方式：
-					"paySign":"70EA570631E4BB79628FBCA90534C63FF7FADD89" //微信签名
-				},
-				function(res){
-					if(res.err_msg == "get_brand_wcpay_request:ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
-				}
-			);
-		}
-		if (typeof WeixinJSBridge == "undefined"){
-			if( document.addEventListener ){
-				document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-			}else if (document.attachEvent){
-				document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-				document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-			}
-		}else{
-			onBridgeReady();
-		}
 	}
 
 	onClickComment = e => {
@@ -109,7 +82,10 @@ export default class extends Component {
 	pay = (requestData) => {
 		if(WeixinJSBridge) {
 			WeixinJSBridge.invoke('getBrandWCPayRequest', requestData, function(res){
-				if(res.err_msg == "get_brand_wcpay_request:ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+				if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+					alert("支付成功");
+					window.location.reload();
+				}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
 			});
 		} else {
 			alert("微信支付不可用，请稍后重试");
@@ -117,22 +93,61 @@ export default class extends Component {
 
 	}
 
+	renderSkuList = (skuList) => {
+		skuList = skuList ? skuList : [];
+		return skuList.map(item => {
+			return (
+				<tr key={item.skuId}>
+					<td className="item-name">{item.skuName != null ? item.skuName : ''}</td>
+					<td className="item-operator">x</td>
+					<td className="item-count">{item.count != null ? item.count : ''}</td>
+				</tr>
+			)
+		});
+	}
+
+	renderMaterialList = (skuList) => {
+		skuList = skuList ? skuList : [];
+		return skuList.map(item => {
+			return (
+				<tr key={item.skuId}>
+					<td className="item-name">{item.skuName != null ? item.skuName : ''}</td>
+					<td className="item-operator">{item.count != null ? item.count : ''}</td>
+					<td className="item-count">{item.skuPrice != null ? item.skuPrice : ''}</td>
+				</tr>
+			)
+		});
+	}
+
+	getSkuTotalAmount = (skuList) => {
+		let result = 0;
+		skuList = skuList ? skuList : [];
+		skuList.forEach(item => {
+			result += item.count * item.skuPrice;
+		});
+		return result;
+	}
+
 	render() {
-		let {id, appointmentTime, payTime, serviceCategoryName, serviceName, status, serviceFee, reduce, totalAmount} = this.state;
-		status = status ? status : {};
+		let {orderId, createTime, appointmentTime, payTime, serviceCategoryName, serviceName, orderStatus, status, technicianName, technicianScore, technicianAvatarURL, serviceFee, bmpFee, reduce, skuCollection} = this.state;
+		orderStatus = orderStatus ? orderStatus : {};
+		serviceFee = serviceFee != null ? serviceFee : 0;
+		bmpFee = bmpFee != null ? bmpFee : 0;
+		let skuTotalAmount = this.getSkuTotalAmount(skuCollection);
+		let totalFee = serviceFee + bmpFee + skuTotalAmount;
 		return (
 			<div className="order-detail">
 				<div className="order-status-zone">
-					{this.getOrderStatusView(status)}
+					{this.getOrderStatusView(orderStatus)}
 				</div>
 				<List>
 					<Item>
 						<div className="label-text ft">订单号</div>
-						<div className="text fr">{id ? id : ''}</div>
+						<div className="text fr">{orderId ? orderId : ''}</div>
 					</Item>
 					<Item>
 						<div className="label-text ft">下单时间</div>
-						<div className="text fr">{appointmentTime ? appointmentTime : ''}</div>
+						<div className="text fr">{createTime ? createTime : ''}</div>
 					</Item>
 					<Item>
 						<div className="label-text ft">付款时间</div>
@@ -150,14 +165,15 @@ export default class extends Component {
 					</Item>
 					<Item>
 						<div className="label-text ft">服务耗材</div>
-						<div className="">
-						</div>
+						<table className="ft service-material-list">
+							<tbody>{this.renderSkuList(skuCollection)}</tbody>
+						</table>
 					</Item>
 				</List>
 				<List>
-					<UserInfo/>
+					<UserInfo avatarUrl={technicianAvatarURL} name={technicianName} score={technicianScore}/>
 				</List>
-				<List>
+				<List style={{display: status >= 300 ? 'block' : 'none'}}>
 					<Item>
 						<div className="label-text ft">工时费</div>
 						<div className="text fr">
@@ -165,10 +181,22 @@ export default class extends Component {
 						</div>
 					</Item>
 					<Item>
+						<table className="material-list">
+							<thead>
+								<tr>
+									<th>耗材</th>
+									<th>数量</th>
+									<th>费用</th>
+								</tr>
+							</thead>
+							<tbody>{this.renderMaterialList(skuCollection)}</tbody>
+						</table>
+					</Item>
+					<Item>
 						<div className="label-text ft">距离费</div>
 						<div className="text fr">
 							<span>¥</span>
-							<span>100</span>
+							<span>{bmpFee != null ? bmpFee : '0'}</span>
 						</div>
 					</Item>
 					<Item right={<span>-¥20</span>}>
@@ -180,16 +208,16 @@ export default class extends Component {
 					<Item>
 						<div className="label-text ft">合计</div>
 						<div className="text fr">
-							<span>{totalAmount != null ? '¥' + totalAmount : ''}</span>
+							<span>{totalFee != null ? '¥' + totalFee : ''}</span>
 						</div>
 					</Item>
 				</List>
 				<div className="info-zone">服务不满意，7天内可申请退款。</div>
 				<List>
 					<div className="btn-zone">
-						<button className="block btn" onClick={this.onClickConfirm} style={{display: (status.key !== 300 && status.key !== 600) ? 'block' : 'none'}}>确认</button>
-						<button className="block btn" onClick={this.onClickPay} style={{display: status.key === 300 ? 'block' : 'none'}}>去支付</button>
-						<button className="block btn" onClick={this.onClickComment} style={{display: status.key === 600 ? 'block' : 'none'}}>去评价</button>
+						<button className="block btn" onClick={this.onClickConfirm} style={{display: (orderStatus.key !== 300 && orderStatus.key !== 600) ? 'block' : 'none'}}>确认</button>
+						<button className="block btn" onClick={this.onClickPay} style={{display: orderStatus.key === 300 ? 'block' : 'none'}}>去支付</button>
+						<button className="block btn" onClick={this.onClickComment} style={{display: orderStatus.key === 600 ? 'block' : 'none'}}>去评价</button>
 					</div>
 				</List>
 			</div>

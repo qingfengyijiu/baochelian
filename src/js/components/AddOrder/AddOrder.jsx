@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 import List, {Item} from '../../components/List';
 import history from '../../views/history.jsx';
 import OrderTimePicker from '../../components/OrderTimePicker';
@@ -46,22 +47,22 @@ export default class extends Component {
 			data = {
 				serviceCategoryId,
 				serviceCategoryName,
-				location: position.location,
-				locationLat: position.locationLat,
-				locationLng: position.locationLng,
+				driverLocation: position.location,
+				driverLocationLat: position.locationLat,
+				driverLocationLng: position.locationLng,
 				locationDetail: position.locationDetail,
 				driverName: selfInfo.name ? selfInfo.name : driverName,
 				driverPhoneNo: selfInfo.phone ? selfInfo.phone : driverPhoneNo,
-				orderTime
+				orderTime,
+				skuCollection: []
 			};
 		ws.post({
 			url: '/api/order',
 			data: data
 		}).then(response => {
 			if(response.code === 0) {
-				if(response.data.phone != null) {
-					history.push('/');
-				}
+				alert("下单成功");
+				history.push('/self/order');
 			} else {
 				alert(response.message);
 			}
@@ -134,7 +135,7 @@ export default class extends Component {
 						</Item>
 					) : (
 						<Item>
-							<input value={driverPhoneNo ? driverPhoneNo : ''} type="text" placeholder="手机号" className="input-phone ft" onChange={this.onChange("phone").bind(this)}/>
+							<input value={driverPhoneNo ? driverPhoneNo : ''} type="text" placeholder="手机号" className="input-phone ft" onChange={this.onChange("driverPhone").bind(this)}/>
 							<a className="btn-smscode fr" onClick={this.onSendSmscode}>发送验证码</a>
 						</Item>
 					)}
@@ -159,7 +160,7 @@ export default class extends Component {
 						<input type="checkbox" className="checkbox" name="agreementCheckbox" checked={isAgree} onChange={this.onChange("isAgree").bind(this)}/>
 						<span className="content">同意</span>
 					</label>
-					<a className="link content">《保车连服务协议》</a>
+					<Link className="link content" href="/html/agreement1.html">《保车连服务协议》</Link>
 				</div>
 				<div className="btn-container">
 					<button className="btn block" onClick={this.submit} disabled={!isAgree}>提交订单</button>
