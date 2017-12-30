@@ -10,7 +10,7 @@ var config = {
 
     },
     production: {
-        domain: 'astraea_prod'
+        domain: 'core.91bcl.com'
     }
 };
 

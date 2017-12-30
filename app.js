@@ -58,7 +58,7 @@ function test(req, res) {
 }
 
 app.get('*', function(req, res) {
-    return test(req, res);
+    //return test(req, res);
 	var tokenInfo = cookieUtil.getLocalToken(req),
 		code,
 		appid = "wx3e98278c327dfef2",
