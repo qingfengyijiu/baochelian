@@ -28,7 +28,8 @@ router.post('/', function(req, res) {
 
 router.get('/:id/pay', function(req, res) {
     ws.get({
-        url: '/web/user/' + userId + '/order/' + req.params.id + '/payment/prepayId'
+        url: '/web/user/' + userId + '/order/' + req.params.id + '/payment/prepayId',
+	    token: getToken(req)
     }).then(function(response) {
         ws.handleResponse(response, res);
     })

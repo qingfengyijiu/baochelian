@@ -160,11 +160,8 @@ class Position extends Component {
 		return (
 			<div className="position-search-container">
 				<div className="search-zone">
-					<input type="text" className="search-input" value={searchText} onChange={this.onChangeSearchText}/>
-					<div className="search-placeholder" style={{display: searchText.length > 0 ? 'none' : 'block'}}>
-						<img className="search-icon" src="/images/search@2x.png"/>
-						<div className="search-label">查找地址</div>
-					</div>
+					<input type="text" className="search-input" placeholder="查找地址" value={searchText} onChange={this.onChangeSearchText}/>
+					<img className="search-icon" src="/images/search@2x.png" style={{display: searchText.length > 0 ? 'none' : 'block'}}/>
 				</div>
 				<Map ref="map" onChangeNearbyList={this.onChangeNearbyList}/>
 				<div className="nearby-list-container">

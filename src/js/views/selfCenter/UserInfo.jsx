@@ -7,9 +7,9 @@ export default class extends Component {
 	}
 
 	getStarScoreViews = (score) => {
-		let arr = [1,1,1,1,1];
+		let arr = [1, 2, 3, 4, 5];
 		return arr.map((value, index) => {
-			let active = index + 1 <= value,
+			let active = value <= score,
 				imgUrl = active ? '/images/star1@2x.png' : '/images/star_h@2x.png';
 			return (
 				<img src={imgUrl} className="score-star-item" key={index}/>
@@ -18,14 +18,15 @@ export default class extends Component {
 	}
 
 	render() {
-		let score = 4;
+		let {avatarUrl, name, score} = this.props;
+		score = score != null ? score : 0;
 		return (
 			<div className="user-info">
 				<div className="left">
-					<img className="user-avatar"/>
+					<img className="user-avatar" src={avatarUrl != null ? avatarUrl : '/images/default_avatar.png'} />
 				</div>
 				<div className="right">
-					<div className="user-name">范辉</div>
+					<div className="user-name">{name != null ? name : '技师'}</div>
 					<div className="user-score">
 						<div className="score-title">综合评价：</div>
 						{this.getStarScoreViews(score)}
