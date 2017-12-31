@@ -6,7 +6,7 @@ var cookieUtil = require('../util/cookieUtil'),
 
 router.get('/truck', function(req, res) {
     ws.get({
-        url: '/web/user/' + '59b949ac6d80f5311e8900bd' + '/trucks',
+        url: '/web/trucks',
         token: getToken(req),
         qs: req.query
     }).then(function(response) {
@@ -16,7 +16,7 @@ router.get('/truck', function(req, res) {
 
 router.put('/truck', function(req, res) {
     ws.put({
-        url: '/web/user/' + '59b949ac6d80f5311e8900bd' + '/trucks',
+        url: '/web/trucks',
         token: getToken(req),
         data: req.body
     }).then(function(response) {
@@ -26,7 +26,7 @@ router.put('/truck', function(req, res) {
 
 router.get('/account', function(req, res) {
     ws.get({
-        url: '/web/user/' + '59b949ac6d80f5311e8900bd' + '/account',
+        url: '/web/account',
         token: getToken(req)
     }).then(function(response) {
         ws.handleResponse(response, res);
