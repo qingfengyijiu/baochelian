@@ -5,5 +5,6 @@ export default Immutable.fromJS({
     orderTime: moment().format("YYYY-MM-DD HH:mm"),
     driverName: null,
     driverPhoneNo: null,
+    smscode: null,
     isAgree: true
 })

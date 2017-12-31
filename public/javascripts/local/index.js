@@ -37994,7 +37994,7 @@
 /* 576 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -38008,103 +38008,129 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _class = function (_Component) {
-		_inherits(_class, _Component);
+	var TimerTask = function (_Component) {
+		_inherits(TimerTask, _Component);
 
-		function _class(props) {
-			_classCallCheck(this, _class);
+		function TimerTask(props) {
+			_classCallCheck(this, TimerTask);
 
-			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (TimerTask.__proto__ || Object.getPrototypeOf(TimerTask)).call(this, props));
 
-			_this.start = function () {
-				var isRunning = _this.state.isRunning;
+			_initialiseProps.call(_this);
 
-				if (isRunning) return;
-				_this.props.onStart && _this.props.onStart();
-				_this.run();
-			};
-
-			_this.stop = function () {
-				var endText = _this.props.endText;
-
-				if (_this.interval) {
-					clearInterval(_this.interval);
-				}
-				_this.setState({
-					count: 60,
-					showText: endText ? endText : "60"
-				});
-			};
+			var _this$props = _this.props,
+			    times = _this$props.times,
+			    startStr = _this$props.startStr,
+			    ingStr = _this$props.ingStr,
+			    endStr = _this$props.endStr,
+			    clickhandle = _this$props.clickhandle,
+			    endHandle = _this$props.endHandle;
 
 			_this.state = {
-				isRunning: false,
-				count: 60,
-				showText: props.startText ? props.startText : "60"
+				isBack: false,
+				times: times || 30,
+				_times: times || 30,
+				startStr: startStr || '点击开始倒计时',
+				ingStr: ingStr || '',
+				endStr: endStr || '重现开始倒计时',
+				isFirst: true,
+				clickhandle: clickhandle,
+				stop: false,
+				endHandle: endHandle,
+				_t: null
 			};
-			_this.interval = null;
 			return _this;
 		}
 
-		_createClass(_class, [{
-			key: "componentDidMount",
+		_createClass(TimerTask, [{
+			key: 'componentDidMount',
 			value: function componentDidMount() {
-				var auto = this.props.auto;
 
-				if (auto) {
-					this.run();
+				if (this.props.isAuto) {
+					this.clickEvent();
 				}
 			}
 		}, {
-			key: "run",
-			value: function run() {
-				var _this2 = this;
-
-				var endText = this.props.endText;
-
-				this.setState({ isRunning: true });
-				this.interval = setInterval(function () {
-					var count = _this2.state.count;
-
-					if (count > 0) {
-						_this2.setState({
-							count: count - 1,
-							showText: count - 1
-						});
-					} else {
-						_this2.stop();
-					}
-				}, 1000);
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				clearInterval(this.state._t);
 			}
 		}, {
-			key: "render",
+			key: 'render',
 			value: function render() {
-				var _props = this.props,
-				    startText = _props.startText,
-				    endText = _props.endText,
-				    auto = _props.auto,
-				    other = _objectWithoutProperties(_props, ["startText", "endText", "auto"]),
-				    showText = this.state.showText;
+				var _this2 = this;
+
+				var _state = this.state,
+				    isBack = _state.isBack,
+				    times = _state.times,
+				    startStr = _state.startStr,
+				    endStr = _state.endStr,
+				    isFirst = _state.isFirst,
+				    ingStr = _state.ingStr,
+				    stop = _state.stop;
+
 
 				return _react2.default.createElement(
-					"span",
-					other,
-					showText
+					'span',
+					{ className: 'timer ' + (isBack ? 'isBak' : ''), onClick: function onClick() {
+							_this2.clickEvent();
+						} },
+					isBack ? times + ingStr : isFirst ? startStr : endStr
 				);
 			}
 		}]);
 
-		return _class;
+		return TimerTask;
 	}(_react.Component);
 
-	exports.default = _class;
+	var _initialiseProps = function _initialiseProps() {
+		var _this3 = this;
+
+		this.clickEvent = function () {
+			var _state2 = _this3.state,
+			    times = _state2.times,
+			    isBack = _state2.isBack,
+			    _times = _state2._times,
+			    clickhandle = _state2.clickhandle,
+			    endHandle = _state2.endHandle,
+			    isRunning = _state2.isRunning;
+
+
+			if (isBack) {
+				return false;
+			}
+
+			var _t = setInterval(function () {
+				if (times <= 0) {
+					clearInterval(_t);
+					_this3.setState({
+						isBack: false,
+						times: _times
+					});
+					endHandle && endHandle();
+					return false;
+				}
+				_this3.setState({
+					times: times
+				});
+				times--;
+			}, 1000);
+
+			clickhandle && clickhandle();
+			_this3.setState({
+				_t: _t,
+				isBack: true
+			});
+		};
+	};
+
+	exports.default = TimerTask;
 
 /***/ },
 /* 577 */
@@ -38283,7 +38309,7 @@
 	  value: true
 	});
 
-	var _AddOrder = __webpack_require__(582);
+	var _AddOrder = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./AddOrder.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	Object.defineProperty(exports, 'default', {
 	  enumerable: true,
@@ -38295,816 +38321,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 582 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(300);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(477);
-
-	var _List = __webpack_require__(572);
-
-	var _List2 = _interopRequireDefault(_List);
-
-	var _history = __webpack_require__(579);
-
-	var _history2 = _interopRequireDefault(_history);
-
-	var _OrderTimePicker = __webpack_require__(583);
-
-	var _OrderTimePicker2 = _interopRequireDefault(_OrderTimePicker);
-
-	var _ws = __webpack_require__(570);
-
-	var _ws2 = _interopRequireDefault(_ws);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _class = function (_Component) {
-		_inherits(_class, _Component);
-
-		function _class(props) {
-			_classCallCheck(this, _class);
-
-			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
-
-			_this.submit = function () {
-				var _this$props$serviceCa = _this.props.serviceCategory,
-				    serviceCategoryId = _this$props$serviceCa.serviceCategoryId,
-				    serviceCategoryName = _this$props$serviceCa.serviceCategoryName,
-				    _this$props = _this.props,
-				    position = _this$props.position,
-				    model = _this$props.model,
-				    selfInfo = _this$props.selfInfo,
-				    orderTime = model.orderTime,
-				    driverName = model.driverName,
-				    driverPhoneNo = model.driverPhoneNo,
-				    data = {
-					serviceCategoryId: serviceCategoryId,
-					serviceCategoryName: serviceCategoryName,
-					driverLocation: position.location,
-					driverLocationLat: position.locationLat,
-					driverLocationLng: position.locationLng,
-					locationDetail: position.locationDetail,
-					driverName: selfInfo.name ? selfInfo.name : driverName,
-					driverPhoneNo: selfInfo.phone ? selfInfo.phone : driverPhoneNo,
-					orderTime: orderTime,
-					skuCollection: []
-				};
-
-				_ws2.default.post({
-					url: '/api/order',
-					data: data
-				}).then(function (response) {
-					if (response.code === 0) {
-						alert("下单成功");
-						_history2.default.push('/self/order');
-					} else {
-						alert(response.message);
-					}
-				});
-			};
-
-			_this.confirmOrderTime = function (value) {
-				var onChangeField = _this.props.onChangeField;
-
-				onChangeField && onChangeField("orderTime", value);
-			};
-
-			_this.onTimePickerShow = function (e) {
-				_this.refs.picker.show();
-			};
-
-			_this.onSendSmscode = function (e) {
-				var phone = _this.state.phone;
-
-				if (phone == null) {
-					alert("请输入正确的手机号");
-					return;
-				}
-				_ws2.default.get({
-					url: '/api/util/captcha?phone=' + phone
-				}).then(function (response) {});
-			};
-
-			_this.onChange = function (field) {
-				return function (e) {
-					var target = e.target,
-					    value = void 0;
-					if (field === "isAgree") {
-						value = target.checked;
-					} else {
-						value = target.value;
-					}
-					this.props.onChangeField && this.props.onChangeField(field, value);
-				};
-			};
-
-			_this.gotoPosition = function (e) {
-				_history2.default.push('/position');
-			};
-
-			_this.state = {
-				pickerOptions: [],
-				driverName: "",
-				phone: "",
-				orderTime: "",
-				smscode: "",
-				isPhoneBind: false
-			};
-			return _this;
-		}
-
-		_createClass(_class, [{
-			key: 'componentWillMount',
-			value: function componentWillMount() {
-				var serviceCategory = this.props.serviceCategory;
-
-				document.title = serviceCategory.serviceCategoryName ? serviceCategory.serviceCategoryName : '';
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				var _props = this.props,
-				    selfInfo = _props.selfInfo,
-				    actions = _props.actions;
-
-				if (selfInfo.phone == null) {
-					_ws2.default.get({
-						url: '/api/self/info'
-					}).then(function (response) {
-						if (response.code === 0) {
-							actions.utilAction.changeSelfInfo(response.data);
-						} else {
-							alert(response.message);
-						}
-					});
-				}
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				var _props2 = this.props,
-				    position = _props2.position,
-				    selfInfo = _props2.selfInfo,
-				    model = _props2.model,
-				    driverName = model.driverName,
-				    driverPhoneNo = model.driverPhoneNo,
-				    smscode = model.smscode,
-				    orderTime = model.orderTime,
-				    isAgree = model.isAgree;
-
-				return _react2.default.createElement(
-					'div',
-					{ className: 'rescue' },
-					_react2.default.createElement(
-						_List2.default,
-						null,
-						selfInfo.name ? _react2.default.createElement(
-							_List.Item,
-							null,
-							_react2.default.createElement(
-								'label',
-								{ className: 'label-text ft' },
-								'\u7528\u6237\u540D'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'text ft' },
-								selfInfo.name ? selfInfo.name : ''
-							)
-						) : _react2.default.createElement(
-							_List.Item,
-							null,
-							_react2.default.createElement('input', { value: driverName ? driverName : '',
-								type: 'text',
-								placeholder: '\u7528\u6237\u540D',
-								className: 'full-width',
-								onChange: this.onChange("driverName").bind(this) })
-						),
-						selfInfo.phone ? _react2.default.createElement(
-							_List.Item,
-							null,
-							_react2.default.createElement(
-								'label',
-								{ className: 'label-text ft' },
-								'\u624B\u673A\u53F7'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'text ft' },
-								selfInfo.phone ? selfInfo.phone : ''
-							)
-						) : _react2.default.createElement(
-							_List.Item,
-							null,
-							_react2.default.createElement('input', { value: driverPhoneNo ? driverPhoneNo : '', type: 'text', placeholder: '\u624B\u673A\u53F7', className: 'input-phone ft', onChange: this.onChange("driverPhone").bind(this) }),
-							_react2.default.createElement(
-								'a',
-								{ className: 'btn-smscode fr', onClick: this.onSendSmscode },
-								'\u53D1\u9001\u9A8C\u8BC1\u7801'
-							)
-						),
-						selfInfo.phone ? undefined : _react2.default.createElement(
-							_List.Item,
-							null,
-							_react2.default.createElement('input', { value: smscode, type: 'text', placeholder: '\u9A8C\u8BC1\u7801', className: 'full-width', onChange: this.onChange("smscode").bind(this) })
-						)
-					),
-					_react2.default.createElement(
-						_List2.default,
-						null,
-						_react2.default.createElement(
-							_List.Item,
-							{ onClick: this.gotoPosition },
-							_react2.default.createElement(
-								'div',
-								{ className: 'text ft' },
-								position.location ? position.location : '您的位置'
-							),
-							_react2.default.createElement('img', { className: 'address fr tail-icon', src: 'images/rescue/address@2x.png' })
-						),
-						_react2.default.createElement(
-							_List.Item,
-							{ onClick: this.onTimePickerShow },
-							_react2.default.createElement(
-								'div',
-								{ className: 'text ft' },
-								orderTime && orderTime.length > 0 ? orderTime : '预约时间'
-							),
-							_react2.default.createElement('img', { className: 'jiaohao fr tail-icon', src: 'images/jiaohao@2x.png' })
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'agreement' },
-						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', { type: 'checkbox', className: 'checkbox', name: 'agreementCheckbox', checked: isAgree, onChange: this.onChange("isAgree").bind(this) }),
-							_react2.default.createElement(
-								'span',
-								{ className: 'content' },
-								'\u540C\u610F'
-							)
-						),
-						_react2.default.createElement(
-							_reactRouter.Link,
-							{ className: 'link content', href: '/html/agreement1.html' },
-							'\u300A\u4FDD\u8F66\u8FDE\u670D\u52A1\u534F\u8BAE\u300B'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'btn-container' },
-						_react2.default.createElement(
-							'button',
-							{ className: 'btn block', onClick: this.submit, disabled: !isAgree },
-							'\u63D0\u4EA4\u8BA2\u5355'
-						)
-					),
-					_react2.default.createElement(_OrderTimePicker2.default, { ref: 'picker', confirm: this.confirmOrderTime })
-				);
-			}
-		}]);
-
-		return _class;
-	}(_react.Component);
-
-	exports.default = _class;
-
-/***/ },
-/* 583 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _OrderTimePicker = __webpack_require__(584);
-
-	Object.defineProperty(exports, 'default', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_OrderTimePicker).default;
-	  }
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ },
-/* 584 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(300);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _index = __webpack_require__(585);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _moment = __webpack_require__(587);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var OrderTimePicker = function (_Component) {
-		_inherits(OrderTimePicker, _Component);
-
-		_createClass(OrderTimePicker, null, [{
-			key: 'getDays',
-			value: function getDays(startDay, count) {
-				var days = [];
-				startDay = startDay ? startDay : (0, _moment2.default)();
-				count = count ? count : 30;
-				for (var i = 0; i < count; i++) {
-					days.push(startDay.format("YYYY-MM-DD"));
-					startDay.add(1, "days");
-				}
-				return days;
-			}
-		}, {
-			key: 'getDefaultValue',
-			value: function getDefaultValue() {
-				var now = new Date();
-				var hour = now.getHours();
-				var hourIndex = hour - 1;
-				var minute = now.getMinutes();
-				minute = minute + 5 < 60 ? minute + 5 : minute;
-				var minuteIndex = Math.round(minute / 5) - 1;
-				return [0, hourIndex, minuteIndex];
-			}
-		}]);
-
-		function OrderTimePicker(props) {
-			_classCallCheck(this, OrderTimePicker);
-
-			var _this = _possibleConstructorReturn(this, (OrderTimePicker.__proto__ || Object.getPrototypeOf(OrderTimePicker)).call(this, props));
-
-			_this.confirmServiceTime = function (value) {
-				console.log(value);
-			};
-
-			_this.show = function () {
-				_this.refs.picker.show();
-			};
-
-			_this.onChange = function (value, index) {
-				var newDefaultValue = void 0;
-				if (index == 0) {
-					if (value === 0) {
-						newDefaultValue = OrderTimePicker.getDefaultValue();
-					} else {
-						newDefaultValue = [value, 0, 0];
-					}
-				}
-				_this.setState({
-					defaultValue: newDefaultValue
-				});
-			};
-
-			_this.confirm = function (value) {
-				var _this$state = _this.state,
-				    days = _this$state.days,
-				    hours = _this$state.hours,
-				    minutes = _this$state.minutes,
-				    result = days[value[0]] + " " + hours[value[1]].slice(0, 2) + ":" + minutes[value[2]].slice(0, 2);
-
-				_this.props.confirm && _this.props.confirm(result);
-			};
-
-			_this.state = {
-				days: OrderTimePicker.getDays(),
-				hours: OrderTimePicker.FULL_HOURS,
-				minutes: OrderTimePicker.FULL_MINUTES,
-				defaultValue: OrderTimePicker.getDefaultValue()
-			};
-			return _this;
-		}
-
-		_createClass(OrderTimePicker, [{
-			key: 'render',
-			value: function render() {
-				var _props = this.props,
-				    confirm = _props.confirm,
-				    other = _objectWithoutProperties(_props, ['confirm']),
-				    _state = this.state,
-				    days = _state.days,
-				    hours = _state.hours,
-				    minutes = _state.minutes,
-				    defaultValue = _state.defaultValue;
-
-				return _react2.default.createElement(_index2.default, _extends({ ref: 'picker', num: 3, onChange: this.onChange, defaultValue: defaultValue, options: [days, hours, minutes], confirm: this.confirm }, other));
-			}
-		}]);
-
-		return OrderTimePicker;
-	}(_react.Component);
-
-	OrderTimePicker.FULL_HOURS = ["00时", "01时", "02时", "03时", "04时", "05时", "06时", "07时", "08时", "09时", "10时", "11时", "12时", "13时", "14时", "15时", "16时", "17时", "18时", "19时", "20时", "21时", "22时", "23时"];
-	OrderTimePicker.FULL_MINUTES = ["00分", "05分", "10分", "15分", "20分", "25分", "30分", "35分", "40分", "45分", "50分", "55分"];
-	exports.default = OrderTimePicker;
-
-/***/ },
-/* 585 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(300);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Picker = __webpack_require__(586);
-
-	var _Picker2 = _interopRequireDefault(_Picker);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	/**
-	 * description: 支持单列或多列选择器
-	 * @property num 选择器列数，默认为1
-	 * @property options 选择器的option数据数组，如果为多列选择器，则为数据数组的数组[[option1, option2], [option1, optino2, option3]]；
-	 *      如果为单列，则为数据数组即可,例如[option1, option2]
-	 * @property defaultValue 默认选中值，该值为数组的选中index；如果多列选择器，则为选中index的数组[selectedIndex1, selectedIndex2]
-	 * @property title picker标题
-	 * @property confirm 确认按钮的回調函数, Function(value)，接收value数据，value为最终选中的index；如果为多列，则value为选中index的数组
-	 * @property cancel 取消按钮的回調函数, Function()
-	 */
-	var _class = function (_Component) {
-		_inherits(_class, _Component);
-
-		function _class(props) {
-			_classCallCheck(this, _class);
-
-			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
-
-			_initialiseProps.call(_this);
-
-			var value = [],
-			    num = props.num;
-			num = num != null ? num : 1;
-			if (props.defaultValue) {
-				value = props.defaultValue;
-				if (!(value instanceof Array)) {
-					value = [value];
-				}
-			} else {
-				for (var i = 0; i < num; i++) {
-					value.push(0);
-				}
-			}
-			_this.state = {
-				show: false,
-				scrollStart: 0,
-				value: value
-			};
-			return _this;
-		}
-
-		_createClass(_class, [{
-			key: "onChange",
-			value: function onChange(index, value) {
-				var stateValue = this.state.value;
-				stateValue[index] = value;
-				this.setState({
-					value: stateValue
-				});
-				this.props.onChange && this.props.onChange(value, index);
-			}
-		}, {
-			key: "componentWillReceiveProps",
-			value: function componentWillReceiveProps(nextProps) {
-				if (nextProps.defaultValue) {
-					this.setState({
-						value: nextProps.defaultValue
-					});
-				}
-				return true;
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				var _this2 = this;
-
-				var _props = this.props,
-				    options = _props.options,
-				    title = _props.title,
-				    num = _props.num,
-				    defaultValue = _props.defaultValue,
-				    confirm = _props.confirm,
-				    cancel = _props.cancel,
-				    onChange = _props.onChange,
-				    other = _objectWithoutProperties(_props, ["options", "title", "num", "defaultValue", "confirm", "cancel", "onChange"]),
-				    _state = this.state,
-				    value = _state.value,
-				    show = _state.show,
-				    pickers = [];
-				//如果是单列picker，统一转换成多列picker数组格式
-
-
-				num = num != null ? num : 1;
-				if (num == 1) {
-					options = [options];
-				}
-				for (var i = 0; i < options.length; i++) {
-					pickers.push({
-						options: options[i],
-						value: value[i]
-					});
-				}
-				return _react2.default.createElement(
-					"div",
-					_extends({ className: "picker-modal", style: { display: show ? 'block' : 'none' } }, other),
-					_react2.default.createElement("div", { className: "picker-shade-layer" }),
-					_react2.default.createElement(
-						"div",
-						{ className: "picker-container" },
-						_react2.default.createElement(
-							"div",
-							{ className: "picker-button-zone" },
-							_react2.default.createElement(
-								"a",
-								{ className: "picker-btn btn-cancel", onClick: this.hide },
-								"\u53D6\u6D88"
-							),
-							_react2.default.createElement(
-								"span",
-								null,
-								title
-							),
-							_react2.default.createElement(
-								"a",
-								{ className: "picker-btn btn-confirm", onClick: this.confirm },
-								"\u5B8C\u6210"
-							)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "picker-select-zone multi-select-" + pickers.length },
-							_react2.default.createElement("div", { className: "picker-selected-zone" }),
-							pickers.map(function (picker, index) {
-								return _react2.default.createElement(_Picker2.default, { key: index, picker: picker, selected: picker.value, onChange: _this2.onChange.bind(_this2, index) });
-							})
-						)
-					)
-				);
-			}
-		}]);
-
-		return _class;
-	}(_react.Component);
-
-	var _initialiseProps = function _initialiseProps() {
-		var _this3 = this;
-
-		this.show = function () {
-			_this3.setState({
-				show: true
-			});
-		};
-
-		this.hide = function () {
-			_this3.setState({
-				show: false
-			});
-		};
-
-		this.confirm = function () {
-			var value = _this3.state.value;
-
-			if (value.length === 1) {
-				value = value[0];
-			}
-			_this3.hide();
-			_this3.props.confirm && _this3.props.confirm(value);
-		};
-
-		this.cancel = function () {
-			_this3.hide();
-			_this3.props.cancel && _this3.props.cancel();
-		};
-
-		this.getValue = function () {
-			return _this3.state.value;
-		};
-	};
-
-	exports.default = _class;
-
-/***/ },
-/* 586 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(300);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _class = function (_Component) {
-		_inherits(_class, _Component);
-
-		function _class(props) {
-			_classCallCheck(this, _class);
-
-			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
-
-			_this.onSelectTouchMove = function (e) {
-				e.preventDefault();
-				e.stopPropagation();
-				e.nativeEvent.stopImmediatePropagation();
-				var _this$props = _this.props,
-				    picker = _this$props.picker,
-				    onChange = _this$props.onChange,
-				    currentY = e.touches[0].pageY,
-				    offset = currentY - _this.state.scrollStart,
-				    offsetAbs = Math.abs(offset);
-
-				if (picker.value == 0 && offset > 0) {
-					return;
-				}
-				if (picker.value == picker.options.length - 1 && offset < 0) {
-					return;
-				}
-				_this.refs.picker.style.transform = "translateY(" + offset + "px)";
-				if (offsetAbs >= 10) {
-					if (offset > 0) {
-						onChange(picker.value - 1);
-					} else {
-						onChange(picker.value + 1);
-					}
-					_this.setState({
-						scrollStart: currentY
-					});
-					_this.refs.picker.style.transform = "translateY(" + 0 + ")";
-				}
-			};
-
-			_this.onSelectTouchStart = function (e) {
-				e.preventDefault();
-				e.stopPropagation();
-				e.nativeEvent.stopImmediatePropagation();
-				_this.setState({
-					scrollStart: e.touches[0].pageY
-				});
-			};
-
-			_this.onSelectTouchEnd = function (e) {
-				e.preventDefault();
-				e.stopPropagation();
-				e.nativeEvent.stopImmediatePropagation();
-				_this.refs.picker.style.transform = "translateY(" + 0 + ")";
-			};
-
-			_this.state = {
-				scrollStart: 0
-			};
-			return _this;
-		}
-
-		_createClass(_class, [{
-			key: "getOptionValue",
-			value: function getOptionValue(picker, offset) {
-				var position = picker.value + offset;
-				return position >= 0 && position < picker.options.length ? picker.options[position] : '';
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				var picker = this.props.picker;
-
-				return _react2.default.createElement(
-					"div",
-					{ className: "select-container" },
-					_react2.default.createElement(
-						"div",
-						{ ref: "picker", className: "picker-item" },
-						_react2.default.createElement(
-							"div",
-							{ className: "option-item option-selected-offset-4" },
-							this.getOptionValue(picker, -4)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "option-item option-selected-offset-3" },
-							this.getOptionValue(picker, -3)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "option-item option-selected-offset-2" },
-							this.getOptionValue(picker, -2)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "option-item option-selected-offset-1" },
-							this.getOptionValue(picker, -1)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "option-item option-selected" },
-							this.getOptionValue(picker, 0)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "option-item option-selected-offset-1" },
-							this.getOptionValue(picker, 1)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "option-item option-selected-offset-2" },
-							this.getOptionValue(picker, 2)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "option-item option-selected-offset-3" },
-							this.getOptionValue(picker, 3)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "option-item option-selected-offset-4" },
-							this.getOptionValue(picker, 4)
-						)
-					),
-					_react2.default.createElement("div", { className: "select-touch-layer", onTouchMove: this.onSelectTouchMove, onTouchStart: this.onSelectTouchStart, onTouchEnd: this.onSelectTouchEnd })
-				);
-			}
-		}]);
-
-		return _class;
-	}(_react.Component);
-
-	exports.default = _class;
-
-/***/ },
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
 /* 587 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -65271,6 +64492,7 @@
 	    orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
 	    driverName: null,
 	    driverPhoneNo: null,
+	    smscode: null,
 	    isAgree: true
 	});
 
@@ -65330,6 +64552,7 @@
 	    orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
 	    driverName: null,
 	    driverPhoneNo: null,
+	    smscode: null,
 	    isAgree: true
 	});
 
@@ -65443,6 +64666,7 @@
 	    orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
 	    driverName: null,
 	    driverPhoneNo: null,
+	    smscode: null,
 	    isAgree: true
 	});
 
@@ -65502,6 +64726,7 @@
 	    orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
 	    driverName: null,
 	    driverPhoneNo: null,
+	    smscode: null,
 	    isAgree: true
 	});
 

@@ -1691,6 +1691,16 @@ th {
   background: url("../images/duihao2@2x.png");
   background-size: 0.4rem 0.4rem;
 }
+.timer {
+  color: #999999;
+  font-size: 0.26rem;
+  width: 1.3rem;
+  text-align: center;
+  display: inline-block;
+}
+.timer.isBack {
+  color: #ccc;
+}
 html,
 body,
 #app {
