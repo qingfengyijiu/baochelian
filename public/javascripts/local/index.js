@@ -57615,8 +57615,7 @@
 			};
 
 			_this.gotoOrderDetail = function (orderId) {
-				location.herf = "/self/order/detail?id=" + orderId;
-				//history.push("/self/order/" + orderId);
+				location.href = "/self/order/detail?id=" + orderId;
 			};
 
 			_this.getOrderItemViews = function (list) {
