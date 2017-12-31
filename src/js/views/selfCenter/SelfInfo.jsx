@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import List, {Item} from "../../components/List";
 import ws from '../../lib/ws.js';
 
-export default class extends Component {
+class SelfInfo extends Component {
 
 	constructor(props) {
 		super(props);
@@ -25,19 +25,17 @@ export default class extends Component {
 	}
 
 	render() {
-		let {avatarUrl, nickname} = this.state;
-		avatarUrl = avatarUrl ? avatarUrl : "/images/address@2x.png";
-		nickname = nickname ? nickname : "未知";
+		let {avatarUrl, name} = this.props.selfInfo;
 		return (
 			<div className="self-info">
 				<List>
 					<Item className="touxiang">
 						<div className="label-text ft">头像</div>
-						<img src={avatarUrl} className="touxiang-img user-avatar fr"/>
+						<img src={avatarUrl != null ? avatarUrl : '/images/default_avatar@2x.png'} className="touxiang-img user-avatar fr"/>
 					</Item>
 					<Item>
 						<div className="label-text ft">昵称</div>
-						<div className="text fr">{nickname != null ? nickname : ''}</div>
+						<div className="text fr">{name != null ? name : '***'}</div>
 					</Item>
 				</List>
 			</div>
@@ -45,3 +43,23 @@ export default class extends Component {
 	}
 
 }
+
+function mapStateToProps(state) {
+	let selfInfo = state.reducers.util.toJS().selfInfo;
+	return {
+		selfInfo
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		actinos: {
+			truckBrandAction: bindActionCreators(TruckBrandAction, dispatch)
+		}
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(SelfInfo)
