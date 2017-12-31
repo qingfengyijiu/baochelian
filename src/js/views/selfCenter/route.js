@@ -17,7 +17,7 @@ export default (
 	    <Route path="account" component={SelfAccount}/>
 	    <Route path="order">
 		    <IndexRoute component={SelfOrder}/>
-		    <Route path=":id" component={OrderDetail}/>
+		    <Route path="detail" component={OrderDetail}/>
 		    <Route path=":id/comment" component={ServiceComment}/>
 	    </Route>
 	    <Route path="coupon" component={SelfCoupon}/>
