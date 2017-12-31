@@ -4,11 +4,9 @@ var ws = require('../util/ws');
 var cookieUtil = require('../util/cookieUtil'),
     getToken = cookieUtil.getToken;
 
-var userId = '59b949ac6d80f5311e8900bd';
-
 router.get('/', function(req, res) {
     ws.get({
-        url: '/web/user/' + userId + '/orders',
+        url: '/web/orders',
         token: getToken(req),
         qs: req.query
     }).then(function(response) {
@@ -18,7 +16,7 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
 	ws.post({
-		url: '/web/user/' + userId + '/order',
+		url: '/web/orders',
 		token: getToken(req),
 		data: req.body
 	}).then(function(response) {
@@ -28,7 +26,7 @@ router.post('/', function(req, res) {
 
 router.get('/:id/pay', function(req, res) {
     ws.get({
-        url: '/web/user/' + userId + '/order/' + req.params.id + '/payment/prepayId',
+        url: '/web/order/' + req.params.id + '/payment/prepayId',
 	    token: getToken(req)
     }).then(function(response) {
         ws.handleResponse(response, res);
@@ -37,7 +35,7 @@ router.get('/:id/pay', function(req, res) {
 
 router.post('/:id/scoring', function(req, res) {
 	ws.post({
-		url: '/web/user/' + userId + '/order/' + req.params.id + '/scoring',
+		url: '/web/order/' + req.params.id + '/scoring',
         data: req.body
 	}).then(function(response) {
 		ws.handleResponse(response, res);
@@ -46,7 +44,7 @@ router.post('/:id/scoring', function(req, res) {
 
 router.get('/:id', function(req, res) {
     ws.get({
-        url: '/web/user/' + userId + '/order/' + req.params.id,
+        url: '/web/order/' + req.params.id,
         token: getToken(req)
     }).then(function(response) {
         ws.handleResponse(response, res);
