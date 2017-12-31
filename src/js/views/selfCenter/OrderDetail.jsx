@@ -14,6 +14,11 @@ export default class extends Component {
 	}
 
 	componentDidMount() {
+		document.title = "订单详情";
+		this.refresh();
+	}
+
+	refresh = () => {
 		let id = this.props.params.id;
 		ws.get({
 			url: '/api/order/' + id
@@ -80,12 +85,15 @@ export default class extends Component {
 	}
 
 	pay = (requestData) => {
+		let _this = this;
 		if(WeixinJSBridge) {
 			WeixinJSBridge.invoke('getBrandWCPayRequest', requestData, function(res){
 				if(res.err_msg == "get_brand_wcpay_request:ok" ) {
 					alert("支付成功");
-					window.location.reload();
-				}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+					_this.refresh();
+				} else {
+					alert(res.err_msg ? res.err_msg : '支付失败');
+				}
 			});
 		} else {
 			alert("微信支付不可用，请稍后重试");
