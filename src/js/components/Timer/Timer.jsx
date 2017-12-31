@@ -1,66 +1,82 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-export default class extends Component {
-
+class TimerTask extends Component {
 	constructor(props) {
 		super(props);
+		let { times, startStr, ingStr, endStr, clickhandle, endHandle } = this.props
 		this.state = {
-			isRunning: false,
-			count: 60,
-			showText: props.startText ? props.startText : "60"
+			isBack: false,
+			times: times || 30,
+			_times: times || 30,
+			startStr: startStr || '点击开始倒计时',
+			ingStr: ingStr || '',
+			endStr: endStr || '重现开始倒计时',
+			isFirst: true,
+			clickhandle: clickhandle,
+			stop: false,
+			endHandle: endHandle,
+			_t: null
 		}
-		this.interval = null;
 	}
 
 	componentDidMount() {
-		let {auto} = this.props;
-		if(auto) {
-			this.run();
+
+		if (this.props.isAuto) {
+			this.clickEvent();
 		}
 	}
 
-	start = () => {
-		let {isRunning} = this.state;
-		if(isRunning) return;
-		this.props.onStart && this.props.onStart();
-		this.run();
-	}
+	clickEvent = () => {
+		let { times, isBack, _times, clickhandle, endHandle, isRunning, } = this.state;
 
-	stop = () => {
-		let {endText} = this.props;
-		if(this.interval) {
-			clearInterval(this.interval);
+		if (isBack) {
+			return false;
 		}
+
+		let _t = setInterval(() => {
+			if (times <= 0) {
+				clearInterval(_t);
+				this.setState({
+					isBack: false,
+					times: _times
+				})
+				endHandle && endHandle();
+				return false
+			}
+			this.setState({
+				times: times
+			})
+			times--
+		}, 1000)
+
+		clickhandle && clickhandle();
 		this.setState({
-			count: 60,
-			showText: endText ? endText : "60"
+			_t: _t,
+			isBack: true
 		})
 	}
 
-	run() {
-		let {endText} = this.props;
-		this.setState({isRunning: true});
-		this.interval = setInterval(() => {
-			let {count} = this.state;
-			if(count > 0) {
-				this.setState({
-					count: count - 1,
-					showText: count - 1
-				});
-			} else {
-				this.stop();
-			}
 
-		}, 1000);
+	componentWillUnmount() {
+		clearInterval(this.state._t)
 	}
 
-
 	render() {
-		let {startText, endText, auto, ...other} = this.props,
-			{showText} = this.state;
+		let { isBack, times, startStr, endStr, isFirst, ingStr, stop } = this.state;
+
 		return (
-			<span {...other}>{showText}</span>
+			<span className={'timer ' + (isBack ? 'isBak' : '')} onClick={() => {
+				this.clickEvent()
+			}}>
+                {
+	                isBack ? times + ingStr : isFirst ? startStr : endStr
+                }
+            </span>
 		)
 	}
 
 }
+
+
+export default TimerTask;
+

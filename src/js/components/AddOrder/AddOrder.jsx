@@ -4,6 +4,7 @@ import List, {Item} from '../../components/List';
 import history from '../../views/history.jsx';
 import OrderTimePicker from '../../components/OrderTimePicker';
 import ws from '../../lib/ws.js';
+import Timer from '../Timer';
 
 export default class extends Component {
 
@@ -43,7 +44,7 @@ export default class extends Component {
 	submit = () => {
 		let {serviceCategoryId, serviceCategoryName} = this.props.serviceCategory,
 			{position, model, selfInfo} = this.props,
-			{orderTime, driverName, driverPhoneNo} = model,
+			{orderTime, driverName, driverPhoneNo, smscode} = model,
 			data = {
 				serviceCategoryId,
 				serviceCategoryName,
@@ -56,6 +57,9 @@ export default class extends Component {
 				orderTime,
 				skuCollection: []
 			};
+		if(smscode != null) {
+			data.captcha = smscode;
+		}
 		ws.post({
 			url: '/api/order',
 			data: data
@@ -79,15 +83,22 @@ export default class extends Component {
 	}
 
 	onSendSmscode = e => {
-		let {phone} = this.state;
-		if(phone == null) {
+		let {driverPhoneNo} = this.props.model;
+		if(driverPhoneNo == null) {
 			alert("请输入正确的手机号");
 			return;
 		}
 		ws.get({
-			url: '/api/util/captcha?phone=' + phone
+			url: '/api/util/captcha',
+			data: {
+				phone: driverPhoneNo
+			}
 		}).then(response => {
-
+			if(response.code === 0) {
+				// do nothing
+			} else {
+				alert(response.message);
+			}
 		})
 	}
 
@@ -128,20 +139,21 @@ export default class extends Component {
 							       onChange={this.onChange("driverName").bind(this)}/>
 						</Item>
 					)}
-					{selfInfo.phone ? (
+					{false && selfInfo.phone ? (
 						<Item>
 							<label className="label-text ft">手机号</label>
 							<div className="text ft">{selfInfo.phone ? selfInfo.phone : ''}</div>
 						</Item>
 					) : (
 						<Item>
-							<input value={driverPhoneNo ? driverPhoneNo : ''} type="text" placeholder="手机号" className="input-phone ft" onChange={this.onChange("driverPhone").bind(this)}/>
-							<a className="btn-smscode fr" onClick={this.onSendSmscode}>发送验证码</a>
+							<input value={driverPhoneNo ? driverPhoneNo : ''} type="text" placeholder="手机号" className="input-phone ft" onChange={this.onChange("driverPhoneNo").bind(this)}/>
+							<a className="btn-smscode fr"><Timer times={60} startStr="发送验证码" endStr="重新发送" clickhandle={this.onSendSmscode}/></a>
+
 						</Item>
 					)}
-					{selfInfo.phone ? undefined : (
+					{false && selfInfo.phone ? undefined : (
 						<Item>
-							<input value={smscode} type="text" placeholder="验证码" className="full-width" onChange={this.onChange("smscode").bind(this)}/>
+							<input value={smscode ? smscode : ''} type="text" placeholder="验证码" className="full-width" onChange={this.onChange("smscode").bind(this)}/>
 						</Item>
 					)}
 				</List>

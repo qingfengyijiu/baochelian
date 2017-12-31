@@ -9,7 +9,10 @@ var getToken = require('../util/cookieUtil').getToken;
 router.get('/captcha', function(req, res) {
 	ws.get({
 		url: '/captcha',
-		qs: req.query
+		qs: {
+			phone: req.query.phone,
+			verifyType: 1
+		}
 	}).then(function(response) {
 		ws.handleResponse(response, res);
 	})
