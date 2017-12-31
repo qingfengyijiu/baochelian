@@ -58,7 +58,10 @@ function test(req, res) {
 }
 
 app.get('*', function(req, res) {
-    //return test(req, res);
+	/*cookieUtil.setToken(res, {
+		token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxLWtUNTg1cHdFQTRZWGJtY2UxMDFSbTN3SmhCeUdnOG1cL3pnWGpIRGtVTStmWVp0TFdwcDQrK09WVjkyaUxkdHEybHp3S1oxUUJncTloRDNzVkN4ejRjeHNYOWFQcFFua1QiLCJpc3MiOiJwbGF5LXNpbGhvdWV0dGUiLCJleHAiOjE1MTczMTg2MjYsImlhdCI6MTUxNDcyNjYyNiwianRpIjoiODhlYzRiMGZlYmQ3OTg2NzUxY2Y4Y2FmZGE3Y2QwMzQzMzI4NzU3NDY3MGU5Y2IyODU2MWE2MGE1ZGJlOWU4YjgyYjEwZDE1MzM2NjEzOTRmMjVmMDc5YWUzMGI2NDUxODg1Mjc3MWUwZDhhNWQxYWE5ZGZiZjk1MWZlODI3ZmExMDYwN2U5NzE0MmRjYzJhMjhjMWQ5MjUwZWEyYzExZTQ5NWMyZTc0MmRiZDVjN2JkZGI2MzJlMTFlNTQzZTgwNTQ3ZTFkMzFiN2U4NTUxODNiYjA2YjBiZWM4MTE3MGIyOWZkOWEzOTliNzc4MWU0MmI4M2EwOGM5MGM4Yjk4YyJ9.dul0HZmQ5nIfQLuNOS4DO5DBoe5KlfeTFQFPtia38uo'
+	});
+    return test(req, res);*/
 	var tokenInfo = cookieUtil.getLocalToken(req),
 		code,
 		appid = "wx3e98278c327dfef2",

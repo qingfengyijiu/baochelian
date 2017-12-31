@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import List, {Item} from "../../components/List";
 import ws from '../../lib/ws.js';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as UtilAction from '../_util/action';
 
 class SelfInfo extends Component {
 
@@ -31,7 +34,7 @@ class SelfInfo extends Component {
 				<List>
 					<Item className="touxiang">
 						<div className="label-text ft">头像</div>
-						<img src={avatarUrl != null ? avatarUrl : '/images/default_avatar@2x.png'} className="touxiang-img user-avatar fr"/>
+						<img src={avatarUrl != null ? avatarUrl : '/images/default_avatar.png'} className="touxiang-img user-avatar fr"/>
 					</Item>
 					<Item>
 						<div className="label-text ft">昵称</div>
@@ -54,7 +57,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		actinos: {
-			truckBrandAction: bindActionCreators(TruckBrandAction, dispatch)
+			utilAction: bindActionCreators(UtilAction, dispatch)
 		}
 	}
 }

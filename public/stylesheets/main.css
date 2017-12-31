@@ -912,6 +912,8 @@ th {
   height: 1.7rem;
 }
 .self-info .list-item.touxiang .label-text {
+  margin-top: 0;
+  margin-bottom: 0;
   height: 1.7rem;
   line-height: 1.7rem;
 }

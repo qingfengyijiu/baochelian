@@ -57048,6 +57048,16 @@
 
 	var _ws2 = _interopRequireDefault(_ws);
 
+	var _reactRedux = __webpack_require__(563);
+
+	var _redux = __webpack_require__(542);
+
+	var _action = __webpack_require__(541);
+
+	var UtilAction = _interopRequireWildcard(_action);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57105,7 +57115,7 @@
 								{ className: 'label-text ft' },
 								'\u5934\u50CF'
 							),
-							_react2.default.createElement('img', { src: avatarUrl != null ? avatarUrl : '/images/default_avatar@2x.png', className: 'touxiang-img user-avatar fr' })
+							_react2.default.createElement('img', { src: avatarUrl != null ? avatarUrl : '/images/default_avatar.png', className: 'touxiang-img user-avatar fr' })
 						),
 						_react2.default.createElement(
 							_List.Item,
@@ -57139,12 +57149,12 @@
 	function mapDispatchToProps(dispatch) {
 		return {
 			actinos: {
-				truckBrandAction: bindActionCreators(TruckBrandAction, dispatch)
+				utilAction: (0, _redux.bindActionCreators)(UtilAction, dispatch)
 			}
 		};
 	}
 
-	exports.default = connect(mapStateToProps, mapDispatchToProps)(SelfInfo);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SelfInfo);
 
 /***/ },
 /* 724 */
