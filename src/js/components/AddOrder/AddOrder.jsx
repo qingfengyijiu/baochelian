@@ -10,14 +10,6 @@ export default class extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			pickerOptions: [],
-			driverName: "",
-			phone: "",
-			orderTime: "",
-			smscode: "",
-			isPhoneBind: false
-		}
 	}
 
 	componentWillMount() {

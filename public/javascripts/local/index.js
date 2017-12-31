@@ -38463,14 +38463,6 @@
 				_history2.default.push('/position');
 			};
 
-			_this.state = {
-				pickerOptions: [],
-				driverName: "",
-				phone: "",
-				orderTime: "",
-				smscode: "",
-				isPhoneBind: false
-			};
 			return _this;
 		}
 
@@ -56875,7 +56867,7 @@
 			_reactRouter.Route,
 			{ path: 'order' },
 			_react2.default.createElement(_reactRouter.IndexRoute, { component: _SelfOrder2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: ':id', component: _OrderDetail2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'detail', component: _OrderDetail2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: ':id/comment', component: _ServiceComment2.default })
 		),
 		_react2.default.createElement(_reactRouter.Route, { path: 'coupon', component: _SelfCoupon2.default })
@@ -57623,7 +57615,8 @@
 			};
 
 			_this.gotoOrderDetail = function (orderId) {
-				_history2.default.push("/self/order/" + orderId);
+				location.herf = "/self/order/detail?id=" + orderId;
+				//history.push("/self/order/" + orderId);
 			};
 
 			_this.getOrderItemViews = function (list) {
@@ -57807,6 +57800,8 @@
 
 	var _history2 = _interopRequireDefault(_history);
 
+	var _utils = __webpack_require__(768);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57824,7 +57819,7 @@
 			var _this2 = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
 			_this2.refresh = function () {
-				var id = _this2.props.params.id;
+				var id = (0, _utils.getQueryParams)(location.search).id;
 				_ws2.default.get({
 					url: '/api/order/' + id
 				}).then(function (response) {
@@ -57875,7 +57870,7 @@
 
 			_this2.onClickPay = function (e) {
 				var _this = _this2,
-				    orderId = _this2.props.params.id;
+				    orderId = (0, _utils.getQueryParams)(location.search).id;
 				_ws2.default.get({
 					url: '/api/order/' + orderId + '/pay'
 				}).then(function (response) {
@@ -57888,7 +57883,7 @@
 			};
 
 			_this2.onClickComment = function (e) {
-				var orderId = _this2.props.params.id;
+				var orderId = (0, _utils.getQueryParams)(location.search).id;
 				_history2.default.push('/self/order/' + orderId + '/comment');
 			};
 
@@ -65591,6 +65586,322 @@
 	    smscode: null,
 	    isAgree: true
 	});
+
+/***/ },
+/* 768 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.dateFormats = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	exports.date2String = date2String;
+	exports.timestamp2String = timestamp2String;
+	exports.parseString2Date = parseString2Date;
+	exports.parseString2Timestamp = parseString2Timestamp;
+	exports.timeFormat = timeFormat;
+	exports.time2Timestamp = time2Timestamp;
+	exports.timeDuration = timeDuration;
+	exports.formatPrice = formatPrice;
+	exports.countDurationForTimestamp = countDurationForTimestamp;
+	exports.discountFormat = discountFormat;
+	exports.getRealParams = getRealParams;
+	exports.getWxNonceStr = getWxNonceStr;
+	exports.signWxPay = signWxPay;
+	exports.getQueryParams = getQueryParams;
+
+	var _lodash = __webpack_require__(769);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var dateFormats = exports.dateFormats = {
+	    SHORT_DATE: "yyyy-MM-dd",
+	    LONG_DATE: "yyyy-MM-dd hh:mm",
+	    FULL_DATE: "yyyy-MM-dd hh:mm:ss"
+	};
+
+	function date2String(date, format) {
+	    var dateString = null,
+	        yyyy = void 0,
+	        M = void 0,
+	        MM = void 0,
+	        d = void 0,
+	        dd = void 0,
+	        h = void 0,
+	        hh = void 0,
+	        m = void 0,
+	        mm = void 0,
+	        s = void 0,
+	        ss = void 0;
+	    if (!_lodash2.default.isDate(date)) {
+	        return null;
+	    }
+	    yyyy = date.getFullYear();
+	    M = date.getMonth() + 1;
+	    MM = M > 9 ? M : "0" + M;
+	    d = date.getDate();
+	    dd = d > 9 ? d : "0" + d;
+	    h = date.getHours();
+	    hh = h > 9 ? h : "0" + h;
+	    m = date.getMinutes();
+	    mm = m > 9 ? m : "0" + m;
+	    s = date.getSeconds();
+	    ss = s > 9 ? s : "0" + s;
+	    format = format ? format : dateFormats.FULL_DATE;
+	    switch (format) {
+	        case dateFormats.SHORT_DATE:
+	            dateString = yyyy + "-" + MM + "-" + dd;
+	            break;
+	        case dateFormats.LONG_DATE:
+	            dateString = yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm;
+	            break;
+	        case dateFormats.FULL_DATE:
+	            dateString = yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss;
+	            break;
+	        default:
+	        // do nothing
+	    }
+	    return dateString;
+	}
+
+	function timestamp2String(timestamp, format) {
+	    var date = new Date(timestamp);
+	    return date2String(date, format);
+	}
+
+	function parseString2Date(ps, format) {
+	    var result = new Date(),
+	        yyyy = void 0,
+	        MM = void 0,
+	        dd = void 0,
+	        hh = void 0,
+	        mm = void 0,
+	        ss = void 0;
+	    format = format ? format : dateFormats.FULL_DATE;
+	    switch (format) {
+	        case dateFormats.SHORT_DATE:
+	            yyyy = ps.substring(0, 4);
+	            MM = ps.substring(5, 7);
+	            dd = ps.substring(8, 10);
+	            result.setFullYear(parseInt(yyyy));
+	            result.setMonth(parseInt(MM) - 1);
+	            result.setDate(parseInt(dd));
+	            result.setHours(0);
+	            result.setMinutes(0);
+	            result.setSeconds(0);
+	            result.setMilliseconds(0);
+	            break;
+	        case dateFormats.LONG_DATE:
+	            yyyy = ps.substring(0, 4);
+	            MM = ps.substring(5, 7);
+	            dd = ps.substring(8, 10);
+	            hh = ps.substring(11, 13);
+	            mm = ps.substring(14, 16);
+	            result.setFullYear(parseInt(yyyy));
+	            result.setMonth(parseInt(MM) - 1);
+	            result.setDate(parseInt(dd));
+	            result.setHours(parseInt(hh));
+	            result.setMinutes(parseInt(mm));
+	            result.setSeconds(0);
+	            result.setMilliseconds(0);
+	            break;
+	        case dateFormats.FULL_DATE:
+	            yyyy = ps.substring(0, 4);
+	            MM = ps.substring(5, 7);
+	            dd = ps.substring(8, 10);
+	            hh = ps.substring(11, 13);
+	            mm = ps.substring(14, 16);
+	            ss = ps.substring(17, 19);
+	            result.setFullYear(parseInt(yyyy));
+	            result.setMonth(parseInt(MM) - 1);
+	            result.setDate(parseInt(dd));
+	            result.setHours(parseInt(hh));
+	            result.setMinutes(parseInt(mm));
+	            result.setSeconds(parseInt(ss));
+	            result.setMilliseconds(0);
+	            break;
+	        default:
+	        // do nothing
+	    }
+	    return result;
+	}
+
+	function parseString2Timestamp(ps, format) {
+	    var date = parseString2Date(ps, format);
+	    return date ? date.getTime() : null;
+	}
+
+	/**
+	 * 时间格式化
+	 * @params "09:12"
+	 * return "09小时12分钟"
+	 **/
+	function timeFormat(time) {
+	    var timeArr = time.split(":");
+	    if (timeArr[0] == 0) {
+	        return timeArr[1] + "分钟";
+	    } else if (timeArr[1] == 0) {
+	        return timeArr[0] + "小时";
+	    } else {
+	        return timeArr[0] + "小时" + timeArr[1] + "分钟";
+	    }
+	}
+
+	//标准时间 -- 时间戳
+	function time2Timestamp(date) {
+	    var arr = date.replace(/ |:/g, '-').split('-');
+	    var newDate = new Date(Date.UTC.apply(null, arr));
+	    return newDate.getTime();
+	}
+
+	/*
+	 * 列车/飞机 行驶时间计算
+	 * @params 起始时间戳 终止时间戳
+	 * return "09:09"
+	 * */
+	function timeDuration(startTimestamp, endTimestamp) {
+	    var startDate = new Date(startTimestamp),
+	        endDate = new Date(endTimestamp),
+	        totalMinutes = (endDate - startDate) / (1000 * 60),
+	        duration;
+	    var hours = parseInt(totalMinutes / 60) < 10 ? "0" + parseInt(totalMinutes / 60) : parseInt(totalMinutes / 60);
+	    var minutes = Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) < 10 ? "0" + Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) : Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60);
+	    duration = hours + ':' + minutes;
+	    return duration;
+	}
+
+	/*
+	 * 价格格式化 Function
+	 * @param    price           float    价格
+	 * @param    NumberOfDecimal number   精确位数
+	 * @param    unit            string   单位
+	 * return                   string
+	 * */
+	function formatPrice(price, NumberOfDecimal, unit) {
+	    if (typeof NumberOfDecimal == "undefined") {
+	        NumberOfDecimal = 2;
+	    }
+	    if (typeof unit == "undefined") {
+	        return price.toFixed(NumberOfDecimal).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+	    }
+	    return price.toFixed(NumberOfDecimal).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + unit;
+	}
+
+	/*
+	 * 飞行时间计算
+	 * @param startTimestamp 出发时间戳
+	 * @param endTimestamp   到达时间戳
+	 * return 3小时20分钟
+	 * */
+	function countDurationForTimestamp(startTimestamp, endTimestamp) {
+	    var startDate = new Date(startTimestamp),
+	        endDate = new Date(endTimestamp),
+	        totalMinutes = (endDate - startDate) / (1000 * 60),
+	        duration;
+	    var hours = parseInt(totalMinutes / 60) < 10 ? "0" + parseInt(totalMinutes / 60) : parseInt(totalMinutes / 60);
+	    var minutes = Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) < 10 ? "0" + Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) : Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60);
+	    duration = hours + ':' + minutes;
+	    return duration;
+	    var hours = parseInt(totalMinutes / 60);
+	    var minutes = Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60);
+	    duration = hours + '小时' + minutes + '分钟';
+	    return duration;
+	}
+
+	/*
+	 * 折扣格式化
+	 * 格式化前 @param discount "0.5"
+	 * 格式化后 "5折"
+	 * */
+	function discountFormat(discount) {
+	    if (discount < 1) {
+	        switch (typeof discount === "undefined" ? "undefined" : _typeof(discount)) {
+	            case "number":
+	                return discount.toString().split(".")[1] + "折";
+	                break;
+	            case "string":
+	                return discount.split(".")[1] + "折";
+	                break;
+	            default:
+	                return discount.toString().split(".")[1] + "折";
+	        }
+	    } else {
+	        return (discount * 10).toString() + "折";
+	    }
+	}
+
+	/*
+	 * 间夜计算
+	 * @param checkIn 入住日期
+	 * @param checkOut 离店日期
+	 * @param roomCount 入住人数
+	 * return 间夜 (离店日期 - 入住日期) * 入住人数
+	 * */
+	function getDaysInterval(checkIn, checkOut, roomCount) {
+	    var newDateStart = new Date(checkIn);
+	    var newDateEnd = new Date(checkOut);
+	    var daysInterval = void 0;
+	    if (newDateEnd <= newDateStart) {
+	        alert("离店日期必须大于入住日期!");
+	        return;
+	    }
+	    daysInterval = parseInt(Math.abs(newDateEnd - newDateStart) / 1000 / 60 / 60 / 24);
+	    if (typeof roomCount == "undefined") {
+	        return daysInterval;
+	    } else {
+	        return daysInterval * roomCount;
+	    }
+	}
+
+	function getRealParams(data) {
+	    var params = {};
+	    for (var p in data) {
+	        if (data[p] != null) {
+	            params[p] = data[p];
+	        }
+	    }
+	    return params;
+	}
+
+	function getWxNonceStr() {
+	    var result = "";
+	    var strLib = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+	    for (var i = 0; i < 32; i++) {
+	        var random = Math.random() * 35;
+	        var randomStr = strLib[random];
+	        result += randomStr;
+	    }
+	    return result;
+	}
+
+	function signWxPay(params, key) {
+	    var stringA = "appId=" + params.appId + "&nonceStr=" + params.nonceStr + "&package=" + encodeURIComponent(params.package) + "&signType=" + params.signType + "&timeStamp=" + params.timeStamp;
+	    var stringSignTemp = StringA + "&key=" + key;
+	}
+
+	function getQueryParams(searchString) {
+	    searchString = searchString.substring(1, searchString.length);
+	    var params = searchString.split("&");
+	    var result = {};
+	    for (var i = 0; i < params.length; i++) {
+	        var parts = params[i].split("=");
+	        result[parts[0]] = decodeURIComponent(parts[1]);
+	    }
+	    return result;
+	}
+
+/***/ },
+/* 769 */
+/***/ function(module, exports) {
+
+	module.exports = _;
 
 /***/ }
 /******/ ]);

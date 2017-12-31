@@ -267,3 +267,14 @@ export function signWxPay(params, key) {
     var stringSignTemp = StringA + "&key=" + key;
 
 }
+
+export function getQueryParams(searchString) {
+	searchString = searchString.substring(1, searchString.length);
+	var params = searchString.split("&");
+	var result = {};
+	for(var i = 0; i < params.length; i++) {
+		var parts = params[i].split("=");
+		result[parts[0]] = decodeURIComponent(parts[1]);
+	}
+	return result;
+}

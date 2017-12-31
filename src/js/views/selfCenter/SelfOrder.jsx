@@ -35,7 +35,8 @@ export default class extends Component {
 	}
 
 	gotoOrderDetail = (orderId) => {
-		history.push("/self/order/" + orderId);
+		location.herf = "/self/order/detail?id=" + orderId;
+		//history.push("/self/order/" + orderId);
 	}
 
 	getOrderItemViews = (list) => {

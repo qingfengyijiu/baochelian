@@ -3,6 +3,7 @@ import List, {Item} from '../../components/List/index.js';
 import UserInfo from './UserInfo.jsx';
 import ws from '../../lib/ws.js';
 import history from '../history.jsx';
+import {getQueryParams} from '../../lib/utils';
 
 export default class extends Component {
 
@@ -19,7 +20,7 @@ export default class extends Component {
 	}
 
 	refresh = () => {
-		let id = this.props.params.id;
+		let id = getQueryParams(location.search).id;
 		ws.get({
 			url: '/api/order/' + id
 		}).then(response => {
@@ -67,7 +68,7 @@ export default class extends Component {
 
 	onClickPay = e => {
 		let _this = this,
-			orderId = this.props.params.id;
+			orderId = getQueryParams(location.search).id;
 		ws.get({
 			url: '/api/order/' + orderId + '/pay'
 		}).then(response => {
@@ -80,7 +81,7 @@ export default class extends Component {
 	}
 
 	onClickComment = e => {
-		let orderId = this.props.params.id;
+		let orderId = getQueryParams(location.search).id;
 		history.push('/self/order/' + orderId + '/comment')
 	}
 
