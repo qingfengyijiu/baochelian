@@ -119,6 +119,14 @@ export default class extends Component {
 		history.push('/position');
 	}
 
+	validatePhoneNo(phone) {
+		if(phone == null) {
+			return false;
+		} else {
+			return /^\d{11}$/.test(phone);
+		}
+	}
+
 	render() {
 		let {position, selfInfo, model} = this.props,
 			{driverName, driverPhoneNo, smscode, orderTime, isAgree} = model;
@@ -147,7 +155,7 @@ export default class extends Component {
 					) : (
 						<Item>
 							<input value={driverPhoneNo ? driverPhoneNo : ''} type="text" placeholder="手机号" className="input-phone ft" onChange={this.onChange("driverPhoneNo").bind(this)}/>
-							<a className="btn-smscode fr"><Timer times={60} startStr="发送验证码" endStr="重新发送" clickhandle={this.onSendSmscode}/></a>
+							<a className="btn-smscode fr" style={{display: this.validatePhoneNo(driverPhoneNo) ? 'block' : 'none'}}><Timer times={60} startStr="发送验证码" endStr="重新发送" clickhandle={this.onSendSmscode}/></a>
 
 						</Item>
 					)}

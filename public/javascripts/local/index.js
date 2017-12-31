@@ -38501,6 +38501,16 @@
 				}
 			}
 		}, {
+			key: 'validatePhoneNo',
+			value: function validatePhoneNo(phone) {
+				if (phone == null) {
+					return false;
+				} else {
+					return (/^\d{11}$/.test(phone)
+					);
+				}
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var _props2 = this.props,
@@ -38560,7 +38570,7 @@
 							_react2.default.createElement('input', { value: driverPhoneNo ? driverPhoneNo : '', type: 'text', placeholder: '\u624B\u673A\u53F7', className: 'input-phone ft', onChange: this.onChange("driverPhoneNo").bind(this) }),
 							_react2.default.createElement(
 								'a',
-								{ className: 'btn-smscode fr' },
+								{ className: 'btn-smscode fr', style: { display: this.validatePhoneNo(driverPhoneNo) ? 'block' : 'none' } },
 								_react2.default.createElement(_Timer2.default, { times: 60, startStr: '\u53D1\u9001\u9A8C\u8BC1\u7801', endStr: '\u91CD\u65B0\u53D1\u9001', clickhandle: this.onSendSmscode })
 							)
 						),
@@ -57046,13 +57056,13 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _class = function (_Component) {
-		_inherits(_class, _Component);
+	var SelfInfo = function (_Component) {
+		_inherits(SelfInfo, _Component);
 
-		function _class(props) {
-			_classCallCheck(this, _class);
+		function SelfInfo(props) {
+			_classCallCheck(this, SelfInfo);
 
-			var _this2 = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+			var _this2 = _possibleConstructorReturn(this, (SelfInfo.__proto__ || Object.getPrototypeOf(SelfInfo)).call(this, props));
 
 			_this2.state = {
 				avatarUrl: "",
@@ -57061,7 +57071,7 @@
 			return _this2;
 		}
 
-		_createClass(_class, [{
+		_createClass(SelfInfo, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
 				var _this = this;
@@ -57077,12 +57087,10 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				var _state = this.state,
-				    avatarUrl = _state.avatarUrl,
-				    nickname = _state.nickname;
+				var _props$selfInfo = this.props.selfInfo,
+				    avatarUrl = _props$selfInfo.avatarUrl,
+				    name = _props$selfInfo.name;
 
-				avatarUrl = avatarUrl ? avatarUrl : "/images/address@2x.png";
-				nickname = nickname ? nickname : "未知";
 				return _react2.default.createElement(
 					'div',
 					{ className: 'self-info' },
@@ -57097,7 +57105,7 @@
 								{ className: 'label-text ft' },
 								'\u5934\u50CF'
 							),
-							_react2.default.createElement('img', { src: avatarUrl, className: 'touxiang-img user-avatar fr' })
+							_react2.default.createElement('img', { src: avatarUrl != null ? avatarUrl : '/images/default_avatar@2x.png', className: 'touxiang-img user-avatar fr' })
 						),
 						_react2.default.createElement(
 							_List.Item,
@@ -57110,7 +57118,7 @@
 							_react2.default.createElement(
 								'div',
 								{ className: 'text fr' },
-								nickname != null ? nickname : ''
+								name != null ? name : '***'
 							)
 						)
 					)
@@ -57118,10 +57126,25 @@
 			}
 		}]);
 
-		return _class;
+		return SelfInfo;
 	}(_react.Component);
 
-	exports.default = _class;
+	function mapStateToProps(state) {
+		var selfInfo = state.reducers.util.toJS().selfInfo;
+		return {
+			selfInfo: selfInfo
+		};
+	}
+
+	function mapDispatchToProps(dispatch) {
+		return {
+			actinos: {
+				truckBrandAction: bindActionCreators(TruckBrandAction, dispatch)
+			}
+		};
+	}
+
+	exports.default = connect(mapStateToProps, mapDispatchToProps)(SelfInfo);
 
 /***/ },
 /* 724 */
@@ -57836,7 +57859,7 @@
 					url: '/api/order/' + orderId + '/pay'
 				}).then(function (response) {
 					if (response.code === 0) {
-						_this.pay(response.data.prepayId, response.data.appId);
+						_this.pay(response.data);
 					} else {
 						alert(response.message);
 					}
@@ -65315,7 +65338,8 @@
 	    driverName: null,
 	    driverPhoneNo: null,
 	    smscode: null,
-	    isAgree: true
+	    isAgree: true,
+	    userCouponId: null
 	});
 
 /***/ },

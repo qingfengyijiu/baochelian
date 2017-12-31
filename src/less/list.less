@@ -2,138 +2,6 @@
   width: 100%;
 }
 
-.list-container {
-  background: #FFFFFF;
-  margin-bottom: 0.16rem;
-  width: 100%;
-  &:nth-last-child(1) {
-    margin-bottom: 0;
-  }
-  .list-item {
-    height: 1rem;
-    width: 6.9rem;
-    margin-left: 0.3rem;
-    margin-right: 0.4rem;
-    border-bottom: 1px solid #EBEBEB;
-    &:nth-last-child(1) {
-      border-bottom-style: none;
-    }
-    &:before, &:after {
-      content: " ";
-      display: table;
-      clear: both;
-    }
-
-    .label {
-      &:before, &:after {
-        content: " ";
-        display: table;
-        clear: both;
-      }
-      height: 100%;
-      line-height: 100%;
-      .label-icon {
-        float: left;
-        width: 0.5rem;
-        height: 0.5rem;
-        margin-top: 0.25rem;
-        margin-right: 0.24rem;
-      }
-      .label-text {
-        float: left;
-        height: 1rem;
-        line-height: 1rem;
-        font-size: 0.3rem;
-      }
-    }
-
-    .item {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    .left {
-      float: left;
-      width: 2rem;
-    }
-
-    .center {
-      float: left;
-    }
-
-    .right {
-      float: right;
-    }
-
-    .center {
-      text-align: center;
-    }
-
-    input, span {
-      float: left;
-      height: 1rem;
-      line-height: 1rem;
-      font-size: 0.3rem;
-      display: block;
-      &.full-width {
-        width: 6.9rem;
-      }
-    }
-  }
-}
-
-.list2 {
-  background: #ffffff;
-  margin-bottom: 0.16rem;
-  .list-item {
-    width: 100%;
-    padding-left: 0.3rem;
-    padding-right: 0.3rem;
-    border-bottom: 1px solid #EBEBEB;
-    font-size: 0.3rem;
-    color: #999999;
-    &:nth-last-child(1) {
-      border-bottom-style: none;
-    }
-    input, select {
-      font-size: 0.3rem;
-      color: #999999;
-    }
-  }
-  .item-part {
-    vertical-align: middle;
-    min-height: 1rem;
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
-    &:before, &:after {
-      content: " ";
-      display: table;
-      clear: both;
-    }
-    &.left {
-      text-align: left;
-      > * {
-        float: left;
-        min-height: 0.4rem;
-        line-height: 0.4rem;
-      }
-    }
-    &.center {
-      text-align: left;
-      > * {
-        float: left;
-      }
-    }
-    &.right {
-      text-align: right;
-      > * {
-        float: right;
-      }
-    }
-  }
-}
-
 .list {
   background: #ffffff;
   margin-bottom: 0.16rem;
@@ -149,7 +17,6 @@
     }
     input, select, textarea {
       width: 5rem;
-      font-size: 0.3rem;
       color: #999999;
       &.full-width {
         width: 100%;
@@ -168,15 +35,22 @@
     margin-right: 0.24rem;
   }
   .text, input, select {
-    height: 1rem;
-    line-height: 1rem;
-    font-size: 0.3rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    &:focus {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
     &.ft {
       text-align: left;
     }
     &.fr {
       text-align: right;
     }
+  }
+  input {
+    height: 0.5rem;
+    line-height: 0.5rem;
   }
   .label-text {
     .text;

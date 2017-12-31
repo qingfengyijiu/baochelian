@@ -67,7 +67,7 @@ export default class extends Component {
 			url: '/api/order/' + orderId + '/pay'
 		}).then(response => {
 			if(response.code === 0) {
-				_this.pay(response.data.prepayId, response.data.appId);
+				_this.pay(response.data);
 			} else {
 				alert(response.message);
 			}

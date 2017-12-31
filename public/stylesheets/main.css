@@ -355,135 +355,6 @@ th {
 .full-width {
   width: 100%;
 }
-.list-container {
-  background: #FFFFFF;
-  margin-bottom: 0.16rem;
-  width: 100%;
-}
-.list-container:nth-last-child(1) {
-  margin-bottom: 0;
-}
-.list-container .list-item {
-  height: 1rem;
-  width: 6.9rem;
-  margin-left: 0.3rem;
-  margin-right: 0.4rem;
-  border-bottom: 1px solid #EBEBEB;
-}
-.list-container .list-item:nth-last-child(1) {
-  border-bottom-style: none;
-}
-.list-container .list-item:before,
-.list-container .list-item:after {
-  content: " ";
-  display: table;
-  clear: both;
-}
-.list-container .list-item .label {
-  height: 100%;
-  line-height: 100%;
-}
-.list-container .list-item .label:before,
-.list-container .list-item .label:after {
-  content: " ";
-  display: table;
-  clear: both;
-}
-.list-container .list-item .label .label-icon {
-  float: left;
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-top: 0.25rem;
-  margin-right: 0.24rem;
-}
-.list-container .list-item .label .label-text {
-  float: left;
-  height: 1rem;
-  line-height: 1rem;
-  font-size: 0.3rem;
-}
-.list-container .list-item .item {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-.list-container .list-item .left {
-  float: left;
-  width: 2rem;
-}
-.list-container .list-item .center {
-  float: left;
-}
-.list-container .list-item .right {
-  float: right;
-}
-.list-container .list-item .center {
-  text-align: center;
-}
-.list-container .list-item input,
-.list-container .list-item span {
-  float: left;
-  height: 1rem;
-  line-height: 1rem;
-  font-size: 0.3rem;
-  display: block;
-}
-.list-container .list-item input.full-width,
-.list-container .list-item span.full-width {
-  width: 6.9rem;
-}
-.list2 {
-  background: #ffffff;
-  margin-bottom: 0.16rem;
-}
-.list2 .list-item {
-  width: 100%;
-  padding-left: 0.3rem;
-  padding-right: 0.3rem;
-  border-bottom: 1px solid #EBEBEB;
-  font-size: 0.3rem;
-  color: #999999;
-}
-.list2 .list-item:nth-last-child(1) {
-  border-bottom-style: none;
-}
-.list2 .list-item input,
-.list2 .list-item select {
-  font-size: 0.3rem;
-  color: #999999;
-}
-.list2 .item-part {
-  vertical-align: middle;
-  min-height: 1rem;
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-}
-.list2 .item-part:before,
-.list2 .item-part:after {
-  content: " ";
-  display: table;
-  clear: both;
-}
-.list2 .item-part.left {
-  text-align: left;
-}
-.list2 .item-part.left > * {
-  float: left;
-  min-height: 0.4rem;
-  line-height: 0.4rem;
-}
-.list2 .item-part.center {
-  text-align: left;
-}
-.list2 .item-part.center > * {
-  float: left;
-}
-.list2 .item-part.right {
-  text-align: right;
-}
-.list2 .item-part.right > * {
-  float: right;
-}
 .list {
   background: #ffffff;
   margin-bottom: 0.16rem;
@@ -503,7 +374,6 @@ th {
 .list .list-item select,
 .list .list-item textarea {
   width: 5rem;
-  font-size: 0.3rem;
   color: #999999;
 }
 .list .list-item input.full-width,
@@ -526,9 +396,14 @@ th {
 .list .text,
 .list input,
 .list select {
-  height: 1rem;
-  line-height: 1rem;
-  font-size: 0.3rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.list .text:focus,
+.list input:focus,
+.list select:focus {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 .list .text.ft,
 .list input.ft,
@@ -540,12 +415,19 @@ th {
 .list select.fr {
   text-align: right;
 }
+.list input {
+  height: 0.5rem;
+  line-height: 0.5rem;
+}
 .list .label-text {
-  height: 1rem;
-  line-height: 1rem;
-  font-size: 0.3rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
   width: 1.6rem;
   float: left;
+}
+.list .label-text:focus {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 .list .label-text.ft {
   text-align: left;
