@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>订单详情</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="true">
+    <link type="text/css" rel="stylesheet" href="stylesheets/normalize.css"/>
+    <style type="text/css">
+        html, body{
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            font-family: "PingFang SC",Helvetica,Tahoma,Arial,STXihei,"华文细黑","Microsoft YaHei","微软雅黑",sans-serif;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .page {
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+        }
+        .header_bg {
+            display: block;
+            width: 100%;
+        }
+        .content {
+            margin: 0;
+            padding-top: 0.96rem;
+        }
+        .company-logo {
+            width: 1.98rem;
+            height: 2.1rem;
+            position: absolute;
+            top: 2.7rem;
+            left: 2.74rem;
+        }
+        .company-name-container {
+            width: 100%;
+        }
+        .company-name {
+            display: block;
+            width: 2.56rem;
+            height: 0.44rem;
+            margin-left: 2.47rem;
+        }
+        .company-intro {
+            font-family: "Microsoft YaHei", "微软雅黑";
+            font-size: 0.32rem;
+            color: rgba(102,102,102, 0.89);
+            text-align: center;
+            width: 100%;
+            margin-top: 0.24rem;
+        }
+        .btn-download {
+            text-decoration: none;
+            display: block;
+            font-family: "Microsoft YaHei", "微软雅黑";
+            font-size: 0.32rem;
+            width: 4.8rem;
+            height: 0.9rem;
+            line-height: 0.9rem;
+            text-align: center;
+            border: 1px solid transparent;
+            border-radius: 0.1rem;
+            margin: 0 auto;
+        }
+        .clearfix:before, .clearfix:after {
+            content: ' ';
+            display: table;
+            clear: both;
+        }
+        .btn-download .btn-icon {
+            float: left;
+            width: 0.36rem;
+            height: 0.42rem;
+            margin-right: 0.24rem;
+            margin-top: 0.23rem;
+        }
+        .btn-download .btn-text {
+            float: left;
+        }
+        .btn-download.btn-apple {
+            border-color: #5b8aff;
+            color: #5b8aff;
+            margin-top: 2.18rem;
+        }
+        .btn-download.btn-apple .btn-icon {
+            margin-left: 1.3rem;
+        }
+        .btn-download.btn-android {
+            border-color: #fbb122;
+            color: #fbb122;
+            margin-top: 0.62rem;
+        }
+        .btn-download.btn-android .btn-icon {
+            margin-left: 1rem;
+        }
+    </style>
+    <script src='/javascripts/thirdparty/lodash.min.js'></script>
+    <script src='/javascripts/thirdparty/zepto.min.js'></script>
+</head>
+<body>
+<div class="page">
+    <img class="header_bg" src="/images/recruit_bg.png"/>
+    <div class="content">
+        <div class="company-name-container">
+            <img class="company-name" src="/images/company_name.png"/>
+        </div>
+        <div class="company-intro">加入保车连&nbsp;&nbsp;&nbsp;赚钱更简单</div>
+        <a class="btn-download btn-apple clearfix" href="https://fir.im/baochelian">
+            <img class="btn-icon" src="/images/recruit_apple.png"/>
+            <span class="btn-text">IOS版下载</span>
+        </a>
+        <a class="btn-download btn-android clearfix" href="https://fir.im/baochelian">
+            <img class="btn-icon" src="/images/recruit_android.png"/>
+            <span class="btn-text">Android版下载</span>
+        </a>
+    </div>
+    <img class="company-logo" src="/images/company_logo.png"/>
+</div>
+<script type="text/javascript">
+	(function (doc, win) {
+		var docEl = doc.documentElement,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+			recalc = function () {
+				var clientWidth = docEl.clientWidth;
+				if (!clientWidth) return;
+				if(clientWidth>=750){
+					docEl.style.fontSize = '100px';
+				}else{
+					docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+				}
+			};
+
+		if (!doc.addEventListener) return;
+		win.addEventListener(resizeEvt, recalc, false);
+		doc.addEventListener('DOMContentLoaded', recalc, false);
+	})(document, window);
+</script>
+</body>
+</html>
