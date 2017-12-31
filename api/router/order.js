@@ -26,7 +26,7 @@ router.post('/', function(req, res) {
 
 router.get('/:id/pay', function(req, res) {
     ws.get({
-        url: '/web/order/' + req.params.id + '/payment/prepayId',
+        url: '/web/orders/' + req.params.id + '/payment/prepayId',
 	    token: getToken(req)
     }).then(function(response) {
         ws.handleResponse(response, res);
@@ -35,7 +35,7 @@ router.get('/:id/pay', function(req, res) {
 
 router.post('/:id/scoring', function(req, res) {
 	ws.post({
-		url: '/web/order/' + req.params.id + '/scoring',
+		url: '/web/orders/' + req.params.id + '/scoring',
         data: req.body
 	}).then(function(response) {
 		ws.handleResponse(response, res);
@@ -44,7 +44,7 @@ router.post('/:id/scoring', function(req, res) {
 
 router.get('/:id', function(req, res) {
     ws.get({
-        url: '/web/order/' + req.params.id,
+        url: '/web/orders/' + req.params.id,
         token: getToken(req)
     }).then(function(response) {
         ws.handleResponse(response, res);
