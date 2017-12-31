@@ -57823,6 +57823,17 @@
 
 			var _this2 = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
+			_this2.refresh = function () {
+				var id = _this2.props.params.id;
+				_ws2.default.get({
+					url: '/api/order/' + id
+				}).then(function (response) {
+					_this2.setState(_extends({}, response.data, {
+						status: response.data.orderStatus.key
+					}));
+				});
+			};
+
 			_this2.getOrderStatusView = function (status) {
 				var statusList = ["抢单", "付款", "服务", "评价"];
 				return statusList.map(function (item, index) {
@@ -57882,12 +57893,15 @@
 			};
 
 			_this2.pay = function (requestData) {
+				var _this = _this2;
 				if (WeixinJSBridge) {
 					WeixinJSBridge.invoke('getBrandWCPayRequest', requestData, function (res) {
 						if (res.err_msg == "get_brand_wcpay_request:ok") {
 							alert("支付成功");
-							window.location.reload();
-						} // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+							_this.refresh();
+						} else {
+							alert(res.err_msg ? res.err_msg : '支付失败');
+						}
 					});
 				} else {
 					alert("微信支付不可用，请稍后重试");
@@ -57960,16 +57974,8 @@
 		_createClass(_class, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				var _this3 = this;
-
-				var id = this.props.params.id;
-				_ws2.default.get({
-					url: '/api/order/' + id
-				}).then(function (response) {
-					_this3.setState(_extends({}, response.data, {
-						status: response.data.orderStatus.key
-					}));
-				});
+				document.title = "订单详情";
+				this.refresh();
 			}
 		}, {
 			key: 'render',
