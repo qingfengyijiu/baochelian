@@ -46,6 +46,7 @@ class Map extends Component {
 				if(_this.placeSearch) {
 					_this.placeSearch.setCity(_this.citycode);
 				}
+				_this.searchNearBy(data.position);
 			});//返回定位信息
 			AMap.event.addListener(_this.geolocation, 'error', function(data) {
 				alert("定位失败，请手动输入地址进行查找");

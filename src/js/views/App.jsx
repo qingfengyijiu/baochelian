@@ -3,6 +3,7 @@ import * as UtilAction from './_util/action';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import ws from '../lib/ws';
+import toast from '../components/Toast';
 
 class App extends React.Component{
 
@@ -16,7 +17,7 @@ class App extends React.Component{
 			        actions.utilAction.changeSelfInfo(response.data);
 			    }
 		    } else {
-			    alert(response.message);
+			    toast.show(response.message);
 		    }
 	    })
 	    // 获取品牌列表
@@ -26,7 +27,7 @@ class App extends React.Component{
 		    if(response.code === 0) {
 		    	actions.utilAction.changeTruckBrandList(response.data);
 		    } else {
-			    alert(response.message);
+			    toast.show(response.message);
 		    }
 	    });
     }
