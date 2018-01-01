@@ -28,7 +28,6 @@ export default class extends Component {
 	}
 
 	getItemViews = (list) => {
-		list = ['', ''];
 		return list.map((item, index) => {
 			return (
 				<div className="account-record-item" key={index}>
