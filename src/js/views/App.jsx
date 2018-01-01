@@ -52,7 +52,7 @@ class App extends React.Component{
 		    	actions.utilAction.changeCurrentPosition({
 		    		locationLng: data.position.getLng(),
 				    locationLat: data.position.getLat(),
-				    location: data.position.formattedAddress,
+				    location: data.formattedAddress,
 			    });
 		    });//返回定位信息
 		    AMap.event.addListener(geolocation, 'error', function() {
