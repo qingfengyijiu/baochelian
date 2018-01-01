@@ -58936,6 +58936,10 @@
 
 	var _Toast2 = _interopRequireDefault(_Toast);
 
+	var _history = __webpack_require__(580);
+
+	var _history2 = _interopRequireDefault(_history);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58985,8 +58989,8 @@
 					}
 				}).then(function (response) {
 					if (response.code === 0) {
-						alert("评价成功");
-						history.push('/self/order');
+						_Toast2.default.show("评价成功");
+						_history2.default.push('/self/order');
 					} else {
 						_Toast2.default.show(response.message);
 					}
@@ -59019,7 +59023,7 @@
 							technicianScore: response.data.technicianScore
 						});
 					} else {
-						alert(response.message);
+						_Toast2.default.show(response.message);
 					}
 				});
 			}

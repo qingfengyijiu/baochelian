@@ -36,7 +36,8 @@ router.get('/:id/pay', function(req, res) {
 router.post('/:id/scoring', function(req, res) {
 	ws.post({
 		url: '/web/orders/' + req.params.id + '/scoring',
-        data: req.body
+        data: req.body,
+		token: getToken(req)
 	}).then(function(response) {
 		ws.handleResponse(response, res);
 	})

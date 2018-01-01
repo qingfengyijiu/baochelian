@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import UserInfo from './UserInfo.jsx';
 import ws from '../../lib/ws.js';
 import toast from '../../components/Toast';
+import history from '../history.jsx';
 
 export default class extends Component {
 
@@ -28,7 +29,7 @@ export default class extends Component {
 					technicianScore: response.data.technicianScore
 				})
 			} else {
-				alert(response.message);
+				toast.show(response.message);
 			}
 		})
 	}
@@ -65,7 +66,7 @@ export default class extends Component {
 			}
 		}).then(response => {
 			if(response.code === 0) {
-				alert("评价成功");
+				toast.show("评价成功");
 				history.push('/self/order');
 			} else {
 				toast.show(response.message);
