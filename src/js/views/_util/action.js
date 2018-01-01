@@ -36,3 +36,10 @@ export function changeTruckBrandList(data) {
         data
     }
 }
+
+export function changeCurrentPosition(data) {
+    return {
+        type: 'CHANGE_CURRENT_POSITION',
+        data
+    }
+}

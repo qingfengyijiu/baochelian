@@ -41,10 +41,20 @@ function truckBrandList(state = initialState.get("truckBrandList"), action={}) {
     }
 }
 
+function currentPosition(state = initialState.get("currentPosition"), action={}) {
+    switch (action.type) {
+        case "CHANGE_CURRENT_POSITION":
+            return _p(action.data);
+        default:
+            return state;
+    }
+}
+
 export default function (state = initialState, action = {}) {
     return state
         .set("loading", loading(state.get("loading"), action))
         .set("toast", toast(state.get("toast"), action))
         .set("selfInfo", selfInfo(state.get("selfInfo"), action))
-        .set("truckBrandList", truckBrandList(state.get("truckBrandList"), action));
+        .set("truckBrandList", truckBrandList(state.get("truckBrandList"), action))
+        .set("currentPosition", currentPosition(state.get("currentPosition"), action));
 }

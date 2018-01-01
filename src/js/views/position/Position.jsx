@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as ThisAction from './action.js';
 import history from '../history.jsx';
+import toast from '../../components/Toast';
 
 class Map extends Component {
 
@@ -49,7 +50,7 @@ class Map extends Component {
 				_this.searchNearBy(data.position);
 			});//返回定位信息
 			AMap.event.addListener(_this.geolocation, 'error', function(data) {
-				alert("定位失败，请手动输入地址进行查找");
+				toast.show("定位失败，请手动输入地址进行查找");
 			});      //返回定位出错信息
 		});
 		AMap.service('AMap.PlaceSearch',function(){//回调函数
