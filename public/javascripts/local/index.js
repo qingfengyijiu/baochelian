@@ -35704,6 +35704,10 @@
 
 	var _ws2 = _interopRequireDefault(_ws);
 
+	var _Toast = __webpack_require__(704);
+
+	var _Toast2 = _interopRequireDefault(_Toast);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -35736,7 +35740,7 @@
 	                        actions.utilAction.changeSelfInfo(response.data);
 	                    }
 	                } else {
-	                    alert(response.message);
+	                    _Toast2.default.show(response.message);
 	                }
 	            });
 	            // 获取品牌列表
@@ -35746,7 +35750,7 @@
 	                if (response.code === 0) {
 	                    actions.utilAction.changeTruckBrandList(response.data);
 	                } else {
-	                    alert(response.message);
+	                    _Toast2.default.show(response.message);
 	                }
 	            });
 	        }
@@ -55246,6 +55250,7 @@
 						if (_this.placeSearch) {
 							_this.placeSearch.setCity(_this.citycode);
 						}
+						_this.searchNearBy(data.position);
 					}); //返回定位信息
 					AMap.event.addListener(_this.geolocation, 'error', function (data) {
 						alert("定位失败，请手动输入地址进行查找");
