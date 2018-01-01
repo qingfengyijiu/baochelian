@@ -29949,15 +29949,15 @@
 
 	var _route2 = _interopRequireDefault(_route);
 
-	var _route3 = __webpack_require__(704);
+	var _route3 = __webpack_require__(705);
 
 	var _route4 = _interopRequireDefault(_route3);
 
-	var _route5 = __webpack_require__(707);
+	var _route5 = __webpack_require__(708);
 
 	var _route6 = _interopRequireDefault(_route5);
 
-	var _route7 = __webpack_require__(721);
+	var _route7 = __webpack_require__(722);
 
 	var _route8 = _interopRequireDefault(_route7);
 
@@ -38358,7 +38358,7 @@
 
 	var _Timer2 = _interopRequireDefault(_Timer);
 
-	var _Toast = __webpack_require__(733);
+	var _Toast = __webpack_require__(704);
 
 	var _Toast2 = _interopRequireDefault(_Toast);
 
@@ -38547,7 +38547,7 @@
 								className: 'full-width',
 								onChange: this.onChange("driverName").bind(this) })
 						),
-						 false ? _react2.default.createElement(
+						selfInfo.phone ? _react2.default.createElement(
 							_List.Item,
 							null,
 							_react2.default.createElement(
@@ -38570,7 +38570,7 @@
 								_react2.default.createElement(_Timer2.default, { times: 60, startStr: '\u53D1\u9001\u9A8C\u8BC1\u7801', endStr: '\u91CD\u65B0\u53D1\u9001', clickhandle: this.onSendSmscode })
 							)
 						),
-						 false ? undefined : _react2.default.createElement(
+						selfInfo.phone ? undefined : _react2.default.createElement(
 							_List.Item,
 							null,
 							_react2.default.createElement('input', { value: smscode ? smscode : '', type: 'text', placeholder: '\u9A8C\u8BC1\u7801', className: 'full-width', onChange: this.onChange("smscode").bind(this) })
@@ -54960,6 +54960,167 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.ToastDom = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(300);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(330);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var cn = function cn(str) {
+		var obj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+		var arr = Object.keys(obj);
+		arr = arr.filter(function (v) {
+			return obj[v];
+		});
+		return str + ' ' + arr.join(' ');
+	};
+
+	var Toast = function () {
+		function Toast() {
+			_classCallCheck(this, Toast);
+
+			this.state = {};
+		}
+
+		_createClass(Toast, [{
+			key: 'bind',
+			value: function bind(fn) {
+				this.fn = fn;
+			}
+		}, {
+			key: 'show',
+			value: function show(text) {
+				var _this = this;
+
+				var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
+
+				// debugger
+				this.st && clearTimeout(this.st);
+				this.state = {
+					show: true,
+					text: text
+				};
+				this.fn();
+				this.st = setTimeout(function () {
+					_this.hide();
+				}, time);
+			}
+		}, {
+			key: 'hide',
+			value: function hide() {
+				this.st && clearTimeout(this.st);
+				this.state = {
+					show: false,
+					text: ''
+				};
+				this.fn();
+			}
+		}]);
+
+		return Toast;
+	}();
+
+	var toast = new Toast();
+
+	var ToastDom = function (_Component) {
+		_inherits(ToastDom, _Component);
+
+		function ToastDom() {
+			var _ref;
+
+			var _temp, _this2, _ret;
+
+			_classCallCheck(this, ToastDom);
+
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
+
+			return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref = ToastDom.__proto__ || Object.getPrototypeOf(ToastDom)).call.apply(_ref, [this].concat(args))), _this2), _this2.state = {
+				text: '',
+				show: _this2.props.show || false
+			}, _this2.loading = function () {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'sk-fading-circle' },
+					_react2.default.createElement('div', { className: 'sk-circle1 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle2 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle3 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle4 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle5 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle6 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle7 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle8 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle9 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle10 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle11 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle12 sk-circle' })
+				);
+			}, _temp), _possibleConstructorReturn(_this2, _ret);
+		}
+
+		_createClass(ToastDom, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var _this3 = this;
+
+				toast.bind(function () {
+					_this3.setState(toast.state);
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ className: cn("toast", { hide: !this.state.show }) },
+					_react2.default.createElement(
+						'div',
+						null,
+						this.state.text || this.loading()
+					)
+				);
+			}
+		}]);
+
+		return ToastDom;
+	}(_react.Component);
+
+	var $toast = document.getElementById('toastroot');
+	if (!$toast) {
+		$toast = document.createElement('div');
+		$toast.setAttribute('id', 'toastroot');
+		document.body.appendChild($toast);
+	}
+
+	_reactDom2.default.render(_react2.default.createElement(ToastDom, null), $toast);
+	exports.default = toast;
+	exports.ToastDom = ToastDom;
+
+/***/ },
+/* 705 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
@@ -54969,7 +55130,7 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _Position = __webpack_require__(705);
+	var _Position = __webpack_require__(706);
 
 	var _Position2 = _interopRequireDefault(_Position);
 
@@ -54978,7 +55139,7 @@
 	exports.default = _react2.default.createElement(_reactRouter.Route, { path: 'position', component: _Position2.default });
 
 /***/ },
-/* 705 */
+/* 706 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54999,7 +55160,7 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _action = __webpack_require__(706);
+	var _action = __webpack_require__(707);
 
 	var ThisAction = _interopRequireWildcard(_action);
 
@@ -55254,7 +55415,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Position);
 
 /***/ },
-/* 706 */
+/* 707 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -55271,7 +55432,7 @@
 	}
 
 /***/ },
-/* 707 */
+/* 708 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55286,11 +55447,11 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _CarNeed = __webpack_require__(708);
+	var _CarNeed = __webpack_require__(709);
 
 	var _CarNeed2 = _interopRequireDefault(_CarNeed);
 
-	var _ProductDetail = __webpack_require__(720);
+	var _ProductDetail = __webpack_require__(721);
 
 	var _ProductDetail2 = _interopRequireDefault(_ProductDetail);
 
@@ -55304,7 +55465,7 @@
 	);
 
 /***/ },
-/* 708 */
+/* 709 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55323,7 +55484,7 @@
 
 	var _ws2 = _interopRequireDefault(_ws);
 
-	var _reactInfiniteScroller = __webpack_require__(709);
+	var _reactInfiniteScroller = __webpack_require__(710);
 
 	var _reactInfiniteScroller2 = _interopRequireDefault(_reactInfiniteScroller);
 
@@ -55434,14 +55595,14 @@
 	exports.default = _class;
 
 /***/ },
-/* 709 */
+/* 710 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(710)
+	module.exports = __webpack_require__(711)
 
 
 /***/ },
-/* 710 */
+/* 711 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55456,7 +55617,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _propTypes = __webpack_require__(711);
+	var _propTypes = __webpack_require__(712);
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -55646,7 +55807,7 @@
 
 
 /***/ },
-/* 711 */
+/* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -55671,17 +55832,17 @@
 	  // By explicitly using `prop-types` you are opting into new development behavior.
 	  // http://fb.me/prop-types-in-prod
 	  var throwOnDirectAccess = true;
-	  module.exports = __webpack_require__(712)(isValidElement, throwOnDirectAccess);
+	  module.exports = __webpack_require__(713)(isValidElement, throwOnDirectAccess);
 	} else {
 	  // By explicitly using `prop-types` you are opting into new production behavior.
 	  // http://fb.me/prop-types-in-prod
-	  module.exports = __webpack_require__(719)();
+	  module.exports = __webpack_require__(720)();
 	}
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 712 */
+/* 713 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -55693,13 +55854,13 @@
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(713);
-	var invariant = __webpack_require__(714);
-	var warning = __webpack_require__(715);
-	var assign = __webpack_require__(716);
+	var emptyFunction = __webpack_require__(714);
+	var invariant = __webpack_require__(715);
+	var warning = __webpack_require__(716);
+	var assign = __webpack_require__(717);
 
-	var ReactPropTypesSecret = __webpack_require__(717);
-	var checkPropTypes = __webpack_require__(718);
+	var ReactPropTypesSecret = __webpack_require__(718);
+	var checkPropTypes = __webpack_require__(719);
 
 	module.exports = function(isValidElement, throwOnDirectAccess) {
 	  /* global Symbol */
@@ -56230,7 +56391,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 713 */
+/* 714 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56271,7 +56432,7 @@
 	module.exports = emptyFunction;
 
 /***/ },
-/* 714 */
+/* 715 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -56330,7 +56491,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 715 */
+/* 716 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -56343,7 +56504,7 @@
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(713);
+	var emptyFunction = __webpack_require__(714);
 
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -56398,7 +56559,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 716 */
+/* 717 */
 /***/ function(module, exports) {
 
 	/*
@@ -56494,7 +56655,7 @@
 
 
 /***/ },
-/* 717 */
+/* 718 */
 /***/ function(module, exports) {
 
 	/**
@@ -56512,7 +56673,7 @@
 
 
 /***/ },
-/* 718 */
+/* 719 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -56525,9 +56686,9 @@
 	'use strict';
 
 	if (process.env.NODE_ENV !== 'production') {
-	  var invariant = __webpack_require__(714);
-	  var warning = __webpack_require__(715);
-	  var ReactPropTypesSecret = __webpack_require__(717);
+	  var invariant = __webpack_require__(715);
+	  var warning = __webpack_require__(716);
+	  var ReactPropTypesSecret = __webpack_require__(718);
 	  var loggedTypeFailures = {};
 	}
 
@@ -56578,7 +56739,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 719 */
+/* 720 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -56590,9 +56751,9 @@
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(713);
-	var invariant = __webpack_require__(714);
-	var ReactPropTypesSecret = __webpack_require__(717);
+	var emptyFunction = __webpack_require__(714);
+	var invariant = __webpack_require__(715);
+	var ReactPropTypesSecret = __webpack_require__(718);
 
 	module.exports = function() {
 	  function shim(props, propName, componentName, location, propFullName, secret) {
@@ -56642,7 +56803,7 @@
 
 
 /***/ },
-/* 720 */
+/* 721 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56811,7 +56972,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 721 */
+/* 722 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56826,31 +56987,31 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _SelfCenter = __webpack_require__(722);
+	var _SelfCenter = __webpack_require__(723);
 
 	var _SelfCenter2 = _interopRequireDefault(_SelfCenter);
 
-	var _SelfInfo = __webpack_require__(723);
+	var _SelfInfo = __webpack_require__(724);
 
 	var _SelfInfo2 = _interopRequireDefault(_SelfInfo);
 
-	var _SelfCar = __webpack_require__(724);
+	var _SelfCar = __webpack_require__(725);
 
 	var _SelfCar2 = _interopRequireDefault(_SelfCar);
 
-	var _SelfAccount = __webpack_require__(726);
+	var _SelfAccount = __webpack_require__(727);
 
 	var _SelfAccount2 = _interopRequireDefault(_SelfAccount);
 
-	var _SelfOrder = __webpack_require__(727);
+	var _SelfOrder = __webpack_require__(728);
 
 	var _SelfOrder2 = _interopRequireDefault(_SelfOrder);
 
-	var _OrderDetail = __webpack_require__(728);
+	var _OrderDetail = __webpack_require__(729);
 
 	var _OrderDetail2 = _interopRequireDefault(_OrderDetail);
 
-	var _ServiceComment = __webpack_require__(732);
+	var _ServiceComment = __webpack_require__(733);
 
 	var _ServiceComment2 = _interopRequireDefault(_ServiceComment);
 
@@ -56878,7 +57039,7 @@
 	);
 
 /***/ },
-/* 722 */
+/* 723 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57021,7 +57182,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 723 */
+/* 724 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57135,7 +57296,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SelfInfo);
 
 /***/ },
-/* 724 */
+/* 725 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57162,7 +57323,7 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _action = __webpack_require__(725);
+	var _action = __webpack_require__(726);
 
 	var TruckBrandAction = _interopRequireWildcard(_action);
 
@@ -57170,7 +57331,7 @@
 
 	var _history2 = _interopRequireDefault(_history);
 
-	var _Toast = __webpack_require__(733);
+	var _Toast = __webpack_require__(704);
 
 	var _Toast2 = _interopRequireDefault(_Toast);
 
@@ -57386,7 +57547,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SelfCar);
 
 /***/ },
-/* 725 */
+/* 726 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57403,7 +57564,7 @@
 	}
 
 /***/ },
-/* 726 */
+/* 727 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57422,7 +57583,7 @@
 
 	var _ws2 = _interopRequireDefault(_ws);
 
-	var _Toast = __webpack_require__(733);
+	var _Toast = __webpack_require__(704);
 
 	var _Toast2 = _interopRequireDefault(_Toast);
 
@@ -57544,7 +57705,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 727 */
+/* 728 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57563,7 +57724,7 @@
 
 	var _ws2 = _interopRequireDefault(_ws);
 
-	var _reactInfiniteScroller = __webpack_require__(709);
+	var _reactInfiniteScroller = __webpack_require__(710);
 
 	var _reactInfiniteScroller2 = _interopRequireDefault(_reactInfiniteScroller);
 
@@ -57571,7 +57732,7 @@
 
 	var _history2 = _interopRequireDefault(_history);
 
-	var _Toast = __webpack_require__(733);
+	var _Toast = __webpack_require__(704);
 
 	var _Toast2 = _interopRequireDefault(_Toast);
 
@@ -57765,7 +57926,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 728 */
+/* 729 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57786,7 +57947,7 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _UserInfo = __webpack_require__(729);
+	var _UserInfo = __webpack_require__(730);
 
 	var _UserInfo2 = _interopRequireDefault(_UserInfo);
 
@@ -57798,9 +57959,9 @@
 
 	var _history2 = _interopRequireDefault(_history);
 
-	var _utils = __webpack_require__(730);
+	var _utils = __webpack_require__(731);
 
-	var _Toast = __webpack_require__(733);
+	var _Toast = __webpack_require__(704);
 
 	var _Toast2 = _interopRequireDefault(_Toast);
 
@@ -58271,7 +58432,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 729 */
+/* 730 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58370,7 +58531,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 730 */
+/* 731 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58397,7 +58558,7 @@
 	exports.signWxPay = signWxPay;
 	exports.getQueryParams = getQueryParams;
 
-	var _lodash = __webpack_require__(731);
+	var _lodash = __webpack_require__(732);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -58680,13 +58841,13 @@
 	}
 
 /***/ },
-/* 731 */
+/* 732 */
 /***/ function(module, exports) {
 
 	module.exports = _;
 
 /***/ },
-/* 732 */
+/* 733 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58701,7 +58862,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _UserInfo = __webpack_require__(729);
+	var _UserInfo = __webpack_require__(730);
 
 	var _UserInfo2 = _interopRequireDefault(_UserInfo);
 
@@ -58709,7 +58870,7 @@
 
 	var _ws2 = _interopRequireDefault(_ws);
 
-	var _Toast = __webpack_require__(733);
+	var _Toast = __webpack_require__(704);
 
 	var _Toast2 = _interopRequireDefault(_Toast);
 
@@ -58861,7 +59022,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 733 */
+/* 734 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58869,7 +59030,6 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.ToastDom = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -58877,165 +59037,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(330);
+	var _ws = __webpack_require__(570);
 
-	var _reactDom2 = _interopRequireDefault(_reactDom);
+	var _ws2 = _interopRequireDefault(_ws);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _Toast = __webpack_require__(704);
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var cn = function cn(str) {
-		var obj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-		var arr = Object.keys(obj);
-		arr = arr.filter(function (v) {
-			return obj[v];
-		});
-		return str + ' ' + arr.join(' ');
-	};
-
-	var Toast = function () {
-		function Toast() {
-			_classCallCheck(this, Toast);
-
-			this.state = {};
-		}
-
-		_createClass(Toast, [{
-			key: 'bind',
-			value: function bind(fn) {
-				this.fn = fn;
-			}
-		}, {
-			key: 'show',
-			value: function show(text) {
-				var _this = this;
-
-				var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
-
-				// debugger
-				this.st && clearTimeout(this.st);
-				this.state = {
-					show: true,
-					text: text
-				};
-				this.fn();
-				this.st = setTimeout(function () {
-					_this.hide();
-				}, time);
-			}
-		}, {
-			key: 'hide',
-			value: function hide() {
-				this.st && clearTimeout(this.st);
-				this.state = {
-					show: false,
-					text: ''
-				};
-				this.fn();
-			}
-		}]);
-
-		return Toast;
-	}();
-
-	var toast = new Toast();
-
-	var ToastDom = function (_Component) {
-		_inherits(ToastDom, _Component);
-
-		function ToastDom() {
-			var _ref;
-
-			var _temp, _this2, _ret;
-
-			_classCallCheck(this, ToastDom);
-
-			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-				args[_key] = arguments[_key];
-			}
-
-			return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref = ToastDom.__proto__ || Object.getPrototypeOf(ToastDom)).call.apply(_ref, [this].concat(args))), _this2), _this2.state = {
-				text: '',
-				show: _this2.props.show || false
-			}, _this2.loading = function () {
-				return _react2.default.createElement(
-					'div',
-					{ className: 'sk-fading-circle' },
-					_react2.default.createElement('div', { className: 'sk-circle1 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle2 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle3 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle4 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle5 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle6 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle7 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle8 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle9 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle10 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle11 sk-circle' }),
-					_react2.default.createElement('div', { className: 'sk-circle12 sk-circle' })
-				);
-			}, _temp), _possibleConstructorReturn(_this2, _ret);
-		}
-
-		_createClass(ToastDom, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				var _this3 = this;
-
-				toast.bind(function () {
-					_this3.setState(toast.state);
-				});
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					{ className: cn("toast", { hide: !this.state.show }) },
-					_react2.default.createElement(
-						'p',
-						null,
-						this.state.text || this.loading()
-					)
-				);
-			}
-		}]);
-
-		return ToastDom;
-	}(_react.Component);
-
-	var $toast = document.getElementById('toastroot');
-	if (!$toast) {
-		$toast = document.createElement('div');
-		$toast.setAttribute('id', 'toastroot');
-		document.body.appendChild($toast);
-	}
-
-	_reactDom2.default.render(_react2.default.createElement(ToastDom, null), $toast);
-	exports.default = toast;
-	exports.ToastDom = ToastDom;
-
-/***/ },
-/* 734 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(300);
-
-	var _react2 = _interopRequireDefault(_react);
+	var _Toast2 = _interopRequireDefault(_Toast);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59061,71 +59069,71 @@
 
 			_this.renderFullcutAmountValue = function (value) {
 				return _react2.default.createElement(
-					"div",
-					{ className: "item-value-container" },
+					'div',
+					{ className: 'item-value-container' },
 					_react2.default.createElement(
-						"span",
-						{ className: "icon-metric" },
-						"\xA5"
+						'span',
+						{ className: 'icon-metric' },
+						'\xA5'
 					),
 					_react2.default.createElement(
-						"span",
-						{ className: "cut-value" },
-						"5"
+						'span',
+						{ className: 'cut-value' },
+						'5'
 					)
 				);
 			};
 
 			_this.renderFullcutDiscountValue = function (value) {
 				return _react2.default.createElement(
-					"div",
-					{ className: "item-value-container" },
+					'div',
+					{ className: 'item-value-container' },
 					_react2.default.createElement(
-						"span",
-						{ className: "cut-value" },
-						"5"
+						'span',
+						{ className: 'cut-value' },
+						'5'
 					),
 					_react2.default.createElement(
-						"span",
-						{ className: "icon-metric" },
-						"\u6298"
+						'span',
+						{ className: 'icon-metric' },
+						'\u6298'
 					)
 				);
 			};
 
 			_this.renderInstantcutValue = function (value) {
 				return _react2.default.createElement(
-					"div",
-					{ className: "item-value-container" },
+					'div',
+					{ className: 'item-value-container' },
 					_react2.default.createElement(
-						"span",
-						{ className: "icon-metric" },
-						"\xA5"
+						'span',
+						{ className: 'icon-metric' },
+						'\xA5'
 					),
 					_react2.default.createElement(
-						"span",
-						{ className: "cut-value integer-part" },
-						"5"
+						'span',
+						{ className: 'cut-value integer-part' },
+						'5'
 					),
 					_react2.default.createElement(
-						"span",
-						{ className: "cut-value float-part" },
-						".00"
+						'span',
+						{ className: 'cut-value float-part' },
+						'.00'
 					),
 					_react2.default.createElement(
-						"span",
-						{ className: "cut-value float-part" },
-						"-"
+						'span',
+						{ className: 'cut-value float-part' },
+						'-'
 					),
 					_react2.default.createElement(
-						"span",
-						{ className: "cut-value integer-part" },
-						"18"
+						'span',
+						{ className: 'cut-value integer-part' },
+						'18'
 					),
 					_react2.default.createElement(
-						"span",
-						{ className: "cut-value float-part" },
-						".00"
+						'span',
+						{ className: 'cut-value float-part' },
+						'.00'
 					)
 				);
 			};
@@ -59151,69 +59159,113 @@
 						typeClass = "";
 				}
 				return _react2.default.createElement(
-					"div",
+					'div',
 					{ className: "coupon-item clearfix " + typeClass },
 					_react2.default.createElement(
-						"div",
-						{ className: "item-left ft" },
+						'div',
+						{ className: 'item-left ft' },
 						couponValueView,
 						_react2.default.createElement(
-							"div",
-							{ className: "cut-info" },
-							"\u6EE130\u5143\u4F7F\u7528"
+							'div',
+							{ className: 'cut-info' },
+							'\u6EE130\u5143\u4F7F\u7528'
 						)
 					),
 					_react2.default.createElement(
-						"div",
-						{ className: "item-right ft" },
+						'div',
+						{ className: 'item-right ft' },
 						_react2.default.createElement(
-							"div",
-							{ className: "coupon-name" },
-							"\u8865\u80CE"
+							'div',
+							{ className: 'coupon-name' },
+							'\u8865\u80CE'
 						),
 						_react2.default.createElement(
-							"div",
-							{ className: "coupon-expiredate" },
-							"\u6709\u6548\u671F\u81F3\uFF1A2017-10-14"
+							'div',
+							{ className: 'coupon-expiredate' },
+							'\u6709\u6548\u671F\u81F3\uFF1A2017-10-14'
 						)
 					)
 				);
 			};
 
+			_this.renderCouponList = function (couponList) {
+				couponList = couponList ? couponList : [];
+				return couponList.map(function (item) {
+					return _this.renderCoupon(item.type);
+				});
+			};
+
 			_this.state = {
-				tabIndex: 0
+				tabIndex: 0,
+				unused: [],
+				used: []
 			};
 			return _this;
 		}
 
 		_createClass(_class, [{
-			key: "render",
-			value: function render() {
-				var tabIndex = this.state.tabIndex;
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var _this2 = this;
 
+				_Toast2.default.show();
+				_ws2.default.get({
+					url: '/api/self/coupons'
+				}).then(function (response) {
+					if (response.code === 0) {
+						_this2.setState({
+							unused: response.data.unused,
+							used: response.data.used
+						});
+					} else {
+						_Toast2.default.show(response.message);
+					}
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _state = this.state,
+				    tabIndex = _state.tabIndex,
+				    unused = _state.unused,
+				    used = _state.used;
+
+				var unusedCount = unused ? unused.length : 0,
+				    usedCount = used ? used.length : 0;
 				return _react2.default.createElement(
-					"div",
-					{ className: "self-coupon" },
+					'div',
+					{ className: 'self-coupon' },
 					_react2.default.createElement(
-						"div",
-						{ className: "tab-container clearfix" },
+						'div',
+						{ className: 'tab-container clearfix' },
 						_react2.default.createElement(
-							"div",
+							'div',
 							{ className: "tab-item ft" + (tabIndex === 0 ? " active" : ""), onClick: this.changeTabIndex.bind(this, 0) },
-							"\u672A\u4F7F\u7528\uFF083\uFF09"
+							"未使用（" + unusedCount + "）"
 						),
 						_react2.default.createElement(
-							"div",
+							'div',
 							{ className: "tab-item ft" + (tabIndex === 1 ? " active" : ""), onClick: this.changeTabIndex.bind(this, 1) },
-							"\u5DF2\u4F7F\u7528\uFF0810\uFF09"
+							"已使用（" + usedCount + "）"
 						)
 					),
 					_react2.default.createElement(
-						"div",
-						{ className: "tab-content-container" },
-						this.renderCoupon("满减额度"),
-						this.renderCoupon("满减折扣"),
-						this.renderCoupon("立减")
+						'div',
+						{ className: 'tab-content', style: { display: tabIndex === 0 ? "block" : "none" } },
+						_react2.default.createElement(
+							'div',
+							{ className: 'tab-content-container' },
+							this.renderCouponList(unused)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'tab-content', style: { display: tabIndex === 1 ? "block" : "none" } },
+						_react2.default.createElement(
+							'div',
+							{ className: 'tab-content-container' },
+							this.renderCouponList(used)
+						)
 					)
 				);
 			}
@@ -59412,7 +59464,7 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _action = __webpack_require__(725);
+	var _action = __webpack_require__(726);
 
 	var ThisAction = _interopRequireWildcard(_action);
 

@@ -1114,6 +1114,11 @@ th {
   width: 100%;
   background: red;
 }
+.self-coupon .tab-content {
+  margin: 0;
+  height: 12.44rem;
+  overflow: auto;
+}
 .self-coupon .tab-content-container {
   padding-left: 0.3rem;
   padding-right: 0.3rem;

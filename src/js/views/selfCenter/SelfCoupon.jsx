@@ -1,12 +1,32 @@
 import React, {Component} from 'react';
+import ws from '../../lib/ws';
+import toast from '../../components/Toast';
 
 export default class extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			tabIndex: 0
+			tabIndex: 0,
+			unused: [],
+			used: []
 		}
+	}
+
+	componentDidMount() {
+		toast.show();
+		ws.get({
+			url: '/api/self/coupons'
+		}).then(response => {
+			if(response.code === 0) {
+				this.setState({
+					unused: response.data.unused,
+					used: response.data.used
+				});
+			} else {
+				toast.show(response.message);
+			}
+		})
 	}
 
 	changeTabIndex = (index) => {
@@ -80,18 +100,28 @@ export default class extends Component {
 		);
 	}
 
+	renderCouponList = (couponList) => {
+		couponList = couponList ? couponList : [];
+		return couponList.map(item => {
+			return this.renderCoupon(item.type);
+		});
+	}
+
 	render() {
-		let {tabIndex} = this.state;
+		let {tabIndex, unused, used} = this.state;
+		let unusedCount = unused ? unused.length : 0,
+			usedCount = used ? used.length : 0;
 		return (
 			<div className="self-coupon">
 				<div className="tab-container clearfix">
-					<div className={"tab-item ft" + (tabIndex === 0 ? " active" : "")} onClick={this.changeTabIndex.bind(this, 0)}>未使用（3）</div>
-					<div className={"tab-item ft" + (tabIndex === 1 ? " active" : "")} onClick={this.changeTabIndex.bind(this, 1)}>已使用（10）</div>
+					<div className={"tab-item ft" + (tabIndex === 0 ? " active" : "")} onClick={this.changeTabIndex.bind(this, 0)}>{"未使用（" + unusedCount + "）"}</div>
+					<div className={"tab-item ft" + (tabIndex === 1 ? " active" : "")} onClick={this.changeTabIndex.bind(this, 1)}>{"已使用（" + usedCount + "）"}</div>
 				</div>
-				<div className="tab-content-container">
-					{this.renderCoupon("满减额度")}
-					{this.renderCoupon("满减折扣")}
-					{this.renderCoupon("立减")}
+				<div className="tab-content" style={{display: tabIndex === 0 ? "block" : "none"}}>
+					<div className="tab-content-container">{this.renderCouponList(unused)}</div>
+				</div>
+				<div className="tab-content" style={{display: tabIndex === 1 ? "block" : "none"}}>
+					<div className="tab-content-container">{this.renderCouponList(used)}</div>
 				</div>
 			</div>
 		)
