@@ -50,7 +50,7 @@ class ToastDom extends Component {
 	render() {
 		return (
 			<div className = {cn("toast", { hide: !this.state.show })}>
-				<p>{this.state.text||this.loading()}</p>
+				<div>{this.state.text||this.loading()}</div>
 			</div>
 		)
 	}

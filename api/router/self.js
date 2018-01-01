@@ -42,4 +42,13 @@ router.get('/info', function(req, res) {
     });
 });
 
+router.get('/coupons', function(req, res) {
+    ws.get({
+        url: '/web/user/coupons',
+        token: getToken(req)
+    }).then(function(response) {
+        ws.handleResponse(response, res);
+    });
+});
+
 module.exports = router;

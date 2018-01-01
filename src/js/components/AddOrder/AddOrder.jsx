@@ -140,7 +140,7 @@ export default class extends Component {
 							       onChange={this.onChange("driverName").bind(this)}/>
 						</Item>
 					)}
-					{false && selfInfo.phone ? (
+					{selfInfo.phone ? (
 						<Item>
 							<label className="label-text ft">手机号</label>
 							<div className="text ft">{selfInfo.phone ? selfInfo.phone : ''}</div>
@@ -152,7 +152,7 @@ export default class extends Component {
 
 						</Item>
 					)}
-					{false && selfInfo.phone ? undefined : (
+					{selfInfo.phone ? undefined : (
 						<Item>
 							<input value={smscode ? smscode : ''} type="text" placeholder="验证码" className="full-width" onChange={this.onChange("smscode").bind(this)}/>
 						</Item>
