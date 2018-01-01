@@ -54,7 +54,6 @@ class App extends React.Component{
 				    locationLat: data.position.getLat(),
 				    location: data.position.formattedAddress,
 			    });
-
 		    });//返回定位信息
 		    AMap.event.addListener(geolocation, 'error', function() {
 			    toast.show("定位失败");
