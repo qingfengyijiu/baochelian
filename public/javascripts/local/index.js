@@ -57604,7 +57604,6 @@
 			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
 			_this.getItemViews = function (list) {
-				list = ['', ''];
 				return list.map(function (item, index) {
 					return _react2.default.createElement(
 						'div',

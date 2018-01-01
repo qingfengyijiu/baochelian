@@ -26,7 +26,7 @@ router.put('/truck', function(req, res) {
 
 router.get('/account', function(req, res) {
     ws.get({
-        url: '/web/account',
+        url: '/web/accounts',
         token: getToken(req)
     }).then(function(response) {
         ws.handleResponse(response, res);
