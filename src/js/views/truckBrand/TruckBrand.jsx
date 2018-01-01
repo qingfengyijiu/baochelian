@@ -5,6 +5,7 @@ import * as ThisAction from './action.js';
 import * as UtilAction from '../_util/action.js';
 import history from '../history.jsx';
 import ws from '../../lib/ws';
+import toast from '../../components/Toast';
 
 class TruckBrand extends Component {
 
@@ -12,9 +13,7 @@ class TruckBrand extends Component {
 		super(props);
 		this.state = {
 			showPop: true,
-			searchText: null,
-			hotBrandList: [],
-			wholeBrandList: []
+			searchText: null
 		}
 	}
 
@@ -26,12 +25,8 @@ class TruckBrand extends Component {
 			}).then(response => {
 				if(response.code === 0) {
 					actions.utilAction.changeTruckBrandList(response.data);
-					this.setState({
-						hotBrandList: response.data.hotBrands,
-						wholeBrandList: response.data.truckModels
-					})
 				} else {
-					alert(response.message);
+					toast.show(response.message);
 				}
 			});
 		}
@@ -165,10 +160,17 @@ class TruckBrand extends Component {
 	}
 
 	onChangeSearchText = e => {
-		let {truckBrandList} = this.props,
-			{hotBrandList, wholeBrandList, searchText} = this.state;
-		searchText = e.target.value;
-		searchText = searchText ? searchText : '';
+		this.setState({
+			searchText: e.target.value
+		});
+	}
+
+	render() {
+		let {truckBrandList, truckBrand} = this.props,
+			{showPop, searchText} = this.state,
+			hotBrandList,
+			wholeBrandList;
+		searchText = searchText != null ? searchText : '';
 		if(truckBrandList && truckBrandList.hotBrands) {
 			if(searchText.length > 0) {
 				hotBrandList = truckBrandList.hotBrands.filter(item => {
@@ -187,19 +189,7 @@ class TruckBrand extends Component {
 			} else {
 				wholeBrandList = truckBrandList.truckModels;
 			}
-
 		}
-		this.setState({
-			searchText,
-			hotBrandList,
-			wholeBrandList
-		});
-	}
-
-	render() {
-		let {truckBrandList, truckBrand} = this.props,
-			{showPop, searchText, hotBrandList, wholeBrandList} = this.state;
-		searchText = searchText != null ? searchText : '';
 		return (
 			<div className="page" id="truckBrandPage">
 				<div className="search-zone">

@@ -59549,6 +59549,10 @@
 
 	var _ws2 = _interopRequireDefault(_ws);
 
+	var _Toast = __webpack_require__(571);
+
+	var _Toast2 = _interopRequireDefault(_Toast);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -59703,44 +59707,14 @@
 			};
 
 			_this.onChangeSearchText = function (e) {
-				var truckBrandList = _this.props.truckBrandList,
-				    _this$state = _this.state,
-				    hotBrandList = _this$state.hotBrandList,
-				    wholeBrandList = _this$state.wholeBrandList,
-				    searchText = _this$state.searchText;
-
-				searchText = e.target.value;
-				searchText = searchText ? searchText : '';
-				if (truckBrandList && truckBrandList.hotBrands) {
-					if (searchText.length > 0) {
-						hotBrandList = truckBrandList.hotBrands.filter(function (item) {
-							return item.brand.indexOf(searchText) > -1;
-						});
-					} else {
-						hotBrandList = truckBrandList.hotBrands;
-					}
-				}
-				if (truckBrandList && truckBrandList.truckModels) {
-					if (searchText.length > 0) {
-						wholeBrandList = truckBrandList.truckModels.filter(function (item) {
-							return item.brand.indexOf(searchText) > -1;
-						});
-					} else {
-						wholeBrandList = truckBrandList.truckModels;
-					}
-				}
 				_this.setState({
-					searchText: searchText,
-					hotBrandList: hotBrandList,
-					wholeBrandList: wholeBrandList
+					searchText: e.target.value
 				});
 			};
 
 			_this.state = {
 				showPop: true,
-				searchText: null,
-				hotBrandList: [],
-				wholeBrandList: []
+				searchText: null
 			};
 			return _this;
 		}
@@ -59748,8 +59722,6 @@
 		_createClass(TruckBrand, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				var _this2 = this;
-
 				var _props = this.props,
 				    truckBrandList = _props.truckBrandList,
 				    actions = _props.actions;
@@ -59760,12 +59732,8 @@
 					}).then(function (response) {
 						if (response.code === 0) {
 							actions.utilAction.changeTruckBrandList(response.data);
-							_this2.setState({
-								hotBrandList: response.data.hotBrands,
-								wholeBrandList: response.data.truckModels
-							});
 						} else {
-							alert(response.message);
+							_Toast2.default.show(response.message);
 						}
 					});
 				}
@@ -59813,10 +59781,28 @@
 				    _state = this.state,
 				    showPop = _state.showPop,
 				    searchText = _state.searchText,
-				    hotBrandList = _state.hotBrandList,
-				    wholeBrandList = _state.wholeBrandList;
+				    hotBrandList = void 0,
+				    wholeBrandList = void 0;
 
 				searchText = searchText != null ? searchText : '';
+				if (truckBrandList && truckBrandList.hotBrands) {
+					if (searchText.length > 0) {
+						hotBrandList = truckBrandList.hotBrands.filter(function (item) {
+							return item.brand.indexOf(searchText) > -1;
+						});
+					} else {
+						hotBrandList = truckBrandList.hotBrands;
+					}
+				}
+				if (truckBrandList && truckBrandList.truckModels) {
+					if (searchText.length > 0) {
+						wholeBrandList = truckBrandList.truckModels.filter(function (item) {
+							return item.brand.indexOf(searchText) > -1;
+						});
+					} else {
+						wholeBrandList = truckBrandList.truckModels;
+					}
+				}
 				return _react2.default.createElement(
 					'div',
 					{ className: 'page', id: 'truckBrandPage' },
