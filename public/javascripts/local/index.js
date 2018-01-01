@@ -35772,7 +35772,7 @@
 					mapObj.addControl(geolocation);
 					geolocation.getCurrentPosition();
 					AMap.event.addListener(geolocation, 'complete', function (data) {
-						actions.utilAction.changeCurrentPostion({
+						actions.utilAction.changeCurrentPosition({
 							locationLng: data.position.getLng(),
 							locationLat: data.position.getLat(),
 							location: data.position.formattedAddress
@@ -35789,8 +35789,7 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'page' },
-					this.props.children,
-					_react2.default.createElement('div', { id: 'iCenter', style: { display: 'none' } })
+					this.props.children
 				);
 			}
 		}]);
@@ -37892,7 +37891,7 @@
 					{ className: cn("toast", { hide: !this.state.show }) },
 					_react2.default.createElement(
 						'div',
-						null,
+						{ className: 'toast-content-container' },
 						this.state.text || this.loading()
 					)
 				);
@@ -65864,7 +65863,11 @@
 	        hotBrands: [],
 	        truckModels: []
 	    },
-	    currentPosition: {}
+	    currentPosition: {
+	        location: null,
+	        locationLng: null,
+	        locationLat: null
+	    }
 	});
 
 /***/ },

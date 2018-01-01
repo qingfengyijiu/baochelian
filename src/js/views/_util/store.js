@@ -14,6 +14,8 @@ export default Immutable.fromJS({
         truckModels: []
     },
     currentPosition: {
-
+        location: null,
+        locationLng: null,
+        locationLat: null
     }
 })

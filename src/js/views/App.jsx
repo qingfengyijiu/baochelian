@@ -49,7 +49,7 @@ class App extends React.Component{
 		    mapObj.addControl(geolocation);
 		    geolocation.getCurrentPosition();
 		    AMap.event.addListener(geolocation, 'complete', function(data) {
-		    	actions.utilAction.changeCurrentPostion({
+		    	actions.utilAction.changeCurrentPosition({
 		    		locationLng: data.position.getLng(),
 				    locationLat: data.position.getLat(),
 				    location: data.position.formattedAddress,
@@ -67,7 +67,6 @@ class App extends React.Component{
         return (
             <div className="page">
                 {this.props.children}
-                <div id="iCenter" style={{display: 'none'}}></div>
             </div>
         )
     }
