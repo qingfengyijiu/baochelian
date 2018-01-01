@@ -38455,7 +38455,12 @@
 		    selfInfo = util.selfInfo,
 		    currentPosition = util.currentPosition;
 		return {
-			position: _extends({}, position, currentPosition),
+			position: {
+				location: position.location != null ? position.location : currentPosition.location,
+				locationLng: position.locationLng != null ? position.locationLng : currentPosition.locationLng,
+				locationLat: position.locationLat != null ? position.locationLat : currentPosition.locationLat,
+				locationDetail: position.locationDetail
+			},
 			model: rescue,
 			selfInfo: selfInfo
 		};
@@ -57654,7 +57659,15 @@
 			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
 			_this.getItemViews = function (list) {
+				list = list ? list : [];
 				return list.map(function (item, index) {
+					var amount = item.amount != null ? item.amount : 0,
+					    operator = "?";
+					if (item.type.key === 1) {
+						operator = "+";
+					} else {
+						operator = "-";
+					}
 					return _react2.default.createElement(
 						'div',
 						{ className: 'account-record-item', key: index },
@@ -57664,12 +57677,12 @@
 							_react2.default.createElement(
 								'div',
 								{ className: 'business-type' },
-								'\u6536\u5165'
+								item.type.value
 							),
 							_react2.default.createElement(
 								'div',
 								{ className: 'business-time' },
-								'2017-08-23 12:00'
+								item.dateTime ? item.dateTime : ''
 							)
 						),
 						_react2.default.createElement(
@@ -57678,7 +57691,7 @@
 							_react2.default.createElement(
 								'div',
 								{ className: 'business-number' },
-								"+120.00"
+								operator + amount.toFixed(2)
 							)
 						)
 					);
@@ -59437,7 +59450,12 @@
 		    selfInfo = util.selfInfo,
 		    currentPosition = util.currentPosition;
 		return {
-			position: _extends({}, position, currentPosition),
+			position: {
+				location: position.location != null ? position.location : currentPosition.location,
+				locationLng: position.locationLng != null ? position.locationLng : currentPosition.locationLng,
+				locationLat: position.locationLat != null ? position.locationLat : currentPosition.locationLat,
+				locationDetail: position.locationDetail
+			},
 			model: useButter,
 			selfInfo: selfInfo
 		};
@@ -60001,7 +60019,12 @@
 		    selfInfo = util.selfInfo,
 		    currentPostion = util.currentPosition;
 		return {
-			position: _extends({}, position, currentPostion),
+			position: {
+				location: position.location != null ? position.location : currentPosition.location,
+				locationLng: position.locationLng != null ? position.locationLng : currentPosition.locationLng,
+				locationLat: position.locationLat != null ? position.locationLat : currentPosition.locationLat,
+				locationDetail: position.locationDetail
+			},
 			model: baoLun,
 			selfInfo: selfInfo
 		};
@@ -60147,7 +60170,12 @@
 		    selfInfo = util.selfInfo,
 		    currentPosition = util.currentPosition;
 		return {
-			position: _extends({}, position, currentPosition),
+			position: {
+				location: position.location != null ? position.location : currentPosition.location,
+				locationLng: position.locationLng != null ? position.locationLng : currentPosition.locationLng,
+				locationLat: position.locationLat != null ? position.locationLat : currentPosition.locationLat,
+				locationDetail: position.locationDetail
+			},
 			model: daoLun,
 			selfInfo: selfInfo
 		};
