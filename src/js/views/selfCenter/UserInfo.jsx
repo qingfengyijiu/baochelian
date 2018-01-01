@@ -17,9 +17,13 @@ export default class extends Component {
 		})
 	}
 
+	formatScore(score) {
+		score = score != null ? score : 0;
+		return score.toFixed(1);
+	}
+
 	render() {
 		let {avatarUrl, name, score} = this.props;
-		score = score != null ? score : 0;
 		return (
 			<div className="user-info">
 				<div className="left">
@@ -30,7 +34,7 @@ export default class extends Component {
 					<div className="user-score">
 						<div className="score-title">综合评价：</div>
 						{this.getStarScoreViews(score)}
-						<div className="score-value">{score + ".0"}</div>
+						<div className="score-value">{this.formatScore(score)}</div>
 					</div>
 				</div>
 			</div>

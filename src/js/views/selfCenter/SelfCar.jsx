@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as TruckBrandAction from '../truckBrand/action.js';
 import history from '../history.jsx';
+import toast from '../../components/Toast';
 
 class SelfCar extends Component {
 
@@ -34,7 +35,7 @@ class SelfCar extends Component {
 					vin: response.data.vin
 				});
 			} else {
-				alert(response.message);
+				toast.show(response.message);
 			}
 		});
 	}
@@ -68,10 +69,10 @@ class SelfCar extends Component {
 			}
 		}).then(response => {
 			if(response.code === 0) {
-				alert("修改成功");
+				toast.show("修改成功");
 				history.goBack();
 			} else {
-				alert(response.message);
+				toast.show(response.message);
 			}
 		})
 	}

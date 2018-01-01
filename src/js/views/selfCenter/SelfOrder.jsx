@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ws from '../../lib/ws.js';
 import InfiniteScroller from 'react-infinite-scroller';
 import history from '../history.jsx';
+import toast from '../../components/Toast';
 
 export default class extends Component {
 
@@ -27,6 +28,7 @@ export default class extends Component {
 					hasMore: hasMore
 				});
 			} else {
+				toast.show(response.message);
 				this.setState({
 					hasMore: false
 				});

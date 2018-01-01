@@ -6,5 +6,6 @@ export default Immutable.fromJS({
     driverName: null,
     driverPhoneNo: null,
 	smscode: null,
-    isAgree: true
+    isAgree: true,
+	userCouponId: null
 })

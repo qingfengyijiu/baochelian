@@ -4,6 +4,7 @@ import UserInfo from './UserInfo.jsx';
 import ws from '../../lib/ws.js';
 import history from '../history.jsx';
 import {getQueryParams} from '../../lib/utils';
+import toast from '../../components/Toast';
 
 export default class extends Component {
 
@@ -24,10 +25,14 @@ export default class extends Component {
 		ws.get({
 			url: '/api/order/' + id
 		}).then(response => {
-			this.setState({
-				...response.data,
-				status: response.data.orderStatus.key
-			});
+			if(response.code === 0) {
+				this.setState({
+					...response.data,
+					status: response.data.orderStatus.key
+				});
+			} else {
+				toast.show(response.message);
+			}
 		})
 	}
 
@@ -75,7 +80,7 @@ export default class extends Component {
 			if(response.code === 0) {
 				_this.pay(response.data);
 			} else {
-				alert(response.message);
+				toast.show(response.message);
 			}
 		})
 	}
@@ -90,14 +95,14 @@ export default class extends Component {
 		if(WeixinJSBridge) {
 			WeixinJSBridge.invoke('getBrandWCPayRequest', requestData, function(res){
 				if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-					alert("支付成功");
+					toast.show("支付成功");
 					_this.refresh();
 				} else {
-					alert(res.err_msg ? res.err_msg : '支付失败');
+					toast.show(res.err_msg ? res.err_msg : '支付失败');
 				}
 			});
 		} else {
-			alert("微信支付不可用，请稍后重试");
+			toast.show("微信支付不可用，请稍后重试");
 		}
 
 	}

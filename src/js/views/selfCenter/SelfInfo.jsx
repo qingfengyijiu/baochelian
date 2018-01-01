@@ -1,30 +1,13 @@
 import React, {Component} from 'react';
 import List, {Item} from "../../components/List";
-import ws from '../../lib/ws.js';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as UtilAction from '../_util/action';
 
 class SelfInfo extends Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			avatarUrl: "",
-			nickname: ""
-		}
-	}
-
 	componentDidMount() {
-		let _this = this;
-		ws.get({
-			url: '/api/self/info'
-		}).then(response => {
-			_this.setState({
-				nickname: response.nickname,
-				avatarUrl: response.avatarURL
-			});
-		})
+		document.title = "个人信息";
 	}
 
 	render() {

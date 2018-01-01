@@ -5,6 +5,7 @@ import history from '../../views/history.jsx';
 import OrderTimePicker from '../../components/OrderTimePicker';
 import ws from '../../lib/ws.js';
 import Timer from '../Timer';
+import toast from '../Toast';
 
 export default class extends Component {
 
@@ -26,7 +27,7 @@ export default class extends Component {
 				if(response.code === 0) {
 					actions.utilAction.changeSelfInfo(response.data);
 				} else {
-					alert(response.message);
+					toast.show(response.message);
 				}
 			})
 		}
@@ -57,10 +58,10 @@ export default class extends Component {
 			data: data
 		}).then(response => {
 			if(response.code === 0) {
-				alert("下单成功");
+				toast.show("下单成功");
 				history.push('/self/order');
 			} else {
-				alert(response.message);
+				toast.show(response.message);
 			}
 		})
 	}
@@ -77,7 +78,7 @@ export default class extends Component {
 	onSendSmscode = e => {
 		let {driverPhoneNo} = this.props.model;
 		if(driverPhoneNo == null) {
-			alert("请输入正确的手机号");
+			toast.show("请输入正确的手机号");
 			return;
 		}
 		ws.get({
@@ -87,9 +88,9 @@ export default class extends Component {
 			}
 		}).then(response => {
 			if(response.code === 0) {
-				// do nothing
+				toast.show("验证码发送成功");
 			} else {
-				alert(response.message);
+				toast.show(response.message);
 			}
 		})
 	}

@@ -8667,9 +8667,9 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _reactRouterRedux = __webpack_require__(743);
+	var _reactRouterRedux = __webpack_require__(746);
 
-	var _reduxThunk = __webpack_require__(748);
+	var _reduxThunk = __webpack_require__(751);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -8677,7 +8677,7 @@
 
 	var _history3 = _interopRequireDefault(_history2);
 
-	var _reducers = __webpack_require__(749);
+	var _reducers = __webpack_require__(752);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -29961,19 +29961,19 @@
 
 	var _route8 = _interopRequireDefault(_route7);
 
-	var _route9 = __webpack_require__(732);
+	var _route9 = __webpack_require__(735);
 
 	var _route10 = _interopRequireDefault(_route9);
 
-	var _route11 = __webpack_require__(735);
+	var _route11 = __webpack_require__(738);
 
 	var _route12 = _interopRequireDefault(_route11);
 
-	var _route13 = __webpack_require__(737);
+	var _route13 = __webpack_require__(740);
 
 	var _route14 = _interopRequireDefault(_route13);
 
-	var _route15 = __webpack_require__(740);
+	var _route15 = __webpack_require__(743);
 
 	var _route16 = _interopRequireDefault(_route15);
 
@@ -38358,6 +38358,10 @@
 
 	var _Timer2 = _interopRequireDefault(_Timer);
 
+	var _Toast = __webpack_require__(733);
+
+	var _Toast2 = _interopRequireDefault(_Toast);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38407,10 +38411,10 @@
 					data: data
 				}).then(function (response) {
 					if (response.code === 0) {
-						alert("下单成功");
+						_Toast2.default.show("下单成功");
 						_history2.default.push('/self/order');
 					} else {
-						alert(response.message);
+						_Toast2.default.show(response.message);
 					}
 				});
 			};
@@ -38429,7 +38433,7 @@
 				var driverPhoneNo = _this.props.model.driverPhoneNo;
 
 				if (driverPhoneNo == null) {
-					alert("请输入正确的手机号");
+					_Toast2.default.show("请输入正确的手机号");
 					return;
 				}
 				_ws2.default.get({
@@ -38439,9 +38443,9 @@
 					}
 				}).then(function (response) {
 					if (response.code === 0) {
-						// do nothing
+						_Toast2.default.show("验证码发送成功");
 					} else {
-						alert(response.message);
+						_Toast2.default.show(response.message);
 					}
 				});
 			};
@@ -38487,7 +38491,7 @@
 						if (response.code === 0) {
 							actions.utilAction.changeSelfInfo(response.data);
 						} else {
-							alert(response.message);
+							_Toast2.default.show(response.message);
 						}
 					});
 				}
@@ -56846,11 +56850,11 @@
 
 	var _OrderDetail2 = _interopRequireDefault(_OrderDetail);
 
-	var _ServiceComment = __webpack_require__(730);
+	var _ServiceComment = __webpack_require__(732);
 
 	var _ServiceComment2 = _interopRequireDefault(_ServiceComment);
 
-	var _SelfCoupon = __webpack_require__(731);
+	var _SelfCoupon = __webpack_require__(734);
 
 	var _SelfCoupon2 = _interopRequireDefault(_SelfCoupon);
 
@@ -57036,10 +57040,6 @@
 
 	var _List2 = _interopRequireDefault(_List);
 
-	var _ws = __webpack_require__(570);
-
-	var _ws2 = _interopRequireDefault(_ws);
-
 	var _reactRedux = __webpack_require__(563);
 
 	var _redux = __webpack_require__(542);
@@ -57061,30 +57061,16 @@
 	var SelfInfo = function (_Component) {
 		_inherits(SelfInfo, _Component);
 
-		function SelfInfo(props) {
+		function SelfInfo() {
 			_classCallCheck(this, SelfInfo);
 
-			var _this2 = _possibleConstructorReturn(this, (SelfInfo.__proto__ || Object.getPrototypeOf(SelfInfo)).call(this, props));
-
-			_this2.state = {
-				avatarUrl: "",
-				nickname: ""
-			};
-			return _this2;
+			return _possibleConstructorReturn(this, (SelfInfo.__proto__ || Object.getPrototypeOf(SelfInfo)).apply(this, arguments));
 		}
 
 		_createClass(SelfInfo, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				var _this = this;
-				_ws2.default.get({
-					url: '/api/self/info'
-				}).then(function (response) {
-					_this.setState({
-						nickname: response.nickname,
-						avatarUrl: response.avatarURL
-					});
-				});
+				document.title = "个人信息";
 			}
 		}, {
 			key: 'render',
@@ -57184,6 +57170,10 @@
 
 	var _history2 = _interopRequireDefault(_history);
 
+	var _Toast = __webpack_require__(733);
+
+	var _Toast2 = _interopRequireDefault(_Toast);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -57237,10 +57227,10 @@
 					}
 				}).then(function (response) {
 					if (response.code === 0) {
-						alert("修改成功");
+						_Toast2.default.show("修改成功");
 						_history2.default.goBack();
 					} else {
-						alert(response.message);
+						_Toast2.default.show(response.message);
 					}
 				});
 			};
@@ -57272,7 +57262,7 @@
 							vin: response.data.vin
 						});
 					} else {
-						alert(response.message);
+						_Toast2.default.show(response.message);
 					}
 				});
 			}
@@ -57432,6 +57422,10 @@
 
 	var _ws2 = _interopRequireDefault(_ws);
 
+	var _Toast = __webpack_require__(733);
+
+	var _Toast2 = _interopRequireDefault(_Toast);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57502,7 +57496,7 @@
 							flow: response.data.flow
 						});
 					} else {
-						alert(response.message);
+						_Toast2.default.show(response.message);
 					}
 				});
 			}
@@ -57577,6 +57571,10 @@
 
 	var _history2 = _interopRequireDefault(_history);
 
+	var _Toast = __webpack_require__(733);
+
+	var _Toast2 = _interopRequireDefault(_Toast);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57607,6 +57605,7 @@
 							hasMore: hasMore
 						});
 					} else {
+						_Toast2.default.show(response.message);
 						_this.setState({
 							hasMore: false
 						});
@@ -57799,7 +57798,11 @@
 
 	var _history2 = _interopRequireDefault(_history);
 
-	var _utils = __webpack_require__(768);
+	var _utils = __webpack_require__(730);
+
+	var _Toast = __webpack_require__(733);
+
+	var _Toast2 = _interopRequireDefault(_Toast);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57822,9 +57825,13 @@
 				_ws2.default.get({
 					url: '/api/order/' + id
 				}).then(function (response) {
-					_this2.setState(_extends({}, response.data, {
-						status: response.data.orderStatus.key
-					}));
+					if (response.code === 0) {
+						_this2.setState(_extends({}, response.data, {
+							status: response.data.orderStatus.key
+						}));
+					} else {
+						_Toast2.default.show(response.message);
+					}
 				});
 			};
 
@@ -57876,7 +57883,7 @@
 					if (response.code === 0) {
 						_this.pay(response.data);
 					} else {
-						alert(response.message);
+						_Toast2.default.show(response.message);
 					}
 				});
 			};
@@ -57891,14 +57898,14 @@
 				if (WeixinJSBridge) {
 					WeixinJSBridge.invoke('getBrandWCPayRequest', requestData, function (res) {
 						if (res.err_msg == "get_brand_wcpay_request:ok") {
-							alert("支付成功");
+							_Toast2.default.show("支付成功");
 							_this.refresh();
 						} else {
-							alert(res.err_msg ? res.err_msg : '支付失败');
+							_Toast2.default.show(res.err_msg ? res.err_msg : '支付失败');
 						}
 					});
 				} else {
-					alert("微信支付不可用，请稍后重试");
+					_Toast2.default.show("微信支付不可用，请稍后重试");
 				}
 			};
 
@@ -58308,6 +58315,12 @@
 		}
 
 		_createClass(_class, [{
+			key: 'formatScore',
+			value: function formatScore(score) {
+				score = score != null ? score : 0;
+				return score.toFixed(1);
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var _props = this.props,
@@ -58315,7 +58328,6 @@
 				    name = _props.name,
 				    score = _props.score;
 
-				score = score != null ? score : 0;
 				return _react2.default.createElement(
 					'div',
 					{ className: 'user-info' },
@@ -58344,7 +58356,7 @@
 							_react2.default.createElement(
 								'div',
 								{ className: 'score-value' },
-								score + ".0"
+								this.formatScore(score)
 							)
 						)
 					)
@@ -58359,6 +58371,322 @@
 
 /***/ },
 /* 730 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.dateFormats = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	exports.date2String = date2String;
+	exports.timestamp2String = timestamp2String;
+	exports.parseString2Date = parseString2Date;
+	exports.parseString2Timestamp = parseString2Timestamp;
+	exports.timeFormat = timeFormat;
+	exports.time2Timestamp = time2Timestamp;
+	exports.timeDuration = timeDuration;
+	exports.formatPrice = formatPrice;
+	exports.countDurationForTimestamp = countDurationForTimestamp;
+	exports.discountFormat = discountFormat;
+	exports.getRealParams = getRealParams;
+	exports.getWxNonceStr = getWxNonceStr;
+	exports.signWxPay = signWxPay;
+	exports.getQueryParams = getQueryParams;
+
+	var _lodash = __webpack_require__(731);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var dateFormats = exports.dateFormats = {
+	    SHORT_DATE: "yyyy-MM-dd",
+	    LONG_DATE: "yyyy-MM-dd hh:mm",
+	    FULL_DATE: "yyyy-MM-dd hh:mm:ss"
+	};
+
+	function date2String(date, format) {
+	    var dateString = null,
+	        yyyy = void 0,
+	        M = void 0,
+	        MM = void 0,
+	        d = void 0,
+	        dd = void 0,
+	        h = void 0,
+	        hh = void 0,
+	        m = void 0,
+	        mm = void 0,
+	        s = void 0,
+	        ss = void 0;
+	    if (!_lodash2.default.isDate(date)) {
+	        return null;
+	    }
+	    yyyy = date.getFullYear();
+	    M = date.getMonth() + 1;
+	    MM = M > 9 ? M : "0" + M;
+	    d = date.getDate();
+	    dd = d > 9 ? d : "0" + d;
+	    h = date.getHours();
+	    hh = h > 9 ? h : "0" + h;
+	    m = date.getMinutes();
+	    mm = m > 9 ? m : "0" + m;
+	    s = date.getSeconds();
+	    ss = s > 9 ? s : "0" + s;
+	    format = format ? format : dateFormats.FULL_DATE;
+	    switch (format) {
+	        case dateFormats.SHORT_DATE:
+	            dateString = yyyy + "-" + MM + "-" + dd;
+	            break;
+	        case dateFormats.LONG_DATE:
+	            dateString = yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm;
+	            break;
+	        case dateFormats.FULL_DATE:
+	            dateString = yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss;
+	            break;
+	        default:
+	        // do nothing
+	    }
+	    return dateString;
+	}
+
+	function timestamp2String(timestamp, format) {
+	    var date = new Date(timestamp);
+	    return date2String(date, format);
+	}
+
+	function parseString2Date(ps, format) {
+	    var result = new Date(),
+	        yyyy = void 0,
+	        MM = void 0,
+	        dd = void 0,
+	        hh = void 0,
+	        mm = void 0,
+	        ss = void 0;
+	    format = format ? format : dateFormats.FULL_DATE;
+	    switch (format) {
+	        case dateFormats.SHORT_DATE:
+	            yyyy = ps.substring(0, 4);
+	            MM = ps.substring(5, 7);
+	            dd = ps.substring(8, 10);
+	            result.setFullYear(parseInt(yyyy));
+	            result.setMonth(parseInt(MM) - 1);
+	            result.setDate(parseInt(dd));
+	            result.setHours(0);
+	            result.setMinutes(0);
+	            result.setSeconds(0);
+	            result.setMilliseconds(0);
+	            break;
+	        case dateFormats.LONG_DATE:
+	            yyyy = ps.substring(0, 4);
+	            MM = ps.substring(5, 7);
+	            dd = ps.substring(8, 10);
+	            hh = ps.substring(11, 13);
+	            mm = ps.substring(14, 16);
+	            result.setFullYear(parseInt(yyyy));
+	            result.setMonth(parseInt(MM) - 1);
+	            result.setDate(parseInt(dd));
+	            result.setHours(parseInt(hh));
+	            result.setMinutes(parseInt(mm));
+	            result.setSeconds(0);
+	            result.setMilliseconds(0);
+	            break;
+	        case dateFormats.FULL_DATE:
+	            yyyy = ps.substring(0, 4);
+	            MM = ps.substring(5, 7);
+	            dd = ps.substring(8, 10);
+	            hh = ps.substring(11, 13);
+	            mm = ps.substring(14, 16);
+	            ss = ps.substring(17, 19);
+	            result.setFullYear(parseInt(yyyy));
+	            result.setMonth(parseInt(MM) - 1);
+	            result.setDate(parseInt(dd));
+	            result.setHours(parseInt(hh));
+	            result.setMinutes(parseInt(mm));
+	            result.setSeconds(parseInt(ss));
+	            result.setMilliseconds(0);
+	            break;
+	        default:
+	        // do nothing
+	    }
+	    return result;
+	}
+
+	function parseString2Timestamp(ps, format) {
+	    var date = parseString2Date(ps, format);
+	    return date ? date.getTime() : null;
+	}
+
+	/**
+	 * 时间格式化
+	 * @params "09:12"
+	 * return "09小时12分钟"
+	 **/
+	function timeFormat(time) {
+	    var timeArr = time.split(":");
+	    if (timeArr[0] == 0) {
+	        return timeArr[1] + "分钟";
+	    } else if (timeArr[1] == 0) {
+	        return timeArr[0] + "小时";
+	    } else {
+	        return timeArr[0] + "小时" + timeArr[1] + "分钟";
+	    }
+	}
+
+	//标准时间 -- 时间戳
+	function time2Timestamp(date) {
+	    var arr = date.replace(/ |:/g, '-').split('-');
+	    var newDate = new Date(Date.UTC.apply(null, arr));
+	    return newDate.getTime();
+	}
+
+	/*
+	 * 列车/飞机 行驶时间计算
+	 * @params 起始时间戳 终止时间戳
+	 * return "09:09"
+	 * */
+	function timeDuration(startTimestamp, endTimestamp) {
+	    var startDate = new Date(startTimestamp),
+	        endDate = new Date(endTimestamp),
+	        totalMinutes = (endDate - startDate) / (1000 * 60),
+	        duration;
+	    var hours = parseInt(totalMinutes / 60) < 10 ? "0" + parseInt(totalMinutes / 60) : parseInt(totalMinutes / 60);
+	    var minutes = Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) < 10 ? "0" + Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) : Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60);
+	    duration = hours + ':' + minutes;
+	    return duration;
+	}
+
+	/*
+	 * 价格格式化 Function
+	 * @param    price           float    价格
+	 * @param    NumberOfDecimal number   精确位数
+	 * @param    unit            string   单位
+	 * return                   string
+	 * */
+	function formatPrice(price, NumberOfDecimal, unit) {
+	    if (typeof NumberOfDecimal == "undefined") {
+	        NumberOfDecimal = 2;
+	    }
+	    if (typeof unit == "undefined") {
+	        return price.toFixed(NumberOfDecimal).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+	    }
+	    return price.toFixed(NumberOfDecimal).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + unit;
+	}
+
+	/*
+	 * 飞行时间计算
+	 * @param startTimestamp 出发时间戳
+	 * @param endTimestamp   到达时间戳
+	 * return 3小时20分钟
+	 * */
+	function countDurationForTimestamp(startTimestamp, endTimestamp) {
+	    var startDate = new Date(startTimestamp),
+	        endDate = new Date(endTimestamp),
+	        totalMinutes = (endDate - startDate) / (1000 * 60),
+	        duration;
+	    var hours = parseInt(totalMinutes / 60) < 10 ? "0" + parseInt(totalMinutes / 60) : parseInt(totalMinutes / 60);
+	    var minutes = Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) < 10 ? "0" + Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) : Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60);
+	    duration = hours + ':' + minutes;
+	    return duration;
+	    var hours = parseInt(totalMinutes / 60);
+	    var minutes = Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60);
+	    duration = hours + '小时' + minutes + '分钟';
+	    return duration;
+	}
+
+	/*
+	 * 折扣格式化
+	 * 格式化前 @param discount "0.5"
+	 * 格式化后 "5折"
+	 * */
+	function discountFormat(discount) {
+	    if (discount < 1) {
+	        switch (typeof discount === "undefined" ? "undefined" : _typeof(discount)) {
+	            case "number":
+	                return discount.toString().split(".")[1] + "折";
+	                break;
+	            case "string":
+	                return discount.split(".")[1] + "折";
+	                break;
+	            default:
+	                return discount.toString().split(".")[1] + "折";
+	        }
+	    } else {
+	        return (discount * 10).toString() + "折";
+	    }
+	}
+
+	/*
+	 * 间夜计算
+	 * @param checkIn 入住日期
+	 * @param checkOut 离店日期
+	 * @param roomCount 入住人数
+	 * return 间夜 (离店日期 - 入住日期) * 入住人数
+	 * */
+	function getDaysInterval(checkIn, checkOut, roomCount) {
+	    var newDateStart = new Date(checkIn);
+	    var newDateEnd = new Date(checkOut);
+	    var daysInterval = void 0;
+	    if (newDateEnd <= newDateStart) {
+	        alert("离店日期必须大于入住日期!");
+	        return;
+	    }
+	    daysInterval = parseInt(Math.abs(newDateEnd - newDateStart) / 1000 / 60 / 60 / 24);
+	    if (typeof roomCount == "undefined") {
+	        return daysInterval;
+	    } else {
+	        return daysInterval * roomCount;
+	    }
+	}
+
+	function getRealParams(data) {
+	    var params = {};
+	    for (var p in data) {
+	        if (data[p] != null) {
+	            params[p] = data[p];
+	        }
+	    }
+	    return params;
+	}
+
+	function getWxNonceStr() {
+	    var result = "";
+	    var strLib = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+	    for (var i = 0; i < 32; i++) {
+	        var random = Math.random() * 35;
+	        var randomStr = strLib[random];
+	        result += randomStr;
+	    }
+	    return result;
+	}
+
+	function signWxPay(params, key) {
+	    var stringA = "appId=" + params.appId + "&nonceStr=" + params.nonceStr + "&package=" + encodeURIComponent(params.package) + "&signType=" + params.signType + "&timeStamp=" + params.timeStamp;
+	    var stringSignTemp = StringA + "&key=" + key;
+	}
+
+	function getQueryParams(searchString) {
+	    searchString = searchString.substring(1, searchString.length);
+	    var params = searchString.split("&");
+	    var result = {};
+	    for (var i = 0; i < params.length; i++) {
+	        var parts = params[i].split("=");
+	        result[parts[0]] = decodeURIComponent(parts[1]);
+	    }
+	    return result;
+	}
+
+/***/ },
+/* 731 */
+/***/ function(module, exports) {
+
+	module.exports = _;
+
+/***/ },
+/* 732 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58381,6 +58709,10 @@
 
 	var _ws2 = _interopRequireDefault(_ws);
 
+	var _Toast = __webpack_require__(733);
+
+	var _Toast2 = _interopRequireDefault(_Toast);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58399,7 +58731,7 @@
 
 			_this.getStarView = function (index, value) {
 				var currentScore = index + 1,
-				    active = value && currentScore <= value,
+				    active = value != null && currentScore <= value,
 				    imgUrl = active ? '/images/star_d@2x.png' : '/images/star_h@2x.png';
 				return _react2.default.createElement('img', { src: imgUrl, className: 'star-item', onClick: _this.onChangeScore.bind(_this, currentScore) });
 			};
@@ -58429,11 +58761,19 @@
 						comment: comment
 					}
 				}).then(function (response) {
-					console.log(response);
+					if (response.code === 0) {
+						alert("评价成功");
+						history.push('/self/order');
+					} else {
+						_Toast2.default.show(response.message);
+					}
 				});
 			};
 
 			_this.state = {
+				technicianName: null,
+				technicianAvatarURL: null,
+				technicianScore: null,
 				scoring: 0,
 				comment: ''
 			};
@@ -58443,12 +58783,20 @@
 		_createClass(_class, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
+				var _this2 = this;
+
 				var orderId = this.props.params.id;
 				_ws2.default.get({
 					url: '/api/order/' + orderId
 				}).then(function (response) {
-					if (response.code === 0) {} else {
-						//alert(response.message);
+					if (response.code === 0) {
+						_this2.setState({
+							technicianName: response.data.technicianName,
+							technicianAvatarURL: response.data.technicianAvatarURL,
+							technicianScore: response.data.technicianScore
+						});
+					} else {
+						alert(response.message);
 					}
 				});
 			}
@@ -58456,13 +58804,16 @@
 			key: 'render',
 			value: function render() {
 				var _state = this.state,
+				    technicianAvatarURL = _state.technicianAvatarURL,
+				    technicianName = _state.technicianName,
+				    technicianScore = _state.technicianScore,
 				    scoring = _state.scoring,
 				    comment = _state.comment;
 
 				return _react2.default.createElement(
 					'div',
 					{ className: 'service-comment' },
-					_react2.default.createElement(_UserInfo2.default, null),
+					_react2.default.createElement(_UserInfo2.default, { avatarUrl: technicianAvatarURL, name: technicianName, score: technicianScore }),
 					_react2.default.createElement(
 						'div',
 						{ className: 'comment-title' },
@@ -58496,7 +58847,7 @@
 						{ className: 'btn-zone' },
 						_react2.default.createElement(
 							'button',
-							{ className: 'btn block', onClick: this.onSumbit },
+							{ className: 'btn block', onClick: this.onSumbit, disabled: !(scoring != null && scoring > 0) },
 							'\u63D0\u4EA4\u8BC4\u4EF7'
 						)
 					)
@@ -58510,7 +58861,168 @@
 	exports.default = _class;
 
 /***/ },
-/* 731 */
+/* 733 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.ToastDom = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(300);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(330);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var cn = function cn(str) {
+		var obj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+		var arr = Object.keys(obj);
+		arr = arr.filter(function (v) {
+			return obj[v];
+		});
+		return str + ' ' + arr.join(' ');
+	};
+
+	var Toast = function () {
+		function Toast() {
+			_classCallCheck(this, Toast);
+
+			this.state = {};
+		}
+
+		_createClass(Toast, [{
+			key: 'bind',
+			value: function bind(fn) {
+				this.fn = fn;
+			}
+		}, {
+			key: 'show',
+			value: function show(text) {
+				var _this = this;
+
+				var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
+
+				// debugger
+				this.st && clearTimeout(this.st);
+				this.state = {
+					show: true,
+					text: text
+				};
+				this.fn();
+				this.st = setTimeout(function () {
+					_this.hide();
+				}, time);
+			}
+		}, {
+			key: 'hide',
+			value: function hide() {
+				this.st && clearTimeout(this.st);
+				this.state = {
+					show: false,
+					text: ''
+				};
+				this.fn();
+			}
+		}]);
+
+		return Toast;
+	}();
+
+	var toast = new Toast();
+
+	var ToastDom = function (_Component) {
+		_inherits(ToastDom, _Component);
+
+		function ToastDom() {
+			var _ref;
+
+			var _temp, _this2, _ret;
+
+			_classCallCheck(this, ToastDom);
+
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
+
+			return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref = ToastDom.__proto__ || Object.getPrototypeOf(ToastDom)).call.apply(_ref, [this].concat(args))), _this2), _this2.state = {
+				text: '',
+				show: _this2.props.show || false
+			}, _this2.loading = function () {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'sk-fading-circle' },
+					_react2.default.createElement('div', { className: 'sk-circle1 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle2 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle3 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle4 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle5 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle6 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle7 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle8 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle9 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle10 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle11 sk-circle' }),
+					_react2.default.createElement('div', { className: 'sk-circle12 sk-circle' })
+				);
+			}, _temp), _possibleConstructorReturn(_this2, _ret);
+		}
+
+		_createClass(ToastDom, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var _this3 = this;
+
+				toast.bind(function () {
+					_this3.setState(toast.state);
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ className: cn("toast", { hide: !this.state.show }) },
+					_react2.default.createElement(
+						'p',
+						null,
+						this.state.text || this.loading()
+					)
+				);
+			}
+		}]);
+
+		return ToastDom;
+	}(_react.Component);
+
+	var $toast = document.getElementById('toastroot');
+	if (!$toast) {
+		$toast = document.createElement('div');
+		$toast.setAttribute('id', 'toastroot');
+		document.body.appendChild($toast);
+	}
+
+	_reactDom2.default.render(_react2.default.createElement(ToastDom, null), $toast);
+	exports.default = toast;
+	exports.ToastDom = ToastDom;
+
+/***/ },
+/* 734 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58713,7 +59225,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 732 */
+/* 735 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58728,7 +59240,7 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _UseButter = __webpack_require__(733);
+	var _UseButter = __webpack_require__(736);
 
 	var _UseButter2 = _interopRequireDefault(_UseButter);
 
@@ -58737,7 +59249,7 @@
 	exports.default = _react2.default.createElement(_reactRouter.Route, { path: 'useButter', component: _UseButter2.default });
 
 /***/ },
-/* 733 */
+/* 736 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58758,7 +59270,7 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _action = __webpack_require__(734);
+	var _action = __webpack_require__(737);
 
 	var ThisAction = _interopRequireWildcard(_action);
 
@@ -58840,7 +59352,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UseButter);
 
 /***/ },
-/* 734 */
+/* 737 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58857,7 +59369,7 @@
 	}
 
 /***/ },
-/* 735 */
+/* 738 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58872,7 +59384,7 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _TruckBrand = __webpack_require__(736);
+	var _TruckBrand = __webpack_require__(739);
 
 	var _TruckBrand2 = _interopRequireDefault(_TruckBrand);
 
@@ -58881,7 +59393,7 @@
 	exports.default = _react2.default.createElement(_reactRouter.Route, { path: 'truckBrand', component: _TruckBrand2.default });
 
 /***/ },
-/* 736 */
+/* 739 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59275,7 +59787,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(TruckBrand);
 
 /***/ },
-/* 737 */
+/* 740 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59290,7 +59802,7 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _BaoLun = __webpack_require__(738);
+	var _BaoLun = __webpack_require__(741);
 
 	var _BaoLun2 = _interopRequireDefault(_BaoLun);
 
@@ -59299,7 +59811,7 @@
 	exports.default = _react2.default.createElement(_reactRouter.Route, { path: 'baoLun', component: _BaoLun2.default });
 
 /***/ },
-/* 738 */
+/* 741 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59320,7 +59832,7 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _action = __webpack_require__(739);
+	var _action = __webpack_require__(742);
 
 	var ThisAction = _interopRequireWildcard(_action);
 
@@ -59402,7 +59914,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BaoLun);
 
 /***/ },
-/* 739 */
+/* 742 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -59419,7 +59931,7 @@
 	}
 
 /***/ },
-/* 740 */
+/* 743 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59434,7 +59946,7 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _DaoLun = __webpack_require__(741);
+	var _DaoLun = __webpack_require__(744);
 
 	var _DaoLun2 = _interopRequireDefault(_DaoLun);
 
@@ -59443,7 +59955,7 @@
 	exports.default = _react2.default.createElement(_reactRouter.Route, { path: 'daoLun', component: _DaoLun2.default });
 
 /***/ },
-/* 741 */
+/* 744 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59464,7 +59976,7 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _action = __webpack_require__(742);
+	var _action = __webpack_require__(745);
 
 	var ThisAction = _interopRequireWildcard(_action);
 
@@ -59546,7 +60058,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(DaoLun);
 
 /***/ },
-/* 742 */
+/* 745 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -59563,7 +60075,7 @@
 	}
 
 /***/ },
-/* 743 */
+/* 746 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59573,7 +60085,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 
-	var _reducer = __webpack_require__(744);
+	var _reducer = __webpack_require__(747);
 
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -59588,7 +60100,7 @@
 	  }
 	});
 
-	var _actions = __webpack_require__(745);
+	var _actions = __webpack_require__(748);
 
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -59633,11 +60145,11 @@
 	  }
 	});
 
-	var _sync = __webpack_require__(746);
+	var _sync = __webpack_require__(749);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
-	var _middleware = __webpack_require__(747);
+	var _middleware = __webpack_require__(750);
 
 	var _middleware2 = _interopRequireDefault(_middleware);
 
@@ -59647,7 +60159,7 @@
 	exports.routerMiddleware = _middleware2['default'];
 
 /***/ },
-/* 744 */
+/* 747 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -59690,7 +60202,7 @@
 	}
 
 /***/ },
-/* 745 */
+/* 748 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -59732,7 +60244,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ },
-/* 746 */
+/* 749 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59745,7 +60257,7 @@
 
 	exports['default'] = syncHistoryWithStore;
 
-	var _reducer = __webpack_require__(744);
+	var _reducer = __webpack_require__(747);
 
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -59890,7 +60402,7 @@
 	}
 
 /***/ },
-/* 747 */
+/* 750 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59900,7 +60412,7 @@
 	});
 	exports['default'] = routerMiddleware;
 
-	var _actions = __webpack_require__(745);
+	var _actions = __webpack_require__(748);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -59928,7 +60440,7 @@
 	}
 
 /***/ },
-/* 748 */
+/* 751 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -59956,7 +60468,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 749 */
+/* 752 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59967,35 +60479,35 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _reducer = __webpack_require__(750);
+	var _reducer = __webpack_require__(753);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _reducer3 = __webpack_require__(754);
+	var _reducer3 = __webpack_require__(757);
 
 	var _reducer4 = _interopRequireDefault(_reducer3);
 
-	var _reducer5 = __webpack_require__(756);
+	var _reducer5 = __webpack_require__(759);
 
 	var _reducer6 = _interopRequireDefault(_reducer5);
 
-	var _reducer7 = __webpack_require__(758);
+	var _reducer7 = __webpack_require__(761);
 
 	var _reducer8 = _interopRequireDefault(_reducer7);
 
-	var _reducer9 = __webpack_require__(760);
+	var _reducer9 = __webpack_require__(763);
 
 	var _reducer10 = _interopRequireDefault(_reducer9);
 
-	var _reducer11 = __webpack_require__(762);
+	var _reducer11 = __webpack_require__(765);
 
 	var _reducer12 = _interopRequireDefault(_reducer11);
 
-	var _reducer13 = __webpack_require__(764);
+	var _reducer13 = __webpack_require__(767);
 
 	var _reducer14 = _interopRequireDefault(_reducer13);
 
-	var _reducer15 = __webpack_require__(766);
+	var _reducer15 = __webpack_require__(769);
 
 	var _reducer16 = _interopRequireDefault(_reducer15);
 
@@ -60013,7 +60525,7 @@
 	});
 
 /***/ },
-/* 750 */
+/* 753 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60066,18 +60578,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(751);
+	var _store = __webpack_require__(754);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(753);
+	var _immutableProcess = __webpack_require__(756);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 751 */
+/* 754 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60086,7 +60598,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(752);
+	var _immutable = __webpack_require__(755);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -60122,7 +60634,7 @@
 	});
 
 /***/ },
-/* 752 */
+/* 755 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -65106,7 +65618,7 @@
 	}));
 
 /***/ },
-/* 753 */
+/* 756 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65122,14 +65634,14 @@
 	    return value;
 	};
 
-	var _immutable = __webpack_require__(752);
+	var _immutable = __webpack_require__(755);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 754 */
+/* 757 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65145,11 +65657,11 @@
 	    return state.set("loading", loading(state.get("loading"), action)).set("toast", toast(state.get("toast"), action)).set("selfInfo", selfInfo(state.get("selfInfo"), action)).set("truckBrandList", truckBrandList(state.get("truckBrandList"), action));
 	};
 
-	var _store = __webpack_require__(755);
+	var _store = __webpack_require__(758);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(753);
+	var _immutableProcess = __webpack_require__(756);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
@@ -65208,7 +65720,7 @@
 	}
 
 /***/ },
-/* 755 */
+/* 758 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65217,7 +65729,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(752);
+	var _immutable = __webpack_require__(755);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -65237,7 +65749,7 @@
 	});
 
 /***/ },
-/* 756 */
+/* 759 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65258,18 +65770,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(757);
+	var _store = __webpack_require__(760);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(753);
+	var _immutableProcess = __webpack_require__(756);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 757 */
+/* 760 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65278,7 +65790,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(752);
+	var _immutable = __webpack_require__(755);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -65292,7 +65804,7 @@
 	});
 
 /***/ },
-/* 758 */
+/* 761 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65313,18 +65825,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(759);
+	var _store = __webpack_require__(762);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(753);
+	var _immutableProcess = __webpack_require__(756);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 759 */
+/* 762 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65333,7 +65845,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(752);
+	var _immutable = __webpack_require__(755);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -65353,7 +65865,7 @@
 	});
 
 /***/ },
-/* 760 */
+/* 763 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65374,27 +65886,27 @@
 	    }
 	};
 
-	var _store = __webpack_require__(761);
+	var _store = __webpack_require__(764);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(753);
+	var _immutableProcess = __webpack_require__(756);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 761 */
+/* 764 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	   value: true
 	});
 
-	var _immutable = __webpack_require__(752);
+	var _immutable = __webpack_require__(755);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -65405,15 +65917,16 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _immutable2.default.fromJS({
-	    orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
-	    driverName: null,
-	    driverPhoneNo: null,
-	    smscode: null,
-	    isAgree: true
+	   orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
+	   driverName: null,
+	   driverPhoneNo: null,
+	   smscode: null,
+	   isAgree: true,
+	   userCouponId: null
 	});
 
 /***/ },
-/* 762 */
+/* 765 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65434,18 +65947,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(763);
+	var _store = __webpack_require__(766);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(753);
+	var _immutableProcess = __webpack_require__(756);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 763 */
+/* 766 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65454,7 +65967,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(752);
+	var _immutable = __webpack_require__(755);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -65467,7 +65980,7 @@
 	});
 
 /***/ },
-/* 764 */
+/* 767 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65488,27 +66001,27 @@
 	    }
 	};
 
-	var _store = __webpack_require__(765);
+	var _store = __webpack_require__(768);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(753);
+	var _immutableProcess = __webpack_require__(756);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 765 */
+/* 768 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	   value: true
 	});
 
-	var _immutable = __webpack_require__(752);
+	var _immutable = __webpack_require__(755);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -65519,15 +66032,16 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _immutable2.default.fromJS({
-	    orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
-	    driverName: null,
-	    driverPhoneNo: null,
-	    smscode: null,
-	    isAgree: true
+	   orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
+	   driverName: null,
+	   driverPhoneNo: null,
+	   smscode: null,
+	   isAgree: true,
+	   userCouponId: null
 	});
 
 /***/ },
-/* 766 */
+/* 769 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65548,27 +66062,27 @@
 	    }
 	};
 
-	var _store = __webpack_require__(767);
+	var _store = __webpack_require__(770);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(753);
+	var _immutableProcess = __webpack_require__(756);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 767 */
+/* 770 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	   value: true
 	});
 
-	var _immutable = __webpack_require__(752);
+	var _immutable = __webpack_require__(755);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -65579,328 +66093,13 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _immutable2.default.fromJS({
-	    orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
-	    driverName: null,
-	    driverPhoneNo: null,
-	    smscode: null,
-	    isAgree: true
+	   orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
+	   driverName: null,
+	   driverPhoneNo: null,
+	   smscode: null,
+	   isAgree: true,
+	   userCouponId: null
 	});
-
-/***/ },
-/* 768 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.dateFormats = undefined;
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-	exports.date2String = date2String;
-	exports.timestamp2String = timestamp2String;
-	exports.parseString2Date = parseString2Date;
-	exports.parseString2Timestamp = parseString2Timestamp;
-	exports.timeFormat = timeFormat;
-	exports.time2Timestamp = time2Timestamp;
-	exports.timeDuration = timeDuration;
-	exports.formatPrice = formatPrice;
-	exports.countDurationForTimestamp = countDurationForTimestamp;
-	exports.discountFormat = discountFormat;
-	exports.getRealParams = getRealParams;
-	exports.getWxNonceStr = getWxNonceStr;
-	exports.signWxPay = signWxPay;
-	exports.getQueryParams = getQueryParams;
-
-	var _lodash = __webpack_require__(769);
-
-	var _lodash2 = _interopRequireDefault(_lodash);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var dateFormats = exports.dateFormats = {
-	    SHORT_DATE: "yyyy-MM-dd",
-	    LONG_DATE: "yyyy-MM-dd hh:mm",
-	    FULL_DATE: "yyyy-MM-dd hh:mm:ss"
-	};
-
-	function date2String(date, format) {
-	    var dateString = null,
-	        yyyy = void 0,
-	        M = void 0,
-	        MM = void 0,
-	        d = void 0,
-	        dd = void 0,
-	        h = void 0,
-	        hh = void 0,
-	        m = void 0,
-	        mm = void 0,
-	        s = void 0,
-	        ss = void 0;
-	    if (!_lodash2.default.isDate(date)) {
-	        return null;
-	    }
-	    yyyy = date.getFullYear();
-	    M = date.getMonth() + 1;
-	    MM = M > 9 ? M : "0" + M;
-	    d = date.getDate();
-	    dd = d > 9 ? d : "0" + d;
-	    h = date.getHours();
-	    hh = h > 9 ? h : "0" + h;
-	    m = date.getMinutes();
-	    mm = m > 9 ? m : "0" + m;
-	    s = date.getSeconds();
-	    ss = s > 9 ? s : "0" + s;
-	    format = format ? format : dateFormats.FULL_DATE;
-	    switch (format) {
-	        case dateFormats.SHORT_DATE:
-	            dateString = yyyy + "-" + MM + "-" + dd;
-	            break;
-	        case dateFormats.LONG_DATE:
-	            dateString = yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm;
-	            break;
-	        case dateFormats.FULL_DATE:
-	            dateString = yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss;
-	            break;
-	        default:
-	        // do nothing
-	    }
-	    return dateString;
-	}
-
-	function timestamp2String(timestamp, format) {
-	    var date = new Date(timestamp);
-	    return date2String(date, format);
-	}
-
-	function parseString2Date(ps, format) {
-	    var result = new Date(),
-	        yyyy = void 0,
-	        MM = void 0,
-	        dd = void 0,
-	        hh = void 0,
-	        mm = void 0,
-	        ss = void 0;
-	    format = format ? format : dateFormats.FULL_DATE;
-	    switch (format) {
-	        case dateFormats.SHORT_DATE:
-	            yyyy = ps.substring(0, 4);
-	            MM = ps.substring(5, 7);
-	            dd = ps.substring(8, 10);
-	            result.setFullYear(parseInt(yyyy));
-	            result.setMonth(parseInt(MM) - 1);
-	            result.setDate(parseInt(dd));
-	            result.setHours(0);
-	            result.setMinutes(0);
-	            result.setSeconds(0);
-	            result.setMilliseconds(0);
-	            break;
-	        case dateFormats.LONG_DATE:
-	            yyyy = ps.substring(0, 4);
-	            MM = ps.substring(5, 7);
-	            dd = ps.substring(8, 10);
-	            hh = ps.substring(11, 13);
-	            mm = ps.substring(14, 16);
-	            result.setFullYear(parseInt(yyyy));
-	            result.setMonth(parseInt(MM) - 1);
-	            result.setDate(parseInt(dd));
-	            result.setHours(parseInt(hh));
-	            result.setMinutes(parseInt(mm));
-	            result.setSeconds(0);
-	            result.setMilliseconds(0);
-	            break;
-	        case dateFormats.FULL_DATE:
-	            yyyy = ps.substring(0, 4);
-	            MM = ps.substring(5, 7);
-	            dd = ps.substring(8, 10);
-	            hh = ps.substring(11, 13);
-	            mm = ps.substring(14, 16);
-	            ss = ps.substring(17, 19);
-	            result.setFullYear(parseInt(yyyy));
-	            result.setMonth(parseInt(MM) - 1);
-	            result.setDate(parseInt(dd));
-	            result.setHours(parseInt(hh));
-	            result.setMinutes(parseInt(mm));
-	            result.setSeconds(parseInt(ss));
-	            result.setMilliseconds(0);
-	            break;
-	        default:
-	        // do nothing
-	    }
-	    return result;
-	}
-
-	function parseString2Timestamp(ps, format) {
-	    var date = parseString2Date(ps, format);
-	    return date ? date.getTime() : null;
-	}
-
-	/**
-	 * 时间格式化
-	 * @params "09:12"
-	 * return "09小时12分钟"
-	 **/
-	function timeFormat(time) {
-	    var timeArr = time.split(":");
-	    if (timeArr[0] == 0) {
-	        return timeArr[1] + "分钟";
-	    } else if (timeArr[1] == 0) {
-	        return timeArr[0] + "小时";
-	    } else {
-	        return timeArr[0] + "小时" + timeArr[1] + "分钟";
-	    }
-	}
-
-	//标准时间 -- 时间戳
-	function time2Timestamp(date) {
-	    var arr = date.replace(/ |:/g, '-').split('-');
-	    var newDate = new Date(Date.UTC.apply(null, arr));
-	    return newDate.getTime();
-	}
-
-	/*
-	 * 列车/飞机 行驶时间计算
-	 * @params 起始时间戳 终止时间戳
-	 * return "09:09"
-	 * */
-	function timeDuration(startTimestamp, endTimestamp) {
-	    var startDate = new Date(startTimestamp),
-	        endDate = new Date(endTimestamp),
-	        totalMinutes = (endDate - startDate) / (1000 * 60),
-	        duration;
-	    var hours = parseInt(totalMinutes / 60) < 10 ? "0" + parseInt(totalMinutes / 60) : parseInt(totalMinutes / 60);
-	    var minutes = Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) < 10 ? "0" + Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) : Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60);
-	    duration = hours + ':' + minutes;
-	    return duration;
-	}
-
-	/*
-	 * 价格格式化 Function
-	 * @param    price           float    价格
-	 * @param    NumberOfDecimal number   精确位数
-	 * @param    unit            string   单位
-	 * return                   string
-	 * */
-	function formatPrice(price, NumberOfDecimal, unit) {
-	    if (typeof NumberOfDecimal == "undefined") {
-	        NumberOfDecimal = 2;
-	    }
-	    if (typeof unit == "undefined") {
-	        return price.toFixed(NumberOfDecimal).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-	    }
-	    return price.toFixed(NumberOfDecimal).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + unit;
-	}
-
-	/*
-	 * 飞行时间计算
-	 * @param startTimestamp 出发时间戳
-	 * @param endTimestamp   到达时间戳
-	 * return 3小时20分钟
-	 * */
-	function countDurationForTimestamp(startTimestamp, endTimestamp) {
-	    var startDate = new Date(startTimestamp),
-	        endDate = new Date(endTimestamp),
-	        totalMinutes = (endDate - startDate) / (1000 * 60),
-	        duration;
-	    var hours = parseInt(totalMinutes / 60) < 10 ? "0" + parseInt(totalMinutes / 60) : parseInt(totalMinutes / 60);
-	    var minutes = Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) < 10 ? "0" + Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60) : Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60);
-	    duration = hours + ':' + minutes;
-	    return duration;
-	    var hours = parseInt(totalMinutes / 60);
-	    var minutes = Math.round(((totalMinutes / 60).toFixed(2) - hours) * 60);
-	    duration = hours + '小时' + minutes + '分钟';
-	    return duration;
-	}
-
-	/*
-	 * 折扣格式化
-	 * 格式化前 @param discount "0.5"
-	 * 格式化后 "5折"
-	 * */
-	function discountFormat(discount) {
-	    if (discount < 1) {
-	        switch (typeof discount === "undefined" ? "undefined" : _typeof(discount)) {
-	            case "number":
-	                return discount.toString().split(".")[1] + "折";
-	                break;
-	            case "string":
-	                return discount.split(".")[1] + "折";
-	                break;
-	            default:
-	                return discount.toString().split(".")[1] + "折";
-	        }
-	    } else {
-	        return (discount * 10).toString() + "折";
-	    }
-	}
-
-	/*
-	 * 间夜计算
-	 * @param checkIn 入住日期
-	 * @param checkOut 离店日期
-	 * @param roomCount 入住人数
-	 * return 间夜 (离店日期 - 入住日期) * 入住人数
-	 * */
-	function getDaysInterval(checkIn, checkOut, roomCount) {
-	    var newDateStart = new Date(checkIn);
-	    var newDateEnd = new Date(checkOut);
-	    var daysInterval = void 0;
-	    if (newDateEnd <= newDateStart) {
-	        alert("离店日期必须大于入住日期!");
-	        return;
-	    }
-	    daysInterval = parseInt(Math.abs(newDateEnd - newDateStart) / 1000 / 60 / 60 / 24);
-	    if (typeof roomCount == "undefined") {
-	        return daysInterval;
-	    } else {
-	        return daysInterval * roomCount;
-	    }
-	}
-
-	function getRealParams(data) {
-	    var params = {};
-	    for (var p in data) {
-	        if (data[p] != null) {
-	            params[p] = data[p];
-	        }
-	    }
-	    return params;
-	}
-
-	function getWxNonceStr() {
-	    var result = "";
-	    var strLib = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-	    for (var i = 0; i < 32; i++) {
-	        var random = Math.random() * 35;
-	        var randomStr = strLib[random];
-	        result += randomStr;
-	    }
-	    return result;
-	}
-
-	function signWxPay(params, key) {
-	    var stringA = "appId=" + params.appId + "&nonceStr=" + params.nonceStr + "&package=" + encodeURIComponent(params.package) + "&signType=" + params.signType + "&timeStamp=" + params.timeStamp;
-	    var stringSignTemp = StringA + "&key=" + key;
-	}
-
-	function getQueryParams(searchString) {
-	    searchString = searchString.substring(1, searchString.length);
-	    var params = searchString.split("&");
-	    var result = {};
-	    for (var i = 0; i < params.length; i++) {
-	        var parts = params[i].split("=");
-	        result[parts[0]] = decodeURIComponent(parts[1]);
-	    }
-	    return result;
-	}
-
-/***/ },
-/* 769 */
-/***/ function(module, exports) {
-
-	module.exports = _;
 
 /***/ }
 /******/ ]);
