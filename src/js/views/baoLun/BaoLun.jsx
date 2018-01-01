@@ -28,9 +28,14 @@ class BaoLun extends Component {
 function mapStateToProps(state) {
 	let position = state.reducers.position.toJS(),
 		baoLun = state.reducers.baoLun.toJS(),
-		selfInfo = state.reducers.util.toJS().selfInfo;
+		util = state.reducers.util.toJS(),
+		selfInfo = util.selfInfo,
+		currentPostion = util.currentPosition;
 	return {
-		position: position,
+		position: {
+			...position,
+			...currentPostion
+		},
 		model: baoLun,
 		selfInfo: selfInfo
 	}

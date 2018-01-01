@@ -30,9 +30,14 @@ class Rescue extends Component {
 function mapStateToProps(state) {
 	let position = state.reducers.position.toJS(),
 		rescue = state.reducers.rescue.toJS(),
-		selfInfo = state.reducers.util.toJS().selfInfo;
+		util = state.reducers.util.toJS(),
+		selfInfo = util.selfInfo,
+		currentPosition = util.currentPosition;
 	return {
-		position,
+		position: {
+			...position,
+			...currentPosition
+		},
 		model: rescue,
 		selfInfo
 	}

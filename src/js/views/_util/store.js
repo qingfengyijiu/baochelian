@@ -12,5 +12,8 @@ export default Immutable.fromJS({
     truckBrandList: {
         hotBrands: [],
         truckModels: []
+    },
+    currentPosition: {
+
     }
 })

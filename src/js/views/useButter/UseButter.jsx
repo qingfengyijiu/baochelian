@@ -28,9 +28,14 @@ class UseButter extends Component {
 function mapStateToProps(state) {
 	let position = state.reducers.position.toJS(),
 		useButter = state.reducers.useButter.toJS(),
-		selfInfo = state.reducers.util.toJS().selfInfo;
+		util = state.reducers.util.toJS(),
+		selfInfo = util.selfInfo,
+		currentPosition = util.currentPosition;
 	return {
-		position: position,
+		position: {
+			...position,
+			...currentPosition
+		},
 		model: useButter,
 		selfInfo: selfInfo
 	}

@@ -28,9 +28,14 @@ class DaoLun extends Component {
 function mapStateToProps(state) {
 	let position = state.reducers.position.toJS(),
 		daoLun = state.reducers.daoLun.toJS(),
-		selfInfo = state.reducers.util.toJS().selfInfo;
+		util = state.reducers.util.toJS(),
+		selfInfo = util.selfInfo,
+		currentPosition = util.currentPosition;
 	return {
-		position: position,
+		position: {
+			...position,
+			...currentPosition
+		},
 		model: daoLun,
 		selfInfo: selfInfo
 	}
