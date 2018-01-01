@@ -17,5 +17,6 @@ export default Immutable.fromJS({
         location: null,
         locationLng: null,
         locationLat: null
-    }
+    },
+    userInputLocation: null
 })

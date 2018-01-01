@@ -50,11 +50,21 @@ function currentPosition(state = initialState.get("currentPosition"), action={})
     }
 }
 
+function userInputLocation(state = initialState.get("userInputLocation"), action={}) {
+    switch (action.type) {
+        case "CHANGE_USER_INPUT_LOCATION":
+            return action.data;
+        default:
+            return state;
+    }
+}
+
 export default function (state = initialState, action = {}) {
     return state
         .set("loading", loading(state.get("loading"), action))
         .set("toast", toast(state.get("toast"), action))
         .set("selfInfo", selfInfo(state.get("selfInfo"), action))
         .set("truckBrandList", truckBrandList(state.get("truckBrandList"), action))
-        .set("currentPosition", currentPosition(state.get("currentPosition"), action));
+        .set("currentPosition", currentPosition(state.get("currentPosition"), action))
+        .set("userInputLocation", userInputLocation(state.get("userInputLocation"), action));
 }

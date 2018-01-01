@@ -43,3 +43,10 @@ export function changeCurrentPosition(data) {
         data
     }
 }
+
+export function changeUserInputLocation(data) {
+    return {
+        type: "CHANGE_USER_INPUT_LOCATION",
+        data
+    }
+}

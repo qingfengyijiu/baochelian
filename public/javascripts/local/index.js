@@ -35831,6 +35831,7 @@
 	exports.changeSelfInfo = changeSelfInfo;
 	exports.changeTruckBrandList = changeTruckBrandList;
 	exports.changeCurrentPosition = changeCurrentPosition;
+	exports.changeUserInputLocation = changeUserInputLocation;
 	function showLoading() {
 	    return {
 	        type: "LOADING_SHOW"
@@ -35873,6 +35874,13 @@
 	function changeCurrentPosition(data) {
 	    return {
 	        type: 'CHANGE_CURRENT_POSITION',
+	        data: data
+	    };
+	}
+
+	function changeUserInputLocation(data) {
+	    return {
+	        type: "CHANGE_USER_INPUT_LOCATION",
 	        data: data
 	    };
 	}
@@ -38453,10 +38461,11 @@
 		    rescue = state.reducers.rescue.toJS(),
 		    util = state.reducers.util.toJS(),
 		    selfInfo = util.selfInfo,
-		    currentPosition = util.currentPosition;
+		    currentPosition = util.currentPosition,
+		    userInputLocation = util.userInputLocation;
 		return {
 			position: {
-				location: position.location != null ? position.location : currentPosition.location,
+				location: userInputLocation ? userInputLocation : position.location != null ? position.location : currentPosition.location,
 				locationLng: position.locationLng != null ? position.locationLng : currentPosition.locationLng,
 				locationLat: position.locationLat != null ? position.locationLat : currentPosition.locationLat,
 				locationDetail: position.locationDetail
@@ -38678,12 +38687,19 @@
 			};
 
 			_this.onChangePosition = function (e) {
-				var _this$props2 = _this.props,
-				    actions = _this$props2.actions,
-				    position = _this$props2.position;
+				var actions = _this.props.actions;
 
-				position.location = e.target.value;
-				actions.utilAction.changeCurrentPosition(position);
+				actions.utilAction.changeUserInputLocation(e.target.value);
+			};
+
+			_this.onClickPosition = function (e) {
+				var position = _this.props.position;
+
+				if (position.locationLng == null || position.locationLat == null) {
+					_this.gotoPosition();
+					e.preventDefault();
+					e.stopPropagation();
+				}
 			};
 
 			return _this;
@@ -38801,7 +38817,7 @@
 						_react2.default.createElement(
 							_List.Item,
 							null,
-							_react2.default.createElement('input', { type: 'text', className: 'input-position', placeholder: '\u60A8\u7684\u4F4D\u7F6E', value: position.location ? position.location : '', onChange: this.onChangePosition }),
+							_react2.default.createElement('input', { type: 'text', className: 'input-position', placeholder: '\u60A8\u7684\u4F4D\u7F6E', value: position.location ? position.location : '', onChange: this.onChangePosition, onClick: this.onClickPosition }),
 							_react2.default.createElement('img', { className: 'address fr tail-icon', src: 'images/rescue/address@2x.png', onClick: this.gotoPosition })
 						),
 						_react2.default.createElement(
@@ -59457,10 +59473,11 @@
 		    useButter = state.reducers.useButter.toJS(),
 		    util = state.reducers.util.toJS(),
 		    selfInfo = util.selfInfo,
-		    currentPosition = util.currentPosition;
+		    currentPosition = util.currentPosition,
+		    userInputLocation = util.userInputLocation;
 		return {
 			position: {
-				location: position.location != null ? position.location : currentPosition.location,
+				location: userInputLocation ? userInputLocation : position.location != null ? position.location : currentPosition.location,
 				locationLng: position.locationLng != null ? position.locationLng : currentPosition.locationLng,
 				locationLat: position.locationLat != null ? position.locationLat : currentPosition.locationLat,
 				locationDetail: position.locationDetail
@@ -60012,10 +60029,11 @@
 		    baoLun = state.reducers.baoLun.toJS(),
 		    util = state.reducers.util.toJS(),
 		    selfInfo = util.selfInfo,
-		    currentPostion = util.currentPosition;
+		    currentPosition = util.currentPosition,
+		    userInputLocation = util.userInputLocation;
 		return {
 			position: {
-				location: position.location != null ? position.location : currentPosition.location,
+				location: userInputLocation ? userInputLocation : position.location != null ? position.location : currentPosition.location,
 				locationLng: position.locationLng != null ? position.locationLng : currentPosition.locationLng,
 				locationLat: position.locationLat != null ? position.locationLat : currentPosition.locationLat,
 				locationDetail: position.locationDetail
@@ -60163,10 +60181,11 @@
 		    daoLun = state.reducers.daoLun.toJS(),
 		    util = state.reducers.util.toJS(),
 		    selfInfo = util.selfInfo,
-		    currentPosition = util.currentPosition;
+		    currentPosition = util.currentPosition,
+		    userInputLocation = util.userInputLocation;
 		return {
 			position: {
-				location: position.location != null ? position.location : currentPosition.location,
+				location: userInputLocation ? userInputLocation : position.location != null ? position.location : currentPosition.location,
 				locationLng: position.locationLng != null ? position.locationLng : currentPosition.locationLng,
 				locationLat: position.locationLat != null ? position.locationLat : currentPosition.locationLat,
 				locationDetail: position.locationDetail
@@ -65784,7 +65803,7 @@
 	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _store2.default;
 	    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-	    return state.set("loading", loading(state.get("loading"), action)).set("toast", toast(state.get("toast"), action)).set("selfInfo", selfInfo(state.get("selfInfo"), action)).set("truckBrandList", truckBrandList(state.get("truckBrandList"), action)).set("currentPosition", currentPosition(state.get("currentPosition"), action));
+	    return state.set("loading", loading(state.get("loading"), action)).set("toast", toast(state.get("toast"), action)).set("selfInfo", selfInfo(state.get("selfInfo"), action)).set("truckBrandList", truckBrandList(state.get("truckBrandList"), action)).set("currentPosition", currentPosition(state.get("currentPosition"), action)).set("userInputLocation", userInputLocation(state.get("userInputLocation"), action));
 	};
 
 	var _store = __webpack_require__(758);
@@ -65861,6 +65880,18 @@
 	    }
 	}
 
+	function userInputLocation() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _store2.default.get("userInputLocation");
+	    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+	    switch (action.type) {
+	        case "CHANGE_USER_INPUT_LOCATION":
+	            return action.data;
+	        default:
+	            return state;
+	    }
+	}
+
 /***/ },
 /* 758 */
 /***/ function(module, exports, __webpack_require__) {
@@ -65892,7 +65923,8 @@
 	        location: null,
 	        locationLng: null,
 	        locationLat: null
-	    }
+	    },
+	    userInputLocation: null
 	});
 
 /***/ },

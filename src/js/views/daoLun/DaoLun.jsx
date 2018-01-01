@@ -30,10 +30,11 @@ function mapStateToProps(state) {
 		daoLun = state.reducers.daoLun.toJS(),
 		util = state.reducers.util.toJS(),
 		selfInfo = util.selfInfo,
-		currentPosition = util.currentPosition;
+		currentPosition = util.currentPosition,
+		userInputLocation = util.userInputLocation;
 	return {
 		position: {
-			location: position.location != null ? position.location : currentPosition.location,
+			location: userInputLocation ? userInputLocation : (position.location != null ? position.location : currentPosition.location),
 			locationLng: position.locationLng != null ? position.locationLng : currentPosition.locationLng,
 			locationLat: position.locationLat != null ? position.locationLat : currentPosition.locationLat,
 			locationDetail: position.locationDetail

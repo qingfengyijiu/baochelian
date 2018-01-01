@@ -121,9 +121,17 @@ export default class extends Component {
 	}
 
 	onChangePosition = e => {
-		let {actions, position} = this.props;
-		position.location = e.target.value;
-		actions.utilAction.changeCurrentPosition(position);
+		let {actions} = this.props;
+		actions.utilAction.changeUserInputLocation(e.target.value);
+	}
+
+	onClickPosition = e => {
+		let {position} = this.props;
+		if(position.locationLng == null || position.locationLat == null) {
+			this.gotoPosition();
+			e.preventDefault();
+			e.stopPropagation();
+		}
 	}
 
 	render() {
@@ -166,7 +174,7 @@ export default class extends Component {
 				</List>
 				<List>
 					<Item>
-						<input type="text" className="input-position" placeholder="您的位置" value={position.location ? position.location : ''} onChange={this.onChangePosition}/>
+						<input type="text" className="input-position" placeholder="您的位置" value={position.location ? position.location : ''} onChange={this.onChangePosition} onClick={this.onClickPosition}/>
 						<img className="address fr tail-icon" src="images/rescue/address@2x.png" onClick={this.gotoPosition}/>
 					</Item>
 					<Item onClick={this.onTimePickerShow}>
