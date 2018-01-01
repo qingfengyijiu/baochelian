@@ -38677,6 +38677,15 @@
 				_history2.default.push('/position');
 			};
 
+			_this.onChangePosition = function (e) {
+				var _this$props2 = _this.props,
+				    actions = _this$props2.actions,
+				    position = _this$props2.position;
+
+				position.location = e.target.value;
+				actions.utilAction.changeCurrentPosition(position);
+			};
+
 			return _this;
 		}
 
@@ -38791,13 +38800,9 @@
 						null,
 						_react2.default.createElement(
 							_List.Item,
-							{ onClick: this.gotoPosition },
-							_react2.default.createElement(
-								'div',
-								{ className: 'text ft' },
-								position.location ? position.location : '您的位置'
-							),
-							_react2.default.createElement('img', { className: 'address fr tail-icon', src: 'images/rescue/address@2x.png' })
+							null,
+							_react2.default.createElement('input', { type: 'text', className: 'input-position', placeholder: '\u60A8\u7684\u4F4D\u7F6E', value: position.location ? position.location : '', onChange: this.onChangePosition }),
+							_react2.default.createElement('img', { className: 'address fr tail-icon', src: 'images/rescue/address@2x.png', onClick: this.gotoPosition })
 						),
 						_react2.default.createElement(
 							_List.Item,

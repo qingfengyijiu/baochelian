@@ -120,6 +120,12 @@ export default class extends Component {
 		}
 	}
 
+	onChangePosition = e => {
+		let {actions, position} = this.props;
+		position.location = e.target.value;
+		actions.utilAction.changeCurrentPosition(position);
+	}
+
 	render() {
 		let {position, selfInfo, model} = this.props,
 			{driverName, driverPhoneNo, smscode, orderTime, isAgree} = model;
@@ -159,9 +165,9 @@ export default class extends Component {
 					)}
 				</List>
 				<List>
-					<Item onClick={this.gotoPosition}>
-						<div className="text ft">{position.location ? position.location : '您的位置'}</div>
-						<img className="address fr tail-icon" src="images/rescue/address@2x.png"/>
+					<Item>
+						<input type="text" className="input-position" placeholder="您的位置" value={position.location ? position.location : ''} onChange={this.onChangePosition}/>
+						<img className="address fr tail-icon" src="images/rescue/address@2x.png" onClick={this.gotoPosition}/>
 					</Item>
 					<Item onClick={this.onTimePickerShow}>
 						<div className="text ft">{orderTime && orderTime.length > 0 ? orderTime : '预约时间'}</div>
