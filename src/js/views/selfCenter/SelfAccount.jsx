@@ -28,15 +28,23 @@ export default class extends Component {
 	}
 
 	getItemViews = (list) => {
+		list = list ? list : [];
 		return list.map((item, index) => {
+			let amount = item.amount != null ? item.amount : 0,
+				operator = "?";
+			if(item.type.key === 1) {
+				operator = "+";
+			} else {
+				operator = "-";
+			}
 			return (
 				<div className="account-record-item" key={index}>
 					<div className="left">
-						<div className="business-type">收入</div>
-						<div className="business-time">2017-08-23 12:00</div>
+						<div className="business-type">{item.type.value}</div>
+						<div className="business-time">{item.dateTime ? item.dateTime : ''}</div>
 					</div>
 					<div className="right">
-						<div className="business-number">{"+120.00"}</div>
+						<div className="business-number">{operator + amount.toFixed(2)}</div>
 					</div>
 				</div>
 			)

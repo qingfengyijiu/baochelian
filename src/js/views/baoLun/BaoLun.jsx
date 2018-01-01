@@ -33,8 +33,10 @@ function mapStateToProps(state) {
 		currentPostion = util.currentPosition;
 	return {
 		position: {
-			...position,
-			...currentPostion
+			location: position.location != null ? position.location : currentPosition.location,
+			locationLng: position.locationLng != null ? position.locationLng : currentPosition.locationLng,
+			locationLat: position.locationLat != null ? position.locationLat : currentPosition.locationLat,
+			locationDetail: position.locationDetail
 		},
 		model: baoLun,
 		selfInfo: selfInfo
