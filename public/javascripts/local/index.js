@@ -57285,7 +57285,7 @@
 			key: 'render',
 			value: function render() {
 				var _props$selfInfo = this.props.selfInfo,
-				    avatarUrl = _props$selfInfo.avatarUrl,
+				    avatarURL = _props$selfInfo.avatarURL,
 				    name = _props$selfInfo.name;
 
 				return _react2.default.createElement(
@@ -57302,7 +57302,7 @@
 								{ className: 'label-text ft' },
 								'\u5934\u50CF'
 							),
-							_react2.default.createElement('img', { src: avatarUrl != null ? avatarUrl : '/images/default_avatar.png', className: 'touxiang-img user-avatar fr' })
+							_react2.default.createElement('img', { src: avatarURL != null ? avatarURL : '/images/default_avatar.png', className: 'touxiang-img user-avatar fr' })
 						),
 						_react2.default.createElement(
 							_List.Item,

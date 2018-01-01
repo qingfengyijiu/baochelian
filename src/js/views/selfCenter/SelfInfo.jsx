@@ -11,13 +11,13 @@ class SelfInfo extends Component {
 	}
 
 	render() {
-		let {avatarUrl, name} = this.props.selfInfo;
+		let {avatarURL, name} = this.props.selfInfo;
 		return (
 			<div className="self-info">
 				<List>
 					<Item className="touxiang">
 						<div className="label-text ft">头像</div>
-						<img src={avatarUrl != null ? avatarUrl : '/images/default_avatar.png'} className="touxiang-img user-avatar fr"/>
+						<img src={avatarURL != null ? avatarURL : '/images/default_avatar.png'} className="touxiang-img user-avatar fr"/>
 					</Item>
 					<Item>
 						<div className="label-text ft">昵称</div>
