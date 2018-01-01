@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import UserInfo from './UserInfo.jsx';
 import ws from '../../lib/ws.js';
+import toast from '../../components/Toast';
 
 export default class extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
+			technicianName: null,
+			technicianAvatarURL: null,
+			technicianScore: null,
 			scoring: 0,
 			comment: ''
 		}
@@ -18,16 +22,20 @@ export default class extends Component {
 			url: '/api/order/' + orderId
 		}).then(response => {
 			if(response.code === 0) {
-
+				this.setState({
+					technicianName: response.data.technicianName,
+					technicianAvatarURL: response.data.technicianAvatarURL,
+					technicianScore: response.data.technicianScore
+				})
 			} else {
-				//alert(response.message);
+				alert(response.message);
 			}
 		})
 	}
 
 	getStarView = (index, value) => {
 		let currentScore = index + 1,
-			active = value && (currentScore <= value),
+			active = value != null && (currentScore <= value),
 			imgUrl = active ? '/images/star_d@2x.png' : '/images/star_h@2x.png';
 		return (
 			<img src={imgUrl} className="star-item" onClick={this.onChangeScore.bind(this, currentScore)}/>
@@ -56,15 +64,20 @@ export default class extends Component {
 				comment: comment
 			}
 		}).then(response => {
-			console.log(response);
+			if(response.code === 0) {
+				alert("评价成功");
+				history.push('/self/order');
+			} else {
+				toast.show(response.message);
+			}
 		})
 	}
 
 	render() {
-		let {scoring, comment} = this.state;
+		let {technicianAvatarURL, technicianName, technicianScore, scoring, comment} = this.state;
 		return (
 			<div className="service-comment">
-				<UserInfo/>
+				<UserInfo avatarUrl={technicianAvatarURL} name={technicianName} score={technicianScore}/>
 				<div className="comment-title">请对技师的本次服务进行评价</div>
 				<div className="comment-zone">
 					<div className="star-operation">
@@ -80,7 +93,7 @@ export default class extends Component {
 					<textarea placeholder="服务评价" className="comment-text" value={comment != null ? comment : ''} onChange={this.onChangeComment}/>
 				</div>
 				<div className="btn-zone">
-					<button className="btn block" onClick={this.onSumbit}>提交评价</button>
+					<button className="btn block" onClick={this.onSumbit} disabled={!(scoring != null && scoring > 0)}>提交评价</button>
 				</div>
 			</div>
 		)

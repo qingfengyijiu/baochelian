@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ws from '../../lib/ws.js';
+import toast from '../../components/Toast';
 
 export default class extends Component {
 
@@ -21,7 +22,7 @@ export default class extends Component {
 					flow: response.data.flow
 				})
 			} else {
-				alert(response.message);
+				toast.show(response.message);
 			}
 		})
 	}
