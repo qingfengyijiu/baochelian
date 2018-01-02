@@ -65,7 +65,7 @@ class TimerTask extends Component {
 		let { isBack, times, startStr, endStr, isFirst, ingStr, stop } = this.state;
 
 		return (
-			<span className={'timer ' + (isBack ? 'isBak' : '')} onClick={() => {
+			<span className={'timer ' + (isBack ? 'isBack' : '')} onClick={() => {
 				this.clickEvent()
 			}}>
                 {

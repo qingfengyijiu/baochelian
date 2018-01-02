@@ -51,4 +51,23 @@ router.get('/coupons', function(req, res) {
     });
 });
 
+router.post('/bindPhone', function(req, res) {
+    ws.post({
+        url: '/web/bind/phone',
+        token: getToken(req),
+        data: req.body
+    }).then(function(response) {
+        ws.handleResponse(response, res);
+    });
+});
+
+router.get('/qrcode', function(req, res) {
+    ws.get({
+        url: '/web/qrcode',
+        token: getToken(req)
+    }).then(function(response) {
+        ws.handleResponse(response, res);
+    })
+})
+
 module.exports = router;

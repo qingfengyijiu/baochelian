@@ -8667,9 +8667,9 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _reactRouterRedux = __webpack_require__(746);
+	var _reactRouterRedux = __webpack_require__(748);
 
-	var _reduxThunk = __webpack_require__(751);
+	var _reduxThunk = __webpack_require__(753);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -8677,7 +8677,7 @@
 
 	var _history3 = _interopRequireDefault(_history2);
 
-	var _reducers = __webpack_require__(752);
+	var _reducers = __webpack_require__(754);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -29961,19 +29961,19 @@
 
 	var _route8 = _interopRequireDefault(_route7);
 
-	var _route9 = __webpack_require__(735);
+	var _route9 = __webpack_require__(737);
 
 	var _route10 = _interopRequireDefault(_route9);
 
-	var _route11 = __webpack_require__(738);
+	var _route11 = __webpack_require__(740);
 
 	var _route12 = _interopRequireDefault(_route11);
 
-	var _route13 = __webpack_require__(740);
+	var _route13 = __webpack_require__(742);
 
 	var _route14 = _interopRequireDefault(_route13);
 
-	var _route15 = __webpack_require__(743);
+	var _route15 = __webpack_require__(745);
 
 	var _route16 = _interopRequireDefault(_route15);
 
@@ -38289,7 +38289,7 @@
 
 				return _react2.default.createElement(
 					'span',
-					{ className: 'timer ' + (isBack ? 'isBak' : ''), onClick: function onClick() {
+					{ className: 'timer ' + (isBack ? 'isBack' : ''), onClick: function onClick() {
 							_this2.clickEvent();
 						} },
 					isBack ? times + ingStr : isFirst ? startStr : endStr
@@ -57094,6 +57094,14 @@
 
 	var _SelfCoupon2 = _interopRequireDefault(_SelfCoupon);
 
+	var _BindPhone = __webpack_require__(735);
+
+	var _BindPhone2 = _interopRequireDefault(_BindPhone);
+
+	var _QrCode = __webpack_require__(736);
+
+	var _QrCode2 = _interopRequireDefault(_QrCode);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createElement(
@@ -57110,7 +57118,9 @@
 			_react2.default.createElement(_reactRouter.Route, { path: 'detail', component: _OrderDetail2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: ':id/comment', component: _ServiceComment2.default })
 		),
-		_react2.default.createElement(_reactRouter.Route, { path: 'coupon', component: _SelfCoupon2.default })
+		_react2.default.createElement(_reactRouter.Route, { path: 'coupon', component: _SelfCoupon2.default }),
+		_react2.default.createElement(_reactRouter.Route, { path: 'bindPhone', component: _BindPhone2.default }),
+		_react2.default.createElement(_reactRouter.Route, { path: 'qrcode', component: _QrCode2.default })
 	);
 
 /***/ },
@@ -57135,6 +57145,16 @@
 
 	var _reactRouter = __webpack_require__(477);
 
+	var _reactRedux = __webpack_require__(563);
+
+	var _redux = __webpack_require__(542);
+
+	var _action = __webpack_require__(541);
+
+	var UtilAction = _interopRequireWildcard(_action);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57143,13 +57163,13 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _class = function (_Component) {
-		_inherits(_class, _Component);
+	var SelfCenter = function (_Component) {
+		_inherits(SelfCenter, _Component);
 
-		function _class(props) {
-			_classCallCheck(this, _class);
+		function SelfCenter(props) {
+			_classCallCheck(this, SelfCenter);
 
-			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (SelfCenter.__proto__ || Object.getPrototypeOf(SelfCenter)).call(this, props));
 
 			_this.gotoSelfInfo = function (e) {
 				_reactRouter.browserHistory.push("/self/info");
@@ -57171,10 +57191,20 @@
 				_reactRouter.browserHistory.push("/self/account");
 			};
 
+			_this.gotoPopularize = function (e) {
+				var selfInfo = _this.props.selfInfo;
+
+				if (selfInfo.phone != null) {
+					_reactRouter.browserHistory.push("/self/qrcode");
+				} else {
+					_reactRouter.browserHistory.push("/self/bindPhone");
+				}
+			};
+
 			return _this;
 		}
 
-		_createClass(_class, [{
+		_createClass(SelfCenter, [{
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
@@ -57245,16 +57275,42 @@
 								'\u6211\u7684\u8D26\u53F7'
 							),
 							_react2.default.createElement('img', { className: 'jiaohao tail-icon fr', src: '/images/jiaohao@2x.png' })
+						),
+						_react2.default.createElement(
+							_index.Item,
+							{ onClick: this.gotoPopularize },
+							_react2.default.createElement('img', { className: 'label-icon ft', src: '/images/icon_tuiguang@2x.png' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'label-text ft' },
+								'\u6211\u7684\u63A8\u5E7F'
+							),
+							_react2.default.createElement('img', { className: 'jiaohao tail-icon fr', src: '/images/jiaohao@2x.png' })
 						)
 					)
 				);
 			}
 		}]);
 
-		return _class;
+		return SelfCenter;
 	}(_react.Component);
 
-	exports.default = _class;
+	function mapStateToProps(state) {
+		var selfInfo = state.reducers.util.toJS().selfInfo;
+		return {
+			selfInfo: selfInfo
+		};
+	}
+
+	function mapDispatchToProps(dispatch) {
+		return {
+			actions: {
+				utilAction: (0, _redux.bindActionCreators)(UtilAction, dispatch)
+			}
+		};
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SelfCenter);
 
 /***/ },
 /* 724 */
@@ -59370,6 +59426,300 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(300);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Toast = __webpack_require__(571);
+
+	var _Toast2 = _interopRequireDefault(_Toast);
+
+	var _List = __webpack_require__(573);
+
+	var _List2 = _interopRequireDefault(_List);
+
+	var _Timer = __webpack_require__(576);
+
+	var _Timer2 = _interopRequireDefault(_Timer);
+
+	var _ws = __webpack_require__(570);
+
+	var _ws2 = _interopRequireDefault(_ws);
+
+	var _history = __webpack_require__(580);
+
+	var _history2 = _interopRequireDefault(_history);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _class = function (_Component) {
+		_inherits(_class, _Component);
+
+		function _class(props) {
+			_classCallCheck(this, _class);
+
+			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+
+			_this.onSendSmscode = function (e) {
+				var phone = _this.state.phone;
+
+				if (phone == null) {
+					_Toast2.default.show("请输入正确的手机号");
+					return;
+				}
+				_ws2.default.get({
+					url: '/api/util/captcha',
+					data: {
+						phone: phone
+					}
+				}).then(function (response) {
+					if (response.code === 0) {
+						_Toast2.default.show("验证码发送成功");
+					} else {
+						_Toast2.default.show(response.message);
+					}
+				});
+			};
+
+			_this.onChange = function (field) {
+				return function (e) {
+					var target = e.target,
+					    value = void 0;
+					value = target.value;
+					this.setState(_defineProperty({}, field, value));
+				};
+			};
+
+			_this.submit = function () {
+				var _this$state = _this.state,
+				    phone = _this$state.phone,
+				    captcha = _this$state.captcha;
+
+				if (!_this.validatePhoneNo(phone)) {
+					_Toast2.default.show("请输入正确的手机号");
+					return;
+				}
+				if (!_this.validateCatpcha(captcha)) {
+					_Toast2.default.show("请输入正确的验证码");
+					return;
+				}
+				_ws2.default.post({
+					url: '/api/self/bindPhone',
+					data: {
+						phone: phone,
+						captcha: captcha
+					}
+				}).then(function (response) {
+					if (response.code === 0) {
+						_Toast2.default.show("绑定手机号成功");
+						_history2.default.push('/self/qrcode');
+					} else {
+						_Toast2.default.show(response.message);
+					}
+				});
+			};
+
+			_this.state = {
+				phone: null,
+				captcha: null
+			};
+			return _this;
+		}
+
+		_createClass(_class, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				document.title = "绑定手机号";
+			}
+		}, {
+			key: 'validatePhoneNo',
+			value: function validatePhoneNo(phone) {
+				if (phone == null) {
+					return false;
+				} else {
+					return (/^\d{11}$/.test(phone)
+					);
+				}
+			}
+		}, {
+			key: 'validateCatpcha',
+			value: function validateCatpcha(captcha) {
+				if (captcha == null) {
+					return false;
+				} else {
+					return (/^\d{6}$/.test(captcha)
+					);
+				}
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _state = this.state,
+				    phone = _state.phone,
+				    captcha = _state.captcha;
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'bind-phone' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'bind-tip' },
+						'\u9A8C\u8BC1\u624B\u673A\u53F7\uFF0C\u83B7\u53D6\u4E8C\u7EF4\u7801\u3002'
+					),
+					_react2.default.createElement(
+						_List2.default,
+						null,
+						_react2.default.createElement(
+							_List.Item,
+							null,
+							_react2.default.createElement('input', { value: phone != null ? phone : '', type: 'text', placeholder: '\u8BF7\u586B\u5199\u624B\u673A\u53F7', className: 'input-phone ft', onChange: this.onChange("phone").bind(this) }),
+							_react2.default.createElement(
+								'a',
+								{ className: 'btn-smscode fr', style: { display: this.validatePhoneNo(phone) ? 'block' : 'none' } },
+								_react2.default.createElement(_Timer2.default, { times: 60, startStr: '\u53D1\u9001\u9A8C\u8BC1\u7801', endStr: '\u91CD\u65B0\u53D1\u9001', clickhandle: this.onSendSmscode })
+							)
+						),
+						_react2.default.createElement(
+							_List.Item,
+							null,
+							_react2.default.createElement('input', { value: captcha != null ? captcha : '', type: 'text', placeholder: '\u9A8C\u8BC1\u7801', className: 'full-width', onChange: this.onChange("captcha").bind(this) })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'btn-container' },
+						_react2.default.createElement(
+							'button',
+							{ className: 'btn block', onClick: this.submit, disabled: !this.validatePhoneNo(phone) || !this.validateCatpcha(captcha) },
+							'\u786E\u8BA4'
+						)
+					)
+				);
+			}
+		}]);
+
+		return _class;
+	}(_react.Component);
+
+	exports.default = _class;
+
+/***/ },
+/* 736 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(300);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ws = __webpack_require__(570);
+
+	var _ws2 = _interopRequireDefault(_ws);
+
+	var _Toast = __webpack_require__(571);
+
+	var _Toast2 = _interopRequireDefault(_Toast);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _class = function (_Component) {
+		_inherits(_class, _Component);
+
+		function _class(props) {
+			_classCallCheck(this, _class);
+
+			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+
+			_this.state = {
+				qrcode: null
+			};
+			return _this;
+		}
+
+		_createClass(_class, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var _this2 = this;
+
+				document.title = "我的推广";
+				_ws2.default.get({
+					url: '/api/self/qrcode'
+				}).then(function (response) {
+					if (response.code === 0) {
+						_this2.setState({
+							qrcode: response.data.qr_url
+						});
+					} else {
+						_Toast2.default.show(response.message);
+					}
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var qrcode = this.state.qrcode;
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'page-qrcode' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'popularize-text-container' },
+						_react2.default.createElement('img', { className: 'popularize-text', src: '/images/popularize-text@2x.png' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'popularize-content-container' },
+						_react2.default.createElement('img', { className: 'popularize-qrcode', src: qrcode != null ? qrcode : '' }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'popularize-content-detail' },
+							'\u9080\u8BF7\u53F8\u673A\u626B\u7801\u52A0\u5165\uFF0C\u8D5A\u53D6\u66F4\u591A\u6536\u76CA\u3002'
+						),
+						_react2.default.createElement('img', { className: 'popularize-logo', src: '/images/popularize-logo@2x.png' })
+					)
+				);
+			}
+		}]);
+
+		return _class;
+	}(_react.Component);
+
+	exports.default = _class;
+
+/***/ },
+/* 737 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
@@ -59379,7 +59729,7 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _UseButter = __webpack_require__(736);
+	var _UseButter = __webpack_require__(738);
 
 	var _UseButter2 = _interopRequireDefault(_UseButter);
 
@@ -59388,7 +59738,7 @@
 	exports.default = _react2.default.createElement(_reactRouter.Route, { path: 'useButter', component: _UseButter2.default });
 
 /***/ },
-/* 736 */
+/* 738 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59409,7 +59759,7 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _action = __webpack_require__(737);
+	var _action = __webpack_require__(739);
 
 	var ThisAction = _interopRequireWildcard(_action);
 
@@ -59499,7 +59849,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UseButter);
 
 /***/ },
-/* 737 */
+/* 739 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -59516,7 +59866,7 @@
 	}
 
 /***/ },
-/* 738 */
+/* 740 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59531,7 +59881,7 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _TruckBrand = __webpack_require__(739);
+	var _TruckBrand = __webpack_require__(741);
 
 	var _TruckBrand2 = _interopRequireDefault(_TruckBrand);
 
@@ -59540,7 +59890,7 @@
 	exports.default = _react2.default.createElement(_reactRouter.Route, { path: 'truckBrand', component: _TruckBrand2.default });
 
 /***/ },
-/* 739 */
+/* 741 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59920,7 +60270,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(TruckBrand);
 
 /***/ },
-/* 740 */
+/* 742 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59935,7 +60285,7 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _BaoLun = __webpack_require__(741);
+	var _BaoLun = __webpack_require__(743);
 
 	var _BaoLun2 = _interopRequireDefault(_BaoLun);
 
@@ -59944,7 +60294,7 @@
 	exports.default = _react2.default.createElement(_reactRouter.Route, { path: 'baoLun', component: _BaoLun2.default });
 
 /***/ },
-/* 741 */
+/* 743 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59965,7 +60315,7 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _action = __webpack_require__(742);
+	var _action = __webpack_require__(744);
 
 	var ThisAction = _interopRequireWildcard(_action);
 
@@ -60055,7 +60405,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BaoLun);
 
 /***/ },
-/* 742 */
+/* 744 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -60072,7 +60422,7 @@
 	}
 
 /***/ },
-/* 743 */
+/* 745 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60087,7 +60437,7 @@
 
 	var _reactRouter = __webpack_require__(477);
 
-	var _DaoLun = __webpack_require__(744);
+	var _DaoLun = __webpack_require__(746);
 
 	var _DaoLun2 = _interopRequireDefault(_DaoLun);
 
@@ -60096,7 +60446,7 @@
 	exports.default = _react2.default.createElement(_reactRouter.Route, { path: 'daoLun', component: _DaoLun2.default });
 
 /***/ },
-/* 744 */
+/* 746 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60117,7 +60467,7 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _action = __webpack_require__(745);
+	var _action = __webpack_require__(747);
 
 	var ThisAction = _interopRequireWildcard(_action);
 
@@ -60207,7 +60557,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(DaoLun);
 
 /***/ },
-/* 745 */
+/* 747 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -60224,7 +60574,7 @@
 	}
 
 /***/ },
-/* 746 */
+/* 748 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60234,7 +60584,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 
-	var _reducer = __webpack_require__(747);
+	var _reducer = __webpack_require__(749);
 
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -60249,7 +60599,7 @@
 	  }
 	});
 
-	var _actions = __webpack_require__(748);
+	var _actions = __webpack_require__(750);
 
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -60294,11 +60644,11 @@
 	  }
 	});
 
-	var _sync = __webpack_require__(749);
+	var _sync = __webpack_require__(751);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
-	var _middleware = __webpack_require__(750);
+	var _middleware = __webpack_require__(752);
 
 	var _middleware2 = _interopRequireDefault(_middleware);
 
@@ -60308,7 +60658,7 @@
 	exports.routerMiddleware = _middleware2['default'];
 
 /***/ },
-/* 747 */
+/* 749 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -60351,7 +60701,7 @@
 	}
 
 /***/ },
-/* 748 */
+/* 750 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -60393,7 +60743,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ },
-/* 749 */
+/* 751 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60406,7 +60756,7 @@
 
 	exports['default'] = syncHistoryWithStore;
 
-	var _reducer = __webpack_require__(747);
+	var _reducer = __webpack_require__(749);
 
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -60551,7 +60901,7 @@
 	}
 
 /***/ },
-/* 750 */
+/* 752 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60561,7 +60911,7 @@
 	});
 	exports['default'] = routerMiddleware;
 
-	var _actions = __webpack_require__(748);
+	var _actions = __webpack_require__(750);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -60589,7 +60939,7 @@
 	}
 
 /***/ },
-/* 751 */
+/* 753 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -60617,7 +60967,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 752 */
+/* 754 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60628,35 +60978,35 @@
 
 	var _redux = __webpack_require__(542);
 
-	var _reducer = __webpack_require__(753);
+	var _reducer = __webpack_require__(755);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _reducer3 = __webpack_require__(757);
+	var _reducer3 = __webpack_require__(759);
 
 	var _reducer4 = _interopRequireDefault(_reducer3);
 
-	var _reducer5 = __webpack_require__(759);
+	var _reducer5 = __webpack_require__(761);
 
 	var _reducer6 = _interopRequireDefault(_reducer5);
 
-	var _reducer7 = __webpack_require__(761);
+	var _reducer7 = __webpack_require__(763);
 
 	var _reducer8 = _interopRequireDefault(_reducer7);
 
-	var _reducer9 = __webpack_require__(763);
+	var _reducer9 = __webpack_require__(765);
 
 	var _reducer10 = _interopRequireDefault(_reducer9);
 
-	var _reducer11 = __webpack_require__(765);
+	var _reducer11 = __webpack_require__(767);
 
 	var _reducer12 = _interopRequireDefault(_reducer11);
 
-	var _reducer13 = __webpack_require__(767);
+	var _reducer13 = __webpack_require__(769);
 
 	var _reducer14 = _interopRequireDefault(_reducer13);
 
-	var _reducer15 = __webpack_require__(769);
+	var _reducer15 = __webpack_require__(771);
 
 	var _reducer16 = _interopRequireDefault(_reducer15);
 
@@ -60674,7 +61024,7 @@
 	});
 
 /***/ },
-/* 753 */
+/* 755 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60727,18 +61077,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(754);
+	var _store = __webpack_require__(756);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(756);
+	var _immutableProcess = __webpack_require__(758);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 754 */
+/* 756 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60747,7 +61097,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(755);
+	var _immutable = __webpack_require__(757);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -60783,7 +61133,7 @@
 	});
 
 /***/ },
-/* 755 */
+/* 757 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -65767,7 +66117,7 @@
 	}));
 
 /***/ },
-/* 756 */
+/* 758 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65783,14 +66133,14 @@
 	    return value;
 	};
 
-	var _immutable = __webpack_require__(755);
+	var _immutable = __webpack_require__(757);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 757 */
+/* 759 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65806,11 +66156,11 @@
 	    return state.set("loading", loading(state.get("loading"), action)).set("toast", toast(state.get("toast"), action)).set("selfInfo", selfInfo(state.get("selfInfo"), action)).set("truckBrandList", truckBrandList(state.get("truckBrandList"), action)).set("currentPosition", currentPosition(state.get("currentPosition"), action)).set("userInputLocation", userInputLocation(state.get("userInputLocation"), action));
 	};
 
-	var _store = __webpack_require__(758);
+	var _store = __webpack_require__(760);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(756);
+	var _immutableProcess = __webpack_require__(758);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
@@ -65893,7 +66243,7 @@
 	}
 
 /***/ },
-/* 758 */
+/* 760 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65902,7 +66252,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(755);
+	var _immutable = __webpack_require__(757);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -65928,7 +66278,7 @@
 	});
 
 /***/ },
-/* 759 */
+/* 761 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65949,18 +66299,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(760);
+	var _store = __webpack_require__(762);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(756);
+	var _immutableProcess = __webpack_require__(758);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 760 */
+/* 762 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65969,7 +66319,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(755);
+	var _immutable = __webpack_require__(757);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -65983,7 +66333,7 @@
 	});
 
 /***/ },
-/* 761 */
+/* 763 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66004,18 +66354,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(762);
+	var _store = __webpack_require__(764);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(756);
+	var _immutableProcess = __webpack_require__(758);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 762 */
+/* 764 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66024,7 +66374,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(755);
+	var _immutable = __webpack_require__(757);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -66044,7 +66394,7 @@
 	});
 
 /***/ },
-/* 763 */
+/* 765 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66065,18 +66415,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(764);
+	var _store = __webpack_require__(766);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(756);
+	var _immutableProcess = __webpack_require__(758);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 764 */
+/* 766 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66085,7 +66435,7 @@
 	   value: true
 	});
 
-	var _immutable = __webpack_require__(755);
+	var _immutable = __webpack_require__(757);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -66105,7 +66455,7 @@
 	});
 
 /***/ },
-/* 765 */
+/* 767 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66126,18 +66476,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(766);
+	var _store = __webpack_require__(768);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(756);
+	var _immutableProcess = __webpack_require__(758);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 766 */
+/* 768 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66146,7 +66496,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(755);
+	var _immutable = __webpack_require__(757);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -66159,7 +66509,7 @@
 	});
 
 /***/ },
-/* 767 */
+/* 769 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66180,18 +66530,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(768);
+	var _store = __webpack_require__(770);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(756);
+	var _immutableProcess = __webpack_require__(758);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 768 */
+/* 770 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66200,7 +66550,7 @@
 	   value: true
 	});
 
-	var _immutable = __webpack_require__(755);
+	var _immutable = __webpack_require__(757);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -66220,7 +66570,7 @@
 	});
 
 /***/ },
-/* 769 */
+/* 771 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66241,18 +66591,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(770);
+	var _store = __webpack_require__(772);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(756);
+	var _immutableProcess = __webpack_require__(758);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 770 */
+/* 772 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66261,7 +66611,7 @@
 	   value: true
 	});
 
-	var _immutable = __webpack_require__(755);
+	var _immutable = __webpack_require__(757);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 

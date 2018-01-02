@@ -8,6 +8,8 @@ import SelfOrder from "./SelfOrder.jsx";
 import OrderDetail from "./OrderDetail.jsx";
 import ServiceComment from "./ServiceComment.jsx";
 import SelfCoupon from "./SelfCoupon.jsx";
+import BindPhone from "./BindPhone.jsx";
+import QrCode from './QrCode.jsx';
 
 export default (
     <Route path="self">
@@ -21,6 +23,7 @@ export default (
 		    <Route path=":id/comment" component={ServiceComment}/>
 	    </Route>
 	    <Route path="coupon" component={SelfCoupon}/>
-
+		<Route path="bindPhone" component={BindPhone}/>
+	    <Route path="qrcode" component={QrCode}/>
     </Route>
 )

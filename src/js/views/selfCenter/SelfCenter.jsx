@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import List, {Item} from "../../components/List/index.js";
 import {browserHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as UtilAction from "../_util/action";
 
-export default class extends Component {
+class SelfCenter extends Component {
 
 	constructor(props) {
 		super(props);
@@ -26,6 +29,15 @@ export default class extends Component {
 
 	gotoSelfAccount = e => {
 		browserHistory.push("/self/account");
+	}
+
+	gotoPopularize = e => {
+		let {selfInfo} = this.props;
+		if(selfInfo.phone != null) {
+			browserHistory.push("/self/qrcode");
+		} else {
+			browserHistory.push("/self/bindPhone");
+		}
 	}
 
 	render() {
@@ -61,8 +73,33 @@ export default class extends Component {
 						<div className="label-text ft">我的账号</div>
 						<img className="jiaohao tail-icon fr" src="/images/jiaohao@2x.png"/>
 					</Item>
+					<Item onClick={this.gotoPopularize}>
+						<img className="label-icon ft" src="/images/icon_tuiguang@2x.png"/>
+						<div className="label-text ft">我的推广</div>
+						<img className="jiaohao tail-icon fr" src="/images/jiaohao@2x.png"/>
+					</Item>
 				</List>
 			</div>
 		);
 	}
 }
+
+function mapStateToProps(state) {
+	let selfInfo = state.reducers.util.toJS().selfInfo;
+	return {
+		selfInfo
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		actions: {
+			utilAction: bindActionCreators(UtilAction, dispatch)
+		}
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(SelfCenter)
