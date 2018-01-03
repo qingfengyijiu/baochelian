@@ -35683,7 +35683,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -35719,98 +35719,68 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var App = function (_React$Component) {
-		_inherits(App, _React$Component);
+	    _inherits(App, _React$Component);
 
-		function App() {
-			_classCallCheck(this, App);
+	    function App() {
+	        _classCallCheck(this, App);
 
-			return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-		}
+	        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	    }
 
-		_createClass(App, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				var actions = this.props.actions;
+	    _createClass(App, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var actions = this.props.actions;
 
-				_ws2.default.get({
-					url: '/api/self/info'
-				}).then(function (response) {
-					if (response.code === 0) {
-						if (response.data.phone != null) {
-							actions.utilAction.changeSelfInfo(response.data);
-						}
-					} else {
-						_Toast2.default.show(response.message);
-					}
-				});
-				// 获取品牌列表
-				_ws2.default.get({
-					url: '/api/truck/brands'
-				}).then(function (response) {
-					if (response.code === 0) {
-						actions.utilAction.changeTruckBrandList(response.data);
-					} else {
-						_Toast2.default.show(response.message);
-					}
-				});
-				// 获取定位
-				var mapObj = new AMap.Map('iCenter');
-				mapObj.plugin('AMap.Geolocation', function () {
-					var geolocation = new AMap.Geolocation({
-						enableHighAccuracy: false, //是否使用高精度定位，默认:true
-						timeout: 10000, //超过10秒后停止定位，默认：无穷大
-						maximumAge: 0, //定位结果缓存0毫秒，默认：0
-						convert: true, //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
-						showButton: false, //显示定位按钮，默认：true
-						buttonPosition: 'LB', //定位按钮停靠位置，默认：'LB'，左下角
-						buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-						showMarker: false, //定位成功后在定位到的位置显示点标记，默认：true
-						showCircle: false, //定位成功后用圆圈表示定位精度范围，默认：true
-						panToLocation: false, //定位成功后将定位到的位置作为地图中心点，默认：true
-						zoomToAccuracy: false //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-					});
-					mapObj.addControl(geolocation);
-					geolocation.getCurrentPosition();
-					AMap.event.addListener(geolocation, 'complete', function (data) {
-						actions.utilAction.changeCurrentPosition({
-							locationLng: data.position.getLng(),
-							locationLat: data.position.getLat(),
-							location: data.formattedAddress
-						});
-					}); //返回定位信息
-					AMap.event.addListener(geolocation, 'error', function () {
-						_Toast2.default.show("定位失败");
-					}); //返回定位出错信息
-				});
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					{ className: 'page' },
-					this.props.children,
-					_react2.default.createElement('div', { id: 'iCenter', style: { width: 0, height: 0 } })
-				);
-			}
-		}]);
+	            _ws2.default.get({
+	                url: '/api/self/info'
+	            }).then(function (response) {
+	                if (response.code === 0) {
+	                    if (response.data.phone != null) {
+	                        actions.utilAction.changeSelfInfo(response.data);
+	                    }
+	                } else {
+	                    _Toast2.default.show(response.message);
+	                }
+	            });
+	            // 获取品牌列表
+	            _ws2.default.get({
+	                url: '/api/truck/brands'
+	            }).then(function (response) {
+	                if (response.code === 0) {
+	                    actions.utilAction.changeTruckBrandList(response.data);
+	                } else {
+	                    _Toast2.default.show(response.message);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'page' },
+	                this.props.children
+	            );
+	        }
+	    }]);
 
-		return App;
+	    return App;
 	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
-		var utilState = state.reducers.util.toJS();
-		return {
-			util: utilState
-		};
+	    var utilState = state.reducers.util.toJS();
+	    return {
+	        util: utilState
+	    };
 	}
 
 	function mapDispatchToProps(dispatch) {
-		return {
-			actions: {
-				utilAction: (0, _redux.bindActionCreators)(UtilAction, dispatch)
-			}
-		};
+	    return {
+	        actions: {
+	            utilAction: (0, _redux.bindActionCreators)(UtilAction, dispatch)
+	        }
+	    };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
@@ -38730,6 +38700,35 @@
 						}
 					});
 				}
+				// 获取定位
+				var mapObj = new AMap.Map('iCenter');
+				mapObj.plugin('AMap.Geolocation', function () {
+					var geolocation = new AMap.Geolocation({
+						enableHighAccuracy: false, //是否使用高精度定位，默认:true
+						timeout: 10000, //超过10秒后停止定位，默认：无穷大
+						maximumAge: 0, //定位结果缓存0毫秒，默认：0
+						convert: true, //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+						showButton: false, //显示定位按钮，默认：true
+						buttonPosition: 'LB', //定位按钮停靠位置，默认：'LB'，左下角
+						buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+						showMarker: false, //定位成功后在定位到的位置显示点标记，默认：true
+						showCircle: false, //定位成功后用圆圈表示定位精度范围，默认：true
+						panToLocation: false, //定位成功后将定位到的位置作为地图中心点，默认：true
+						zoomToAccuracy: false //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+					});
+					mapObj.addControl(geolocation);
+					geolocation.getCurrentPosition();
+					AMap.event.addListener(geolocation, 'complete', function (data) {
+						actions.utilAction.changeCurrentPosition({
+							locationLng: data.position.getLng(),
+							locationLat: data.position.getLat(),
+							location: data.formattedAddress
+						});
+					}); //返回定位信息
+					AMap.event.addListener(geolocation, 'error', function () {
+						_Toast2.default.show("定位失败");
+					}); //返回定位出错信息
+				});
 			}
 		}, {
 			key: 'validatePhoneNo',
@@ -38859,7 +38858,8 @@
 							'\u63D0\u4EA4\u8BA2\u5355'
 						)
 					),
-					_react2.default.createElement(_OrderTimePicker2.default, { ref: 'picker', confirm: this.confirmOrderTime })
+					_react2.default.createElement(_OrderTimePicker2.default, { ref: 'picker', confirm: this.confirmOrderTime }),
+					_react2.default.createElement('div', { id: 'iCenter', style: { width: 0, height: 0 } })
 				);
 			}
 		}]);

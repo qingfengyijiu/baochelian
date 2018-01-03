@@ -247,7 +247,7 @@
 	<div class="service-info-container list">
 		<div class="list-item">
 			<label class="text ft">服务项目</label>
-			<div class="text ft" id="serviceCategoryName">补胎救援</div>
+			<div class="text ft" id="serviceCategoryName"></div>
 		</div>
 		<div class="list-item">
 			<label class="text ft">服务详情</label>
@@ -267,13 +267,13 @@
 				<div class="info-comment">
 					<label class="comment-label ft">综合评价：</label>
 					<ul class="comment-value-icon ft">
-						<li class="comment-value-icon-item active"></li>
-						<li class="comment-value-icon-item active"></li>
-						<li class="comment-value-icon-item active"></li>
-						<li class="comment-value-icon-item active"></li>
+						<li class="comment-value-icon-item"></li>
+						<li class="comment-value-icon-item"></li>
+						<li class="comment-value-icon-item"></li>
+						<li class="comment-value-icon-item"></li>
 						<li class="comment-value-icon-item"></li>
 					</ul>
-					<div class="comment-value-number ft">4.0</div>
+					<div class="comment-value-number ft"></div>
 				</div>
 			</div>
 		</div>
@@ -283,7 +283,7 @@
 			<label class="text ft">工时费</label>
 			<div class="text fr">
 				<span>¥ </span>
-				<span>100</span>
+				<span>0</span>
 			</div>
 		</div>
 		<div class="list-item">
@@ -303,21 +303,21 @@
 			<label class="text ft">距离费</label>
 			<div class="text fr">
 				<span>¥ </span>
-				<span>100</span>
+				<span>0</span>
 			</div>
 		</div>
-		<div class="list-item">
+		<div class="list-item" style="display: none;">
 			<label class="text ft">优惠</label>
 			<div class="text fr text-coupon">
 				<span>- ¥ </span>
-				<span>100</span>
+				<span>0</span>
 			</div>
 		</div>
 		<div class="list-item">
 			<label class="text ft">合计</label>
 			<div class="text fr text-total">
 				<span>¥ </span>
-				<span>100</span>
+				<span>0</span>
 			</div>
 		</div>
 	</div>
@@ -355,7 +355,6 @@
 	}
 
 	function changeOrderStatus(status) {
-		console.log(status);
 		if(status >= 200) {
 			$(".step-item[name=order]").addClass("active");
 		}
