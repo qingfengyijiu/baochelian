@@ -1291,7 +1291,12 @@ th {
   color: #f94f4f;
   height: 0.62rem;
   line-height: 0.62rem;
-  margin-left: 0.3rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+}
+.order-detail .info-zone a {
+  text-decoration: none;
+  color: #5b8aff;
 }
 .order-detail .btn-zone {
   width: 6.9rem;

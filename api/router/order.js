@@ -43,6 +43,18 @@ router.post('/:id/scoring', function(req, res) {
 	})
 });
 
+router.post('/:id/cancel', function(req, res) {
+	ws.post({
+		url: '/web/orders/cancel',
+		token: getToken(req),
+		data: {
+			orderId: req.params.id
+		}
+	}).then(function(response) {
+		ws.handleResponse(response, res);
+	})
+});
+
 router.get('/:id', function(req, res) {
     ws.get({
         url: '/web/orders/' + req.params.id,

@@ -58268,6 +58268,21 @@
 				return result;
 			};
 
+			_this2.cancelOrder = function () {
+				var orderId = _this2.state.orderId;
+
+				_ws2.default.post({
+					url: '/api/order/' + orderId + '/cancel'
+				}).then(function (response) {
+					if (response.code === 0) {
+						_Toast2.default.show("取消订单成功");
+						_history2.default.goBack();
+					} else {
+						_Toast2.default.show(response.message);
+					}
+				});
+			};
+
 			_this2.state = {};
 			return _this2;
 		}
@@ -58284,7 +58299,6 @@
 				var _state = this.state,
 				    orderId = _state.orderId,
 				    createTime = _state.createTime,
-				    appointmentTime = _state.appointmentTime,
 				    payTime = _state.payTime,
 				    serviceCategoryName = _state.serviceCategoryName,
 				    serviceName = _state.serviceName,
@@ -58535,8 +58549,17 @@
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'info-zone' },
-						'\u670D\u52A1\u4E0D\u6EE1\u610F\uFF0C7\u5929\u5185\u53EF\u7533\u8BF7\u9000\u6B3E\u3002'
+						{ className: 'info-zone clearfix' },
+						_react2.default.createElement(
+							'span',
+							null,
+							'\u670D\u52A1\u4E0D\u6EE1\u610F\uFF0C7\u5929\u5185\u53EF\u7533\u8BF7\u9000\u6B3E\u3002'
+						),
+						_react2.default.createElement(
+							'a',
+							{ href: 'javascript:void(0)', className: 'fr', onClick: this.cancelOrder },
+							'\u53D6\u6D88\u8BA2\u5355'
+						)
 					),
 					_react2.default.createElement(
 						_index2.default,

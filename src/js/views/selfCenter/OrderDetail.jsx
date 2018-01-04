@@ -142,8 +142,22 @@ export default class extends Component {
 		return result;
 	}
 
+	cancelOrder = () => {
+		let {orderId} = this.state;
+		ws.post({
+			url: '/api/order/' + orderId + '/cancel'
+		}).then(response => {
+			if(response.code === 0) {
+				toast.show("取消订单成功");
+				history.goBack();
+			} else {
+				toast.show(response.message);
+			}
+		});
+	}
+
 	render() {
-		let {orderId, createTime, appointmentTime, payTime, serviceCategoryName, serviceName, orderStatus, status, technicianName, technicianScore, technicianAvatarURL, serviceFee, bmpFee, reduce, skuCollection} = this.state;
+		let {orderId, createTime, payTime, serviceCategoryName, serviceName, orderStatus, status, technicianName, technicianScore, technicianAvatarURL, serviceFee, bmpFee, reduce, skuCollection} = this.state;
 		orderStatus = orderStatus ? orderStatus : {};
 		serviceFee = serviceFee != null ? serviceFee : 0;
 		bmpFee = bmpFee != null ? bmpFee : 0;
@@ -226,7 +240,10 @@ export default class extends Component {
 						</div>
 					</Item>
 				</List>
-				<div className="info-zone">服务不满意，7天内可申请退款。</div>
+				<div className="info-zone clearfix">
+					<span>服务不满意，7天内可申请退款。</span>
+					<a href="javascript:void(0)" className="fr" onClick={this.cancelOrder}>取消订单</a>
+				</div>
 				<List>
 					<div className="btn-zone">
 						<button className="block btn" onClick={this.onClickConfirm} style={{display: (orderStatus.key !== 300 && orderStatus.key !== 600) ? 'block' : 'none'}}>确认</button>
