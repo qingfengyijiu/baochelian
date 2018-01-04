@@ -58276,7 +58276,7 @@
 				}).then(function (response) {
 					if (response.code === 0) {
 						_Toast2.default.show("取消订单成功");
-						_history2.default.goBack();
+						_history2.default.push('/self/order');
 					} else {
 						_Toast2.default.show(response.message);
 					}
@@ -58557,7 +58557,7 @@
 						),
 						_react2.default.createElement(
 							'a',
-							{ href: 'javascript:void(0)', className: 'fr', onClick: this.cancelOrder },
+							{ href: 'javascript:void(0)', className: 'fr', onClick: this.cancelOrder, style: { display: orderStatus.key < 400 ? 'block' : 'none' } },
 							'\u53D6\u6D88\u8BA2\u5355'
 						)
 					),

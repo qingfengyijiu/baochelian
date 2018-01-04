@@ -149,7 +149,7 @@ export default class extends Component {
 		}).then(response => {
 			if(response.code === 0) {
 				toast.show("取消订单成功");
-				history.goBack();
+				history.push('/self/order');
 			} else {
 				toast.show(response.message);
 			}
@@ -242,7 +242,7 @@ export default class extends Component {
 				</List>
 				<div className="info-zone clearfix">
 					<span>服务不满意，7天内可申请退款。</span>
-					<a href="javascript:void(0)" className="fr" onClick={this.cancelOrder}>取消订单</a>
+					<a href="javascript:void(0)" className="fr" onClick={this.cancelOrder} style={{display: orderStatus.key < 400 ? 'block' : 'none'}}>取消订单</a>
 				</div>
 				<List>
 					<div className="btn-zone">
