@@ -59698,7 +59698,6 @@
 						_this2.setState({
 							qrcode: response.data.qr_url
 						});
-						alert(response.data.qr_url);
 					} else {
 						_Toast2.default.show(response.message);
 					}

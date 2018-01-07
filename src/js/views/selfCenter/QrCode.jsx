@@ -20,7 +20,6 @@ export default class extends Component {
 				this.setState({
 					qrcode: response.data.qr_url
 				});
-				alert(response.data.qr_url);
 			} else {
 				toast.show(response.message);
 			}
