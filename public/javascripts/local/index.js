@@ -59708,6 +59708,7 @@
 			value: function render() {
 				var qrcode = this.state.qrcode;
 
+				qrcode = qrcode != null ? qrcode.replace("http://", "https://") : '';
 				return _react2.default.createElement(
 					'div',
 					{ className: 'page-qrcode' },

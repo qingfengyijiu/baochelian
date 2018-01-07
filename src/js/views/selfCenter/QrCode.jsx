@@ -28,6 +28,7 @@ export default class extends Component {
 
 	render() {
 		let {qrcode} = this.state;
+		qrcode = qrcode != null ? qrcode.replace("http://", "https://") : '';
 		return (
 			<div className="page-qrcode">
 				<div className="popularize-text-container">
