@@ -216,6 +216,7 @@ export default class extends Component {
 						<span className="content">同意</span>
 					</label>
 					<Link className="link content" href="/html/agreement1.html">《保车连服务协议》</Link>
+					<Link className="link content fee-list-link" href="/serviceList">保车连服务费用表</Link>
 				</div>
 				<div className="btn-container">
 					<button className="btn block" onClick={this.submit} disabled={!isAgree}>提交订单</button>

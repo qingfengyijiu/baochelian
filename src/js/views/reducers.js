@@ -7,6 +7,7 @@ import useButter from './useButter/reducer.js';
 import truckBrand from './truckBrand/reducer.js';
 import baoLun from './baoLun/reducer.js';
 import daoLun from './daoLun/reducer.js';
+import serviceList from './serviceList/reducer.js';
 
 export default combineReducers({
     enums,
@@ -16,5 +17,6 @@ export default combineReducers({
     useButter,
     truckBrand,
     baoLun,
-    daoLun
+    daoLun,
+    serviceList
 })

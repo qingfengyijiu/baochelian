@@ -12,6 +12,7 @@ import useButterRoute from "./useButter/route";
 import truckBrandRoute from './truckBrand/route';
 import baoLunRoute from "./baoLun/route";
 import daoLunRoute from './daoLun/route';
+import serviceListRoute from './serviceList/route';
 
 export default class extends React.Component {
 
@@ -28,6 +29,7 @@ export default class extends React.Component {
                     {truckBrandRoute}
                     {baoLunRoute}
                     {daoLunRoute}
+                    {serviceListRoute}
                     <Route path="phoneValidate" component={PhoneValidate}/>
                 </Route>
             </Router>
