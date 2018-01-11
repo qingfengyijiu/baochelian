@@ -57204,7 +57204,7 @@
 			_this.gotoPopularize = function (e) {
 				var selfInfo = _this.props.selfInfo;
 
-				if (selfInfo.phone != null) {
+				if (selfInfo.phone != null || selfInfo.phone != "") {
 					_reactRouter.browserHistory.push("/self/qrcode");
 				} else {
 					_reactRouter.browserHistory.push("/self/bindPhone");
