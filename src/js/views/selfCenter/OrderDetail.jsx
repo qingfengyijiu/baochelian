@@ -157,12 +157,10 @@ export default class extends Component {
 	}
 
 	render() {
-		let {orderId, createTime, payTime, serviceCategoryName, serviceName, orderStatus, status, technicianName, technicianScore, technicianAvatarURL, serviceFee, bmpFee, reduce, skuCollection} = this.state;
+		let {orderId, createTime, payTime, serviceCategoryName, serviceName, orderStatus, status, technicianName,
+			technicianScore, technicianAvatarURL, serviceFee, bmpFee, otherFee, totalAmount, reduce,
+			skuCollection} = this.state;
 		orderStatus = orderStatus ? orderStatus : {};
-		serviceFee = serviceFee != null ? serviceFee : 0;
-		bmpFee = bmpFee != null ? bmpFee : 0;
-		let skuTotalAmount = this.getSkuTotalAmount(skuCollection);
-		let totalFee = serviceFee + bmpFee + skuTotalAmount;
 		return (
 			<div className="order-detail">
 				<div className="order-status-zone">
@@ -227,6 +225,12 @@ export default class extends Component {
 							<span>{bmpFee != null ? bmpFee : '0'}</span>
 						</div>
 					</Item>
+					<Item>
+						<div className="label-text ft">其它费用</div>
+						<div className="text fr">
+							<span>{otherFee != null ? '¥' + otherFee : ''}</span>
+						</div>
+					</Item>
 					<Item right={<span>-¥20</span>}>
 						<div className="label-text ft">优惠</div>
 						<div className="text fr">
@@ -236,7 +240,7 @@ export default class extends Component {
 					<Item>
 						<div className="label-text ft">合计</div>
 						<div className="text fr">
-							<span>{totalFee != null ? '¥' + totalFee : ''}</span>
+							<span>{totalAmount != null ? '¥' + totalAmount : ''}</span>
 						</div>
 					</Item>
 				</List>

@@ -58319,14 +58319,12 @@
 				    technicianAvatarURL = _state.technicianAvatarURL,
 				    serviceFee = _state.serviceFee,
 				    bmpFee = _state.bmpFee,
+				    otherFee = _state.otherFee,
+				    totalAmount = _state.totalAmount,
 				    reduce = _state.reduce,
 				    skuCollection = _state.skuCollection;
 
 				orderStatus = orderStatus ? orderStatus : {};
-				serviceFee = serviceFee != null ? serviceFee : 0;
-				bmpFee = bmpFee != null ? bmpFee : 0;
-				var skuTotalAmount = this.getSkuTotalAmount(skuCollection);
-				var totalFee = serviceFee + bmpFee + skuTotalAmount;
 				return _react2.default.createElement(
 					'div',
 					{ className: 'order-detail' },
@@ -58518,6 +58516,24 @@
 						),
 						_react2.default.createElement(
 							_index.Item,
+							null,
+							_react2.default.createElement(
+								'div',
+								{ className: 'label-text ft' },
+								'\u5176\u5B83\u8D39\u7528'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'text fr' },
+								_react2.default.createElement(
+									'span',
+									null,
+									otherFee != null ? '¥' + otherFee : ''
+								)
+							)
+						),
+						_react2.default.createElement(
+							_index.Item,
 							{ right: _react2.default.createElement(
 									'span',
 									null,
@@ -58552,7 +58568,7 @@
 								_react2.default.createElement(
 									'span',
 									null,
-									totalFee != null ? '¥' + totalFee : ''
+									totalAmount != null ? '¥' + totalAmount : ''
 								)
 							)
 						)
