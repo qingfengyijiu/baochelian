@@ -33,7 +33,7 @@ router.get('/:id/pay', function(req, res) {
     })
 });
 
-router.post('/:id/cancalPay', function(req, res) {
+router.post('/:id/cancelPay', function(req, res) {
 	ws.post({
 		url: '/pay/wechat/cancel',
 		data: {

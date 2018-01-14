@@ -283,7 +283,7 @@
 			<label class="text ft">工时费</label>
 			<div class="text fr">
 				<span>¥ </span>
-				<span>0</span>
+				<span id="serviceFee">0</span>
 			</div>
 		</div>
 		<div class="list-item">
@@ -303,7 +303,14 @@
 			<label class="text ft">距离费</label>
 			<div class="text fr">
 				<span>¥ </span>
-				<span>0</span>
+				<span id="bumpFee">0</span>
+			</div>
+		</div>
+		<div class="list-item">
+			<label class="text ft">其它费用</label>
+			<div class="text fr">
+				<span>¥ </span>
+				<span id="otherFee">0</span>
 			</div>
 		</div>
 		<div class="list-item" style="display: none;">
@@ -317,7 +324,7 @@
 			<label class="text ft">合计</label>
 			<div class="text fr text-total">
 				<span>¥ </span>
-				<span>0</span>
+				<span id="totalAmount">0</span>
 			</div>
 		</div>
 	</div>
@@ -398,8 +405,12 @@
 		$("#serviceCategoryName").text(data.serviceCategoryName);
 		$("#serviceName").text(data.serviceName);
 		renderServiceMaterials(data.skuCollection);
-		$("#driverName").text(data.driverName);
 		renderMaterials(data.skuCollection);
+		$("#driverName").text(data.driverName);
+		$("#serviceFee").text(data.serviceFee != null ? data.serviceFee : 0);
+		$("#bumpFee").text(data.bumpFee != null ? data.bumpFee : 0);
+		$("#otherFee").text(data.otherFee != null ? data.otherFee : 0);
+		$("#totalAmount").text(data.totalAmount);
 	}
 
 	/*function setupWebViewJavascriptBridge(callback) {
