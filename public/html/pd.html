@@ -261,19 +261,19 @@
 	</div>
 	<div class="technician-info-container list">
 		<div class="list-item">
-			<img src="/images/default_avatar.png" class="info-avatar ft"/>
+			<img src="/images/default_avatar.png" class="info-avatar ft" id="technicianAvatar"/>
 			<div class="info-right ft">
-				<div class="info-name" id="driverName"></div>
+				<div class="info-name" id="technicianName"></div>
 				<div class="info-comment">
 					<label class="comment-label ft">综合评价：</label>
-					<ul class="comment-value-icon ft">
+					<ul class="comment-value-icon ft" id="technicianScoreList">
 						<li class="comment-value-icon-item"></li>
 						<li class="comment-value-icon-item"></li>
 						<li class="comment-value-icon-item"></li>
 						<li class="comment-value-icon-item"></li>
 						<li class="comment-value-icon-item"></li>
 					</ul>
-					<div class="comment-value-number ft"></div>
+					<div class="comment-value-number ft" id="technicianScore"></div>
 				</div>
 			</div>
 		</div>
@@ -406,7 +406,18 @@
 		$("#serviceName").text(data.serviceName);
 		renderServiceMaterials(data.skuCollection);
 		renderMaterials(data.skuCollection);
-		$("#driverName").text(data.driverName);
+		$("#technicianName").text(data.technicianName);
+		$("#technicianScore").text(data.technicianScore);
+		$("#technicianScoreList li").each(function(idx, item) {
+			if(idx + 1 <= data.score) {
+				$(this).addClass("active");
+			} else {
+				$(this).removeClass("active");
+			}
+		});
+		if(data.technicianAvatar != null && data.technicianAvatar != "") {
+			$("#technicianAvatar").attr("src", data.technicianAvatar);
+		}
 		$("#serviceFee").text(data.serviceFee != null ? data.serviceFee : 0);
 		$("#bumpFee").text(data.bumpFee != null ? data.bumpFee : 0);
 		$("#otherFee").text(data.otherFee != null ? data.otherFee : 0);
