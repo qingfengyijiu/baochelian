@@ -92,13 +92,17 @@ export default class extends Component {
 
 	pay = (requestData) => {
 		let _this = this;
+		let orderId = getQueryParams(location.search).id;
 		if(WeixinJSBridge) {
 			WeixinJSBridge.invoke('getBrandWCPayRequest', requestData, function(res){
 				if(res.err_msg == "get_brand_wcpay_request:ok" ) {
 					toast.show("支付成功");
 					_this.refresh();
 				} else {
-					toast.show(res.err_msg ? res.err_msg : '支付失败');
+					ws.post({
+						url: '/api/order/' + orderId + '/cancelPay'
+					}).then(response => {}).catch(error => {});
+					toast.show('支付失败');
 				}
 			});
 		} else {

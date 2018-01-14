@@ -58205,13 +58205,17 @@
 
 			_this2.pay = function (requestData) {
 				var _this = _this2;
+				var orderId = (0, _utils.getQueryParams)(location.search).id;
 				if (WeixinJSBridge) {
 					WeixinJSBridge.invoke('getBrandWCPayRequest', requestData, function (res) {
 						if (res.err_msg == "get_brand_wcpay_request:ok") {
 							_Toast2.default.show("支付成功");
 							_this.refresh();
 						} else {
-							_Toast2.default.show(res.err_msg ? res.err_msg : '支付失败');
+							_ws2.default.post({
+								url: '/api/order/' + orderId + '/cancelPay'
+							}).then(function (response) {}).catch(function (error) {});
+							_Toast2.default.show('支付失败');
 						}
 					});
 				} else {

@@ -33,6 +33,18 @@ router.get('/:id/pay', function(req, res) {
     })
 });
 
+router.post('/:id/cancalPay', function(req, res) {
+	ws.post({
+		url: '/pay/wechat/cancel',
+		data: {
+			orderId: req.params.id
+		},
+		token: getToken(req)
+	}).then(function(response) {
+		ws.handleResponse(response, res);
+	});
+});
+
 router.post('/:id/scoring', function(req, res) {
 	ws.post({
 		url: '/web/orders/' + req.params.id + '/scoring',
