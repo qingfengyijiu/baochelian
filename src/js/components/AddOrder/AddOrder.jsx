@@ -81,6 +81,10 @@ export default class extends Component {
 		if(smscode != null) {
 			data.captcha = smscode;
 		}
+		if(data.driverLocation == null || data.driverLocation == "") {
+			toast.show("请先选择您当前所在位置");
+			return;
+		}
 		ws.post({
 			url: '/api/order',
 			data: data
