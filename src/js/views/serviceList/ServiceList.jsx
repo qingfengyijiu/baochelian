@@ -8,7 +8,6 @@ import toast from '../../components/Toast';
 class ServiceList extends Component {
 
 	componentDidMount() {
-		document.title = "服务费用表";
 		let {dataList, actions} = this.props;
 		if(dataList == null || dataList.length == 0) {
 			ws.get({
