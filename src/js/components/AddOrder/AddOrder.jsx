@@ -6,6 +6,7 @@ import OrderTimePicker from '../../components/OrderTimePicker';
 import ws from '../../lib/ws.js';
 import Timer from '../Timer';
 import toast from '../Toast';
+import AutosizeTextarea from 'react-autosize-textarea';
 
 export default class extends Component {
 
@@ -206,7 +207,7 @@ export default class extends Component {
 				</List>
 				<List>
 					<Item>
-						<input type="text" className="input-position" placeholder="您的位置" value={position.location ? position.location : ''} onChange={this.onChangePosition} onClick={this.onClickPosition}/>
+						<AutosizeTextarea rows={1} className="input-position" placeholder="您的位置" value={position.location ? position.location : ''} onChange={this.onChangePosition} onClick={this.onClickPosition}/>
 						<img className="address fr tail-icon" src="images/rescue/address@2x.png" onClick={this.gotoPosition}/>
 					</Item>
 					<Item onClick={this.onTimePickerShow}>
@@ -220,7 +221,6 @@ export default class extends Component {
 						<span className="content">同意</span>
 					</label>
 					<Link className="link content" href="/html/agreement1.html">《保车连服务协议》</Link>
-					<Link className="link content fee-list-link" href="/serviceList">保车连服务费用表</Link>
 				</div>
 				<div className="btn-container">
 					<button className="btn block" onClick={this.submit} disabled={!isAgree}>提交订单</button>

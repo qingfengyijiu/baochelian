@@ -54,7 +54,7 @@ class ServiceList extends Component {
 	render() {
 		return (
 			<div className="service-fee-list">
-				<div className="tip">费用仅包含工时费，服务所需耗材不包含在内</div>
+				<div className="service-fee-list-header">- 服务价目表 -</div>
 				<table>
 					<thead>
 						<tr>

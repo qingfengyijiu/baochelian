@@ -16,8 +16,12 @@ export default class extends Component {
 	}
 
 	componentDidMount() {
+		let autoPay = getQueryParams(location.search).autoPay;
 		document.title = "订单详情";
 		this.refresh();
+		if(autoPay == "true") {
+			this.onClickPay();
+		}
 	}
 
 	refresh = () => {

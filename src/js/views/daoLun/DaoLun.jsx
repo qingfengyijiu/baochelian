@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as ThisAction from './action.js';
 import * as UtilAction from '../_util/action.js';
 import AddOrder from '../../components/AddOrder';
+import ServiceList from '../serviceList/ServiceList.jsx';
 
 class DaoLun extends Component {
 
@@ -20,7 +21,10 @@ class DaoLun extends Component {
 
 	render() {
 		return (
-			<AddOrder onChangeField={this.onChangeField} serviceCategory={this.serviceCategory} {...this.props}/>
+			<div>
+				<AddOrder onChangeField={this.onChangeField} serviceCategory={this.serviceCategory} {...this.props}/>
+				<ServiceList/>
+			</div>
 		)
 	}
 }
