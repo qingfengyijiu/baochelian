@@ -33,7 +33,7 @@ class SelfCenter extends Component {
 
 	gotoPopularize = e => {
 		let {selfInfo} = this.props;
-		if(selfInfo.phone != null || selfInfo.phone != "") {
+		if(selfInfo.phone != null && selfInfo.phone != "") {
 			browserHistory.push("/self/qrcode");
 		} else {
 			browserHistory.push("/self/bindPhone");
