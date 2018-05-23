@@ -7,7 +7,7 @@ var getToken = require('../util/cookieUtil').getToken;
  * 获取jsapi signature
  */
 router.post('/custom', function(req, res) {
-	ws.get({
+	ws.post({
 		url: '/web/user/coupons/custom',
 		token: getToken(req),
 	}).then(function(response) {
