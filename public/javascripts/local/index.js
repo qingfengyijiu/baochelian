@@ -61763,15 +61763,10 @@
 
 			_this2.onClickDraw = function (e) {
 				var _this = _this2;
-				var phone = _this2.props.selfInfo.phone || _this2.state.phone;
-				if (_this2.props.selfInfo.phone && _this2.props.selfInfo.phone.length > 0) {
-					phone = _this2.props.selfInfo.phone;
-				} else {
-					phone = _this2.state.phone;
-					if (!/\d{11}/.test(phone)) {
-						alert("请输入正确的手机号");
-						return;
-					}
+				var phone = _this2.state.phone;
+				if (!/\d{11}/.test(phone)) {
+					alert("请输入正确的手机号");
+					return;
 				}
 				_ws2.default.post({
 					url: "/api/self/draw",
@@ -61840,6 +61835,25 @@
 							});
 						}
 					});
+					wx.onMenuShareAppMessage({
+						title: '保车连老板疯了，iPhone X免费送',
+						link: location.origin + '/draw/introduction',
+						imgUrl: location.origin + '/images/draw/head.png',
+						success: function success() {
+							_ws2.default.post({
+								url: "/api/coupons/custom"
+							}).then(function (response) {
+								if (response.code === 0) {
+									_this.setState({
+										showShareDialog: true,
+										parPrice: response.data.parPrice
+									});
+								} else {
+									alert(response.message);
+								}
+							});
+						}
+					});
 				});
 			}
 		}, {
@@ -61850,7 +61864,6 @@
 				    showShareDialog = _state.showShareDialog,
 				    showCouponDialog = _state.showCouponDialog,
 				    parPrice = _state.parPrice;
-				var selfInfo = this.props.selfInfo;
 
 				var couponUrl = "";
 				if (parPrice) {
@@ -61864,7 +61877,7 @@
 						{ className: 'introduction-head' },
 						_react2.default.createElement('img', { className: 'head-img', src: '/images/draw/head.png' }),
 						_react2.default.createElement('img', { className: 'head-tip', src: '/images/draw/activity/title_prizeDrew.png' }),
-						_react2.default.createElement('input', { className: 'head-input', style: { display: selfInfo.phone && selfInfo.phone.length > 0 ? "none" : "block" },
+						_react2.default.createElement('input', { className: 'head-input',
 							type: 'text', value: phone || "", onChange: this.onChangePhone }),
 						_react2.default.createElement('img', { className: 'head-btn', src: '/images/draw/activity/btn.png', onClick: this.onClickDraw }),
 						_react2.default.createElement(
@@ -61924,14 +61937,7 @@
 		return Draw;
 	}(_react.Component);
 
-	function mapStateToProps(state) {
-		var selfInfo = state.reducers.util.toJS().selfInfo;
-		return {
-			selfInfo: selfInfo
-		};
-	}
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Draw);
+	exports.default = Draw;
 
 /***/ },
 /* 760 */,

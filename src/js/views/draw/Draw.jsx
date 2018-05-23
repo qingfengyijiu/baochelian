@@ -4,7 +4,7 @@ import ws from "../../lib/ws"
 import {connect} from 'react-redux'
 
 
-class Draw extends Component {
+export default class Draw extends Component {
 
 	constructor(props) {
 		super(props)
@@ -60,6 +60,25 @@ class Draw extends Component {
 					})
 				}
 			})
+			wx.onMenuShareAppMessage({
+				title: '保车连老板疯了，iPhone X免费送',
+				link: location.origin + '/draw/introduction',
+				imgUrl: location.origin + '/images/draw/head.png',
+				success: function() {
+					ws.post({
+						url: "/api/coupons/custom"
+					}).then(response => {
+						if(response.code === 0) {
+							_this.setState({
+								showShareDialog: true,
+								parPrice: response.data.parPrice
+							})
+						} else {
+							alert(response.message)
+						}
+					})
+				}
+			})
 		})
 
 	}
@@ -89,15 +108,10 @@ class Draw extends Component {
 
 	onClickDraw = e => {
 		const _this = this
-		let phone = this.props.selfInfo.phone || this.state.phone
-		if(this.props.selfInfo.phone && this.props.selfInfo.phone.length > 0) {
-			phone = this.props.selfInfo.phone
-		} else {
-			phone = this.state.phone
-			if(!/\d{11}/.test(phone)) {
-				alert("请输入正确的手机号")
-				return
-			}
+		let phone = this.state.phone
+		if(!/\d{11}/.test(phone)) {
+			alert("请输入正确的手机号")
+			return
 		}
 		ws.post({
 			url: "/api/self/draw",
@@ -113,7 +127,6 @@ class Draw extends Component {
 
 	render() {
 		const {phone, showShareDialog, showCouponDialog, parPrice} = this.state
-		const {selfInfo} = this.props
 		let couponUrl = ""
 		if(parPrice) {
 			couponUrl = "/images/draw/popup/coupon_" + parPrice + ".png"
@@ -123,7 +136,7 @@ class Draw extends Component {
 				<div className="introduction-head">
 					<img className="head-img" src="/images/draw/head.png"/>
 					<img className="head-tip" src="/images/draw/activity/title_prizeDrew.png"/>
-					<input className="head-input" style={{display: selfInfo.phone && selfInfo.phone.length > 0 ? "none" : "block"}}
+					<input className="head-input"
 					       type="text" value={phone || ""} onChange={this.onChangePhone}/>
 					<img className="head-btn" src="/images/draw/activity/btn.png" onClick={this.onClickDraw}/>
 					<div className="head-note">*本次活动手机号作为唯一中奖凭证</div>
@@ -160,12 +173,3 @@ class Draw extends Component {
 		)
 	}
 }
-
-function mapStateToProps(state) {
-	let selfInfo = state.reducers.util.toJS().selfInfo;
-	return {
-		selfInfo
-	}
-}
-
-export default connect(mapStateToProps)(Draw)
