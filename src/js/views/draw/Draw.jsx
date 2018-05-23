@@ -20,7 +20,7 @@ export default class Draw extends Component {
 		const timestamp = new Date().getTime().toString().slice(0, 10)
 		const nonceStr = "testbaochelian"
 		const appid = "wx3e98278c327dfef2"
-		const debug = false
+		const debug = true
 		const jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"]
 		const _this = this
 		ws.get({
@@ -58,10 +58,15 @@ export default class Draw extends Component {
 							alert(response.message)
 						}
 					})
-				}
+				},
+				fail: function() {},
+				complete: function() {},
+				cancel: function() {},
+				trigger: function() {}
 			})
 			wx.onMenuShareAppMessage({
 				title: '保车连老板疯了，iPhone X免费送',
+				desc: '保车连老板疯了，iPhone X免费送',
 				link: location.origin + '/draw/introduction',
 				imgUrl: location.origin + '/images/draw/head.png',
 				success: function() {
@@ -77,7 +82,11 @@ export default class Draw extends Component {
 							alert(response.message)
 						}
 					})
-				}
+				},
+				fail: function() {},
+				complete: function() {},
+				cancel: function() {},
+				trigger: function() {}
 			})
 		})
 

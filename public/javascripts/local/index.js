@@ -61795,7 +61795,7 @@
 				var timestamp = new Date().getTime().toString().slice(0, 10);
 				var nonceStr = "testbaochelian";
 				var appid = "wx3e98278c327dfef2";
-				var debug = false;
+				var debug = true;
 				var jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"];
 				var _this = this;
 				_ws2.default.get({
@@ -61833,10 +61833,15 @@
 									alert(response.message);
 								}
 							});
-						}
+						},
+						fail: function fail() {},
+						complete: function complete() {},
+						cancel: function cancel() {},
+						trigger: function trigger() {}
 					});
 					wx.onMenuShareAppMessage({
 						title: '保车连老板疯了，iPhone X免费送',
+						desc: '保车连老板疯了，iPhone X免费送',
 						link: location.origin + '/draw/introduction',
 						imgUrl: location.origin + '/images/draw/head.png',
 						success: function success() {
@@ -61852,7 +61857,11 @@
 									alert(response.message);
 								}
 							});
-						}
+						},
+						fail: function fail() {},
+						complete: function complete() {},
+						cancel: function cancel() {},
+						trigger: function trigger() {}
 					});
 				});
 			}
