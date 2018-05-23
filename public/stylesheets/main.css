@@ -1885,11 +1885,12 @@ th {
 .page-introduction .introduction-head .head-btn {
   display: block;
   width: 5.21rem;
-  margin: 0.19rem auto 0.9rem;
+  margin: 0.19rem auto 0;
 }
 .page-introduction .introduction-head .head-qrcode {
   display: block;
   width: 7.5rem;
+  margin-top: 0.9rem;
 }
 .page-introduction .introduction-prize {
   margin-top: 0.77rem;

@@ -20,7 +20,7 @@ export default class Draw extends Component {
 		const timestamp = new Date().getTime().toString().slice(0, 10)
 		const nonceStr = "testbaochelian"
 		const appid = "wx3e98278c327dfef2"
-		const debug = true
+		const debug = false
 		const jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"]
 		const _this = this
 		ws.get({

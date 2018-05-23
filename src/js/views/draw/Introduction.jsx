@@ -6,7 +6,6 @@ export default class extends Component {
 			<div className="page-introduction">
 				<div className="introduction-head">
 					<img className="head-img" src="/images/draw/head.png"/>
-					<img className="head-btn" src="/images/draw/text_01.png"/>
 					<img className="head-qrcode" src="/images/draw/erweima.png" />
 				</div>
 				<div className="introduction-prize">

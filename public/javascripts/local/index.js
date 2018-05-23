@@ -61795,7 +61795,7 @@
 				var timestamp = new Date().getTime().toString().slice(0, 10);
 				var nonceStr = "testbaochelian";
 				var appid = "wx3e98278c327dfef2";
-				var debug = true;
+				var debug = false;
 				var jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"];
 				var _this = this;
 				_ws2.default.get({
@@ -61993,7 +61993,6 @@
 						"div",
 						{ className: "introduction-head" },
 						_react2.default.createElement("img", { className: "head-img", src: "/images/draw/head.png" }),
-						_react2.default.createElement("img", { className: "head-btn", src: "/images/draw/text_01.png" }),
 						_react2.default.createElement("img", { className: "head-qrcode", src: "/images/draw/erweima.png" })
 					),
 					_react2.default.createElement(
