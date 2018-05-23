@@ -47,7 +47,7 @@ export default class Draw extends Component {
 				imgUrl: location.origin + '/images/draw/head.png',
 				success: function() {
 					ws.post({
-						url: "/api/coupons/custom"
+						url: "/api/coupon/custom"
 					}).then(response => {
 						if(response.code === 0) {
 							_this.setState({
@@ -71,7 +71,7 @@ export default class Draw extends Component {
 				imgUrl: location.origin + '/images/draw/head.png',
 				success: function() {
 					ws.post({
-						url: "/api/coupons/custom"
+						url: "/api/coupon/custom"
 					}).then(response => {
 						if(response.code === 0) {
 							_this.setState({

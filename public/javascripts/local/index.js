@@ -61822,7 +61822,7 @@
 						imgUrl: location.origin + '/images/draw/head.png',
 						success: function success() {
 							_ws2.default.post({
-								url: "/api/coupons/custom"
+								url: "/api/coupon/custom"
 							}).then(function (response) {
 								if (response.code === 0) {
 									_this.setState({
@@ -61846,7 +61846,7 @@
 						imgUrl: location.origin + '/images/draw/head.png',
 						success: function success() {
 							_ws2.default.post({
-								url: "/api/coupons/custom"
+								url: "/api/coupon/custom"
 							}).then(function (response) {
 								if (response.code === 0) {
 									_this.setState({
