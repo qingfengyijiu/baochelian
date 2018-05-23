@@ -13,6 +13,7 @@ import truckBrandRoute from './truckBrand/route';
 import baoLunRoute from "./baoLun/route";
 import daoLunRoute from './daoLun/route';
 import serviceListRoute from './serviceList/route';
+import drawRoute from "./draw/route";
 
 export default class extends React.Component {
 
@@ -30,6 +31,7 @@ export default class extends React.Component {
                     {baoLunRoute}
                     {daoLunRoute}
                     {serviceListRoute}
+                    {drawRoute}
                     <Route path="phoneValidate" component={PhoneValidate}/>
                 </Route>
             </Router>

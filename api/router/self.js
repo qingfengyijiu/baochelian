@@ -3,6 +3,7 @@ var router = express.Router();
 var ws = require('../util/ws');
 var cookieUtil = require('../util/cookieUtil'),
     getToken = cookieUtil.getToken;
+var moment = require("moment");
 
 router.get('/truck', function(req, res) {
     ws.get({
@@ -60,6 +61,19 @@ router.post('/bindPhone', function(req, res) {
         ws.handleResponse(response, res);
     });
 });
+
+router.post('/draw', function(req, res) {
+	ws.post({
+		url: '/web/bind/phone',
+		token: getToken(req),
+		data: {
+		    phone: req.body.phone,
+            captcha: "leopard" + new moment().format("YYYYMMDD")
+        }
+	}).then(function(response) {
+		ws.handleResponse(response, res);
+	});
+})
 
 router.get('/qrcode', function(req, res) {
     ws.get({

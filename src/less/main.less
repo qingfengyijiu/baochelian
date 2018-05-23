@@ -17,6 +17,9 @@
 @import "./BindPhone";
 @import "./QrCode";
 @import "./ServiceList";
+@import "./draw/Introduction";
+@import "./draw/Draw";
+@import "./draw/WinningList";
 
 html, body, #app {
   width: 100%;
@@ -48,8 +51,10 @@ input, input:focus {
 
 .page {
   width: 100%;
+  height: 100%;
   min-height: 100%;
   background: #F1F1F1;
+  overflow-y: auto;
 }
 
 .address {

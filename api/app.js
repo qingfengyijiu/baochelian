@@ -10,6 +10,7 @@ app.use('/truck', require('./router/truck'));
 app.use('/native', require('./router/native'));
 app.use('/spu', require('./router/spu'));
 app.use('/serviceCategory', require('./router/serviceCategory'));
+app.use("/wechat", require("./router/wechat"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

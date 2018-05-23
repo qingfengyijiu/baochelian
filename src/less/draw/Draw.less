@@ -1,0 +1,164 @@
+.page-draw {
+  height: 100%;
+  overflow-y: auto;
+  .introduction-head {
+    background: rgb(255, 248, 230);
+    padding-bottom: 0.54rem;
+    .head-img {
+      display: block;
+      width: 7.5rem;
+    }
+    .head-tip {
+      display: block;
+      width: 3.91rem;
+      margin: 0.44rem auto 0.7rem;
+    }
+    .head-input {
+      display: block;
+      width: 6.16rem;
+      height: 1.2rem;
+      line-height: 1.2rem;
+      font-size: 0.36rem;
+      color: rgb(102, 102, 102);
+      border: 1px solid rgb(255, 176, 143);
+      margin: 0 auto;
+      border-radius: 0.1rem;
+      text-align: center;
+    }
+    .head-btn {
+      display: block;
+      width: 4.34rem;
+      margin: 0.4rem auto 0;
+    }
+    .head-note {
+      text-align: center;
+      margin: 0.18rem 0 0;
+      color: rgb(252, 83, 67);
+      font-size: 0.3rem;
+    }
+    .head-link {
+      width: 2.5rem;
+      text-align: center;
+      padding: 0.2rem 0;
+      margin: 0.48rem auto 0;
+      font-size: 0.36rem;
+      color: rgb(255, 168, 0);
+    }
+  }
+  .introduction-prize {
+    padding-top: 0.52rem;
+    background: #ffffff;
+    .prize-title {
+      display: block;
+      width: 3.37rem;
+      margin: 0 auto 0.38rem;
+    }
+    .prize-list {
+      padding-left: 0.3rem;
+      &:before, &:after {
+        content: " ";
+        display: block;
+      }
+      &:after {
+        clear: both;
+      }
+      .prize-img {
+        float: left;
+      }
+      .prize-01 {
+        width: 3.3rem;
+      }
+      .prize-02 {
+        width: 3.32rem;
+        margin-left: 0.3rem;
+      }
+      .prize-03 {
+        margin-top: 0.3rem;
+        width: 6.92rem;
+      }
+    }
+    .btn-share {
+      display: block;
+      width: 4.66rem;
+      margin: 0.44rem auto;
+    }
+    .coupon-img {
+      display: block;
+      width: 6.9rem;
+      margin: 0 auto;
+    }
+    .draw-rule {
+      margin-top: 0.5rem;
+      display: block;
+      width: 7.5rem;
+    }
+    .draw-bottom {
+      display: block;
+      width: 7.5rem;
+    }
+
+  }
+
+}
+.shade-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  opacity: 0.7;
+  z-index: 800;
+}
+.popup {
+  position: absolute;
+  left: 0.65rem;
+  top: 3.11rem;
+  width: 6.2rem;
+  height: 9rem;
+  z-index: 900;
+  .popup-body {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6.2rem;
+    height: 7.32rem;
+    background: url("../images/draw/popup/pop_01_bg.png");
+    background-size: 6.2rem 7.32rem;
+    .popup-btn {
+      width: 3.83rem;
+      height: 0.95rem;
+      margin: 5.8rem auto 0;
+      background: url("../images/draw/popup/btn_share.png");
+      background-size: 3.83rem 0.95rem;
+    }
+  }
+  .popup-close-btn {
+    width: 0.56rem;
+    height: 0.56rem;
+    background: url("../images/draw/popup/cancel.png");
+    background-size: 0.56rem 0.56rem;
+    position: absolute;
+    left: 50%;
+    top: 8.04rem;
+    margin-left: -0.28rem;
+  }
+}
+
+.popup.popup-coupon {
+  .popup-body {
+    background: url("../images/draw/popup/pop_02_bg.png");
+    background-size: 6.2rem 7.32rem;
+    .coupon-instance {
+      width: 5.47rem;
+      position: absolute;
+      left: 50%;
+      top: 3.23rem;
+      margin-left: -2.735rem;
+    }
+    .popup-btn {
+      background: url("../images/draw/popup/btn_ok.png");
+      background-size: 3.83rem 0.95rem;
+    }
+  }
+}
