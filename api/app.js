@@ -12,6 +12,7 @@ app.use('/spu', require('./router/spu'));
 app.use('/serviceCategory', require('./router/serviceCategory'));
 app.use("/wechat", require("./router/wechat"));
 app.use("/coupon", require("./router/coupon"));
+app.use("/draw", require("./router/draw"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

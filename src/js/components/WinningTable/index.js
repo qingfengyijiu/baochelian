@@ -6,8 +6,8 @@ export default class extends Component {
 		data = data || []
 		return data.map(item => {
 			return (
-				<tr>
-					<td>{item.wxname || ""}</td>
+				<tr key={item.userId}>
+					<td>{item.nickName || ""}</td>
 					<td>{item.phone || ""}</td>
 				</tr>
 			)

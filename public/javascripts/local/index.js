@@ -61955,6 +61955,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _ws = __webpack_require__(576);
+
+	var _ws2 = _interopRequireDefault(_ws);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61973,6 +61977,82 @@
 		}
 
 		_createClass(_class, [{
+			key: "componentDidMount",
+			value: function componentDidMount() {
+				var timestamp = new Date().getTime().toString().slice(0, 10);
+				var nonceStr = "testbaochelian";
+				var appid = "wx3e98278c327dfef2";
+				var debug = false;
+				var jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"];
+				var _this = this;
+				_ws2.default.get({
+					url: "/api/wechat/jsapi_signature",
+					data: {
+						timestamp: timestamp,
+						nonceStr: nonceStr,
+						url: window.location.href.replace(/#.*/g, "")
+					}
+				}).then(function (response) {
+					wx && wx.config({
+						debug: debug, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+						appId: appid, // 必填，公众号的唯一标识
+						timestamp: timestamp, // 必填，生成签名的时间戳
+						nonceStr: nonceStr, // 必填，生成签名的随机串
+						signature: response.data.signature, // 必填，签名
+						jsApiList: jsApiList // 必填，需要使用的JS接口列表
+					});
+				});
+				wx && wx.ready(function () {
+					wx.onMenuShareTimeline({
+						title: '保车连老板疯了，iPhone X免费送',
+						link: location.origin + '/draw/introduction',
+						imgUrl: location.origin + '/images/draw/head.png',
+						success: function success() {
+							_ws2.default.post({
+								url: "/api/coupon/custom"
+							}).then(function (response) {
+								if (response.code === 0) {
+									_this.setState({
+										showCouponDialog: true,
+										parPrice: response.data.parPrice
+									});
+								} else {
+									alert(response.message);
+								}
+							});
+						},
+						fail: function fail() {},
+						complete: function complete() {},
+						cancel: function cancel() {},
+						trigger: function trigger() {}
+					});
+					wx.onMenuShareAppMessage({
+						title: '保车连老板疯了，iPhone X免费送',
+						desc: '保车连老板疯了，iPhone X免费送',
+						link: location.origin + '/draw/introduction',
+						imgUrl: location.origin + '/images/draw/head.png',
+						success: function success() {
+							_ws2.default.post({
+								url: "/api/coupon/custom"
+							}).then(function (response) {
+								if (response.code === 0) {
+									_this.setState({
+										showCouponDialog: true,
+										parPrice: response.data.parPrice
+									});
+								} else {
+									alert(response.message);
+								}
+							});
+						},
+						fail: function fail() {},
+						complete: function complete() {},
+						cancel: function cancel() {},
+						trigger: function trigger() {}
+					});
+				});
+			}
+		}, {
 			key: "render",
 			value: function render() {
 				return _react2.default.createElement(
@@ -62028,6 +62108,10 @@
 
 	var _WinningTable2 = _interopRequireDefault(_WinningTable);
 
+	var _ws = __webpack_require__(576);
+
+	var _ws2 = _interopRequireDefault(_ws);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -62039,20 +62123,51 @@
 	var _class = function (_Component) {
 		_inherits(_class, _Component);
 
-		function _class() {
+		function _class(props) {
 			_classCallCheck(this, _class);
 
-			return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+
+			_this.state = {
+				firstPrize: [],
+				luckyPrize: [],
+				superPrize: []
+			};
+			return _this;
 		}
 
 		_createClass(_class, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
+				var _this2 = this;
+
 				window.scrollTo(0, 0);
+				_ws2.default.get({
+					url: "/api/draw/winninglist"
+				}).then(function (response) {
+					var firstPrizeItem = response.data.find(function (item) {
+						return item.drawType.key === 2;
+					});
+					var luckyPrizeItem = response.data.find(function (item) {
+						return item.drawType.key === 1;
+					});
+					var superPrizeItem = response.data.find(function (item) {
+						return item.drawType.key === 3;
+					});
+					_this2.setState({
+						firstPrize: firstPrizeItem && firstPrizeItem.luckDogs,
+						luckyPrize: luckyPrizeItem && luckyPrizeItem.luckDogs,
+						superPrize: superPrizeItem && superPrizeItem.luckDogs
+					});
+				});
 			}
 		}, {
 			key: 'render',
 			value: function render() {
+				var _state = this.state,
+				    firstPrize = _state.firstPrize,
+				    luckyPrize = _state.luckyPrize;
+
 				return _react2.default.createElement(
 					'div',
 					{ className: 'page-winninglist' },
@@ -62067,9 +62182,9 @@
 							'2018\u5E746\u670820\u63ED\u6653'
 						),
 						_react2.default.createElement('img', { className: 'head-title title-first-prize', src: '/images/draw/winninglist/rankingList_title02.png' }),
-						_react2.default.createElement(_WinningTable2.default, null),
+						_react2.default.createElement(_WinningTable2.default, { data: firstPrize || [] }),
 						_react2.default.createElement('img', { className: 'head-title title-lucky-prize', src: '/images/draw/winninglist/rankingList_title03.png' }),
-						_react2.default.createElement(_WinningTable2.default, null),
+						_react2.default.createElement(_WinningTable2.default, { data: luckyPrize || [] }),
 						_react2.default.createElement(
 							'div',
 							{ className: 'head-tip' },
@@ -62149,11 +62264,11 @@
 				return data.map(function (item) {
 					return _react2.default.createElement(
 						"tr",
-						null,
+						{ key: item.userId },
 						_react2.default.createElement(
 							"td",
 							null,
-							item.wxname || ""
+							item.nickName || ""
 						),
 						_react2.default.createElement(
 							"td",
