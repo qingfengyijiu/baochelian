@@ -8667,9 +8667,9 @@
 
 	var _redux = __webpack_require__(548);
 
-	var _reactRouterRedux = __webpack_require__(765);
+	var _reactRouterRedux = __webpack_require__(763);
 
-	var _reduxThunk = __webpack_require__(770);
+	var _reduxThunk = __webpack_require__(768);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -8677,7 +8677,7 @@
 
 	var _history3 = _interopRequireDefault(_history2);
 
-	var _reducers = __webpack_require__(771);
+	var _reducers = __webpack_require__(769);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -60223,6 +60223,10 @@
 
 	var _Toast2 = _interopRequireDefault(_Toast);
 
+	var _moment = __webpack_require__(594);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60291,45 +60295,26 @@
 					_react2.default.createElement(
 						'span',
 						{ className: 'cut-value integer-part' },
-						'5'
-					),
-					_react2.default.createElement(
-						'span',
-						{ className: 'cut-value float-part' },
-						'.00'
-					),
-					_react2.default.createElement(
-						'span',
-						{ className: 'cut-value float-part' },
-						'-'
-					),
-					_react2.default.createElement(
-						'span',
-						{ className: 'cut-value integer-part' },
-						'18'
-					),
-					_react2.default.createElement(
-						'span',
-						{ className: 'cut-value float-part' },
-						'.00'
+						value || ""
 					)
 				);
 			};
 
-			_this.renderCoupon = function (type) {
+			_this.renderCoupon = function (item) {
+				var type = item.couponType;
 				var couponValueView = void 0,
 				    typeClass = void 0;
 				switch (type) {
-					case "满减额度":
+					case 1:
 						couponValueView = _this.renderFullcutAmountValue();
 						typeClass = "fullcut-amount";
 						break;
-					case "满减折扣":
+					case 3:
 						couponValueView = _this.renderFullcutDiscountValue();
 						typeClass = "fullcut-discount";
 						break;
-					case "立减":
-						couponValueView = _this.renderInstantcutValue();
+					case 2:
+						couponValueView = _this.renderInstantcutValue(item.parPrice);
 						typeClass = "instantcut";
 						break;
 					default:
@@ -60338,7 +60323,7 @@
 				}
 				return _react2.default.createElement(
 					'div',
-					{ className: "coupon-item clearfix " + typeClass },
+					{ className: "coupon-item clearfix " + typeClass, key: item.id },
 					_react2.default.createElement(
 						'div',
 						{ className: 'item-left ft' },
@@ -60346,7 +60331,7 @@
 						_react2.default.createElement(
 							'div',
 							{ className: 'cut-info' },
-							'\u6EE130\u5143\u4F7F\u7528'
+							item.priceDesc || ""
 						)
 					),
 					_react2.default.createElement(
@@ -60355,12 +60340,13 @@
 						_react2.default.createElement(
 							'div',
 							{ className: 'coupon-name' },
-							'\u8865\u80CE'
+							item.couponDesc
 						),
 						_react2.default.createElement(
 							'div',
 							{ className: 'coupon-expiredate' },
-							'\u6709\u6548\u671F\u81F3\uFF1A2017-10-14'
+							'\u6709\u6548\u671F\u81F3\uFF1A',
+							new _moment2.default(item.relatedDate).format("YYYY-MM-DD")
 						)
 					)
 				);
@@ -60369,7 +60355,7 @@
 			_this.renderCouponList = function (couponList) {
 				couponList = couponList ? couponList : [];
 				return couponList.map(function (item) {
-					return _this.renderCoupon(item.type);
+					return _this.renderCoupon(item);
 				});
 			};
 
@@ -61680,11 +61666,11 @@
 
 	var _Draw2 = _interopRequireDefault(_Draw);
 
-	var _Introduction = __webpack_require__(762);
+	var _Introduction = __webpack_require__(760);
 
 	var _Introduction2 = _interopRequireDefault(_Introduction);
 
-	var _WinningList = __webpack_require__(763);
+	var _WinningList = __webpack_require__(761);
 
 	var _WinningList2 = _interopRequireDefault(_WinningList);
 
@@ -61826,7 +61812,7 @@
 							}).then(function (response) {
 								if (response.code === 0) {
 									_this.setState({
-										showShareDialog: true,
+										showCouponDialog: true,
 										parPrice: response.data.parPrice
 									});
 								} else {
@@ -61850,7 +61836,7 @@
 							}).then(function (response) {
 								if (response.code === 0) {
 									_this.setState({
-										showShareDialog: true,
+										showCouponDialog: true,
 										parPrice: response.data.parPrice
 									});
 								} else {
@@ -61949,9 +61935,7 @@
 	exports.default = Draw;
 
 /***/ },
-/* 760 */,
-/* 761 */,
-/* 762 */
+/* 760 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62020,7 +62004,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 763 */
+/* 761 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62035,7 +62019,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _WinningTable = __webpack_require__(764);
+	var _WinningTable = __webpack_require__(762);
 
 	var _WinningTable2 = _interopRequireDefault(_WinningTable);
 
@@ -62118,7 +62102,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 764 */
+/* 762 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62217,7 +62201,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 765 */
+/* 763 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62227,7 +62211,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 
-	var _reducer = __webpack_require__(766);
+	var _reducer = __webpack_require__(764);
 
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -62242,7 +62226,7 @@
 	  }
 	});
 
-	var _actions = __webpack_require__(767);
+	var _actions = __webpack_require__(765);
 
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -62287,11 +62271,11 @@
 	  }
 	});
 
-	var _sync = __webpack_require__(768);
+	var _sync = __webpack_require__(766);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
-	var _middleware = __webpack_require__(769);
+	var _middleware = __webpack_require__(767);
 
 	var _middleware2 = _interopRequireDefault(_middleware);
 
@@ -62301,7 +62285,7 @@
 	exports.routerMiddleware = _middleware2['default'];
 
 /***/ },
-/* 766 */
+/* 764 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -62344,7 +62328,7 @@
 	}
 
 /***/ },
-/* 767 */
+/* 765 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -62386,7 +62370,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ },
-/* 768 */
+/* 766 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62399,7 +62383,7 @@
 
 	exports['default'] = syncHistoryWithStore;
 
-	var _reducer = __webpack_require__(766);
+	var _reducer = __webpack_require__(764);
 
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -62544,7 +62528,7 @@
 	}
 
 /***/ },
-/* 769 */
+/* 767 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62554,7 +62538,7 @@
 	});
 	exports['default'] = routerMiddleware;
 
-	var _actions = __webpack_require__(767);
+	var _actions = __webpack_require__(765);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -62582,7 +62566,7 @@
 	}
 
 /***/ },
-/* 770 */
+/* 768 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -62610,7 +62594,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 771 */
+/* 769 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62621,39 +62605,39 @@
 
 	var _redux = __webpack_require__(548);
 
-	var _reducer = __webpack_require__(772);
+	var _reducer = __webpack_require__(770);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _reducer3 = __webpack_require__(776);
+	var _reducer3 = __webpack_require__(774);
 
 	var _reducer4 = _interopRequireDefault(_reducer3);
 
-	var _reducer5 = __webpack_require__(778);
+	var _reducer5 = __webpack_require__(776);
 
 	var _reducer6 = _interopRequireDefault(_reducer5);
 
-	var _reducer7 = __webpack_require__(780);
+	var _reducer7 = __webpack_require__(778);
 
 	var _reducer8 = _interopRequireDefault(_reducer7);
 
-	var _reducer9 = __webpack_require__(782);
+	var _reducer9 = __webpack_require__(780);
 
 	var _reducer10 = _interopRequireDefault(_reducer9);
 
-	var _reducer11 = __webpack_require__(784);
+	var _reducer11 = __webpack_require__(782);
 
 	var _reducer12 = _interopRequireDefault(_reducer11);
 
-	var _reducer13 = __webpack_require__(786);
+	var _reducer13 = __webpack_require__(784);
 
 	var _reducer14 = _interopRequireDefault(_reducer13);
 
-	var _reducer15 = __webpack_require__(788);
+	var _reducer15 = __webpack_require__(786);
 
 	var _reducer16 = _interopRequireDefault(_reducer15);
 
-	var _reducer17 = __webpack_require__(790);
+	var _reducer17 = __webpack_require__(788);
 
 	var _reducer18 = _interopRequireDefault(_reducer17);
 
@@ -62672,7 +62656,7 @@
 	});
 
 /***/ },
-/* 772 */
+/* 770 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62725,18 +62709,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(773);
+	var _store = __webpack_require__(771);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(775);
+	var _immutableProcess = __webpack_require__(773);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 773 */
+/* 771 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62745,7 +62729,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(774);
+	var _immutable = __webpack_require__(772);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -62781,7 +62765,7 @@
 	});
 
 /***/ },
-/* 774 */
+/* 772 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -67765,7 +67749,7 @@
 	}));
 
 /***/ },
-/* 775 */
+/* 773 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -67781,14 +67765,14 @@
 	    return value;
 	};
 
-	var _immutable = __webpack_require__(774);
+	var _immutable = __webpack_require__(772);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 776 */
+/* 774 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -67804,11 +67788,11 @@
 	    return state.set("loading", loading(state.get("loading"), action)).set("toast", toast(state.get("toast"), action)).set("selfInfo", selfInfo(state.get("selfInfo"), action)).set("truckBrandList", truckBrandList(state.get("truckBrandList"), action)).set("currentPosition", currentPosition(state.get("currentPosition"), action)).set("userInputLocation", userInputLocation(state.get("userInputLocation"), action));
 	};
 
-	var _store = __webpack_require__(777);
+	var _store = __webpack_require__(775);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(775);
+	var _immutableProcess = __webpack_require__(773);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
@@ -67891,7 +67875,7 @@
 	}
 
 /***/ },
-/* 777 */
+/* 775 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -67900,7 +67884,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(774);
+	var _immutable = __webpack_require__(772);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -67926,7 +67910,7 @@
 	});
 
 /***/ },
-/* 778 */
+/* 776 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -67947,18 +67931,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(779);
+	var _store = __webpack_require__(777);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(775);
+	var _immutableProcess = __webpack_require__(773);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 779 */
+/* 777 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -67967,7 +67951,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(774);
+	var _immutable = __webpack_require__(772);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -67981,7 +67965,7 @@
 	});
 
 /***/ },
-/* 780 */
+/* 778 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68002,18 +67986,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(781);
+	var _store = __webpack_require__(779);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(775);
+	var _immutableProcess = __webpack_require__(773);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 781 */
+/* 779 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68022,7 +68006,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(774);
+	var _immutable = __webpack_require__(772);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -68042,7 +68026,7 @@
 	});
 
 /***/ },
-/* 782 */
+/* 780 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68063,18 +68047,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(783);
+	var _store = __webpack_require__(781);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(775);
+	var _immutableProcess = __webpack_require__(773);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 783 */
+/* 781 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68083,7 +68067,7 @@
 	   value: true
 	});
 
-	var _immutable = __webpack_require__(774);
+	var _immutable = __webpack_require__(772);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -68103,7 +68087,7 @@
 	});
 
 /***/ },
-/* 784 */
+/* 782 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68124,18 +68108,18 @@
 	    }
 	};
 
-	var _store = __webpack_require__(785);
+	var _store = __webpack_require__(783);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(775);
+	var _immutableProcess = __webpack_require__(773);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 785 */
+/* 783 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68144,7 +68128,7 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(774);
+	var _immutable = __webpack_require__(772);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -68157,7 +68141,7 @@
 	});
 
 /***/ },
-/* 786 */
+/* 784 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68178,11 +68162,72 @@
 	    }
 	};
 
+	var _store = __webpack_require__(785);
+
+	var _store2 = _interopRequireDefault(_store);
+
+	var _immutableProcess = __webpack_require__(773);
+
+	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 785 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+
+	var _immutable = __webpack_require__(772);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
+	var _moment = __webpack_require__(594);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _immutable2.default.fromJS({
+	   orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
+	   driverName: null,
+	   driverPhoneNo: null,
+	   smscode: null,
+	   isAgree: true,
+	   userCouponId: null
+	});
+
+/***/ },
+/* 786 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function () {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _store2.default;
+	    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+	    switch (action.type) {
+	        case "daoLun_CHANGE_MODEL":
+	            return (0, _immutableProcess2.default)(action.data);
+	        default:
+	            return state;
+	    }
+	};
+
 	var _store = __webpack_require__(787);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(775);
+	var _immutableProcess = __webpack_require__(773);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
@@ -68198,7 +68243,7 @@
 	   value: true
 	});
 
-	var _immutable = __webpack_require__(774);
+	var _immutable = __webpack_require__(772);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -68232,8 +68277,8 @@
 	    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	    switch (action.type) {
-	        case "daoLun_CHANGE_MODEL":
-	            return (0, _immutableProcess2.default)(action.data);
+	        case "serviceList_CHANGE_DATA_LIST":
+	            return state.set("dataList", (0, _immutableProcess2.default)(action.data));
 	        default:
 	            return state;
 	    }
@@ -68243,7 +68288,7 @@
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _immutableProcess = __webpack_require__(775);
+	var _immutableProcess = __webpack_require__(773);
 
 	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
 
@@ -68256,71 +68301,10 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-
-	var _immutable = __webpack_require__(774);
-
-	var _immutable2 = _interopRequireDefault(_immutable);
-
-	var _moment = __webpack_require__(594);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _immutable2.default.fromJS({
-	   orderTime: (0, _moment2.default)().format("YYYY-MM-DD HH:mm"),
-	   driverName: null,
-	   driverPhoneNo: null,
-	   smscode: null,
-	   isAgree: true,
-	   userCouponId: null
-	});
-
-/***/ },
-/* 790 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
-	exports.default = function () {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _store2.default;
-	    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-	    switch (action.type) {
-	        case "serviceList_CHANGE_DATA_LIST":
-	            return state.set("dataList", (0, _immutableProcess2.default)(action.data));
-	        default:
-	            return state;
-	    }
-	};
-
-	var _store = __webpack_require__(791);
-
-	var _store2 = _interopRequireDefault(_store);
-
-	var _immutableProcess = __webpack_require__(775);
-
-	var _immutableProcess2 = _interopRequireDefault(_immutableProcess);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ },
-/* 791 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _immutable = __webpack_require__(774);
+	var _immutable = __webpack_require__(772);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 

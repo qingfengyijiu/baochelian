@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ws from '../../lib/ws';
 import toast from '../../components/Toast';
+import moment from "moment"
 
 export default class extends Component {
 
@@ -57,29 +58,26 @@ export default class extends Component {
 		return (
 			<div className="item-value-container">
 				<span className="icon-metric">¥</span>
-				<span className="cut-value integer-part">5</span>
-				<span className="cut-value float-part">.00</span>
-				<span className="cut-value float-part">-</span>
-				<span className="cut-value integer-part">18</span>
-				<span className="cut-value float-part">.00</span>
+				<span className="cut-value integer-part">{value || ""}</span>
 			</div>
 		)
 	}
 
-	renderCoupon = (type) => {
+	renderCoupon = (item) => {
+		let type = item.couponType
 		let couponValueView,
 			typeClass;
 		switch (type) {
-			case "满减额度":
+			case 1:
 				couponValueView = this.renderFullcutAmountValue();
 				typeClass = "fullcut-amount"
 				break;
-			case "满减折扣":
+			case 3:
 				couponValueView = this.renderFullcutDiscountValue();
 				typeClass = "fullcut-discount";
 				break;
-			case "立减":
-				couponValueView = this.renderInstantcutValue();
+			case 2:
+				couponValueView = this.renderInstantcutValue(item.parPrice);
 				typeClass = "instantcut";
 				break;
 			default:
@@ -87,14 +85,14 @@ export default class extends Component {
 				typeClass = "";
 		}
 		return (
-			<div className={"coupon-item clearfix " + typeClass}>
+			<div className={"coupon-item clearfix " + typeClass} key={item.id}>
 				<div className="item-left ft">
 					{couponValueView}
-					<div className="cut-info">满30元使用</div>
+					<div className="cut-info">{item.priceDesc || ""}</div>
 				</div>
 				<div className="item-right ft">
-					<div className="coupon-name">补胎</div>
-					<div className="coupon-expiredate">有效期至：2017-10-14</div>
+					<div className="coupon-name">{item.couponDesc}</div>
+					<div className="coupon-expiredate">有效期至：{new moment(item.relatedDate).format("YYYY-MM-DD")}</div>
 				</div>
 			</div>
 		);
@@ -103,7 +101,7 @@ export default class extends Component {
 	renderCouponList = (couponList) => {
 		couponList = couponList ? couponList : [];
 		return couponList.map(item => {
-			return this.renderCoupon(item.type);
+			return this.renderCoupon(item);
 		});
 	}
 
