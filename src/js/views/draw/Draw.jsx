@@ -51,7 +51,7 @@ export default class Draw extends Component {
 					}).then(response => {
 						if(response.code === 0) {
 							_this.setState({
-								showShareDialog: true,
+								showCouponDialog: true,
 								parPrice: response.data.parPrice
 							})
 						} else {
@@ -75,7 +75,7 @@ export default class Draw extends Component {
 					}).then(response => {
 						if(response.code === 0) {
 							_this.setState({
-								showShareDialog: true,
+								showCouponDialog: true,
 								parPrice: response.data.parPrice
 							})
 						} else {
