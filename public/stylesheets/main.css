@@ -2053,10 +2053,17 @@ th {
   opacity: 0.7;
   z-index: 800;
 }
+.share-arrow {
+  position: fixed;
+  right: 0;
+  top: 0.48rem;
+  width: 1.15rem;
+  z-index: 900;
+}
 .popup {
-  position: absolute;
+  position: fixed;
   left: 0.65rem;
-  top: 7.11rem;
+  top: 1.86rem;
   width: 6.2rem;
   height: 9rem;
   z-index: 900;
@@ -2069,6 +2076,12 @@ th {
   height: 7.32rem;
   background: url("../images/draw/popup/pop_01_bg.png");
   background-size: 6.2rem 7.32rem;
+}
+.popup .popup-body .share-tip {
+  font-size: 0.3rem;
+  text-align: center;
+  color: #e95b4b;
+  margin: 5.8rem auto 0;
 }
 .popup .popup-body .popup-btn {
   width: 3.83rem;

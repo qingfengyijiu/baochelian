@@ -164,9 +164,10 @@ export default class Draw extends Component {
 					<img className="draw-bottom" src="/images/draw/activity/bottom.png" />
 				</div>
 				<div className="shade-layer" style={{display: showShareDialog ? "block" : "none"}}></div>
+				<img className="share-arrow" style={{display: showShareDialog ? "block" : "none"}} src="/images/draw/popup/img_share.png"></img>
 				<div className="popup" style={{display: showShareDialog ? "block" : "none"}}>
 					<div className="popup-body">
-						<div className="popup-btn"></div>
+						<div className="share-tip">点击右上角立即分享</div>
 					</div>
 					<div className="popup-close-btn" onClick={this.onCloseShareDialog}></div>
 				</div>

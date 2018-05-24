@@ -61903,13 +61903,18 @@
 						_react2.default.createElement('img', { className: 'draw-bottom', src: '/images/draw/activity/bottom.png' })
 					),
 					_react2.default.createElement('div', { className: 'shade-layer', style: { display: showShareDialog ? "block" : "none" } }),
+					_react2.default.createElement('img', { className: 'share-arrow', style: { display: showShareDialog ? "block" : "none" }, src: '/images/draw/popup/img_share.png' }),
 					_react2.default.createElement(
 						'div',
 						{ className: 'popup', style: { display: showShareDialog ? "block" : "none" } },
 						_react2.default.createElement(
 							'div',
 							{ className: 'popup-body' },
-							_react2.default.createElement('div', { className: 'popup-btn' })
+							_react2.default.createElement(
+								'div',
+								{ className: 'share-tip' },
+								'\u70B9\u51FB\u53F3\u4E0A\u89D2\u7ACB\u5373\u5206\u4EAB'
+							)
 						),
 						_react2.default.createElement('div', { className: 'popup-close-btn', onClick: this.onCloseShareDialog })
 					),
