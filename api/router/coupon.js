@@ -10,6 +10,7 @@ router.post('/custom', function(req, res) {
 	ws.post({
 		url: '/web/user/coupons/custom',
 		token: getToken(req),
+		data: {}
 	}).then(function(response) {
 		ws.handleResponse(response, res);
 	})
