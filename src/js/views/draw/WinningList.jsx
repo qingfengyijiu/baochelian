@@ -36,7 +36,7 @@ export default class extends Component {
 				<div className="introduction-head">
 					<img className="head-img" src="/images/draw/winninglist/rankingList_head.png"/>
 					<img className="head-title title-super-prize" src="/images/draw/winninglist/rankingList_title01.png"/>
-					<div className="tip-super-prize">2018年6月20揭晓</div>
+					<div className="tip-super-prize">2018年6月24揭晓</div>
 					<img className="head-title title-first-prize" src="/images/draw/winninglist/rankingList_title02.png"/>
 					<WinningTable data={firstPrize || []}/>
 					<img className="head-title title-lucky-prize" src="/images/draw/winninglist/rankingList_title03.png"/>
